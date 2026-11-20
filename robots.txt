@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://chandankumarpanda0820-code.github.io/nextgen-digital-solutions/sitemap.xml
