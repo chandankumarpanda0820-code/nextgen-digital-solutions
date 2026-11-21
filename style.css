@@ -3687,6 +3687,134 @@ a.footer-contact-item:hover {
   pointer-events: none;
 }
 
+/* CATALOGUE CONTENT LAYOUT */
+
+.catalogue-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.catalogue-icon {
+  width: 58px;
+  height: 58px;
+  min-width: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(37, 99, 235, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  color: #60a5fa;
+  font-size: 27px;
+}
+
+.catalogue-text {
+  flex: 1;
+}
+
+.catalogue-text span {
+  display: inline-block;
+  color: #60a5fa;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+}
+
+.catalogue-text h2 {
+  color: #fff;
+  font-size: 21px;
+  font-weight: 800;
+  margin: 0 0 5px;
+}
+
+.catalogue-text p {
+  color: #a9bbd6;
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.catalogue-action a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 22px;
+  color: #fff;
+  background: linear-gradient(135deg, #2563eb, #0ea5e9);
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 5px 20px rgba(37, 99, 235, 0.25);
+  transition: all 0.3s ease;
+}
+
+.catalogue-action a:hover {
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 9px 28px rgba(37, 99, 235, 0.4);
+}
+
+/* NAVBAR POSITION */
+
+#mainNavbar.navbar.fixed-top {
+  position: sticky !important;
+  top: 0;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 767px) {
+  .service-catalogue-banner {
+    padding: 19px 0;
+  }
+
+  .catalogue-content {
+    gap: 13px;
+    flex-wrap: wrap;
+  }
+
+  .catalogue-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    font-size: 23px;
+  }
+
+  .catalogue-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .catalogue-text h2 {
+    font-size: 16px;
+  }
+
+  .catalogue-text p {
+    font-size: 11px;
+  }
+
+  .catalogue-text span {
+    font-size: 9px;
+  }
+
+  .catalogue-action {
+    width: 100%;
+  }
+
+  .catalogue-action a {
+    width: 100%;
+    padding: 12px;
+  }
+}
+
 .catalogue-content {
   position: relative;
   z-index: 1;
