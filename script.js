@@ -1374,3 +1374,457 @@ document.addEventListener("DOMContentLoaded", function () {
   startTerminalBoot();
 
 });
+
+
+/* =========================================
+   NEXTGEN — DIGITAL SERVICE SCANNER
+========================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const form = document.getElementById("ngScannerForm");
+  if (!form) return;
+
+  const businessSelect = document.getElementById("ngBusinessType");
+  const presenceSelect = document.getElementById("ngOnlinePresence");
+
+  const steps = document.querySelectorAll(".ng-ai-step");
+
+  const stepLabel = document.getElementById("ngStepLabel");
+  const stepPercent = document.getElementById("ngStepPercent");
+  const stepBar = document.getElementById("ngStepBar");
+
+  const scanAnimation = document.getElementById("ngScannerAnimation");
+  const scanStatus = document.getElementById("ngScannerStatus");
+  const scanProgress = document.getElementById("ngScannerProgress");
+  const scanPercent = document.getElementById("ngScanPercent");
+
+  const results = document.getElementById("ngScannerResults");
+  const resultDetails = document.getElementById("ngScannerResultDetails");
+
+  const scanButton = document.getElementById("ngScannerButton");
+  const whatsappButton = document.getElementById("ngScannerWhatsApp");
+  const resetButton = document.getElementById("ngScannerReset");
+
+  let scanTimer = null;
+  let currentStep = 1;
+
+  const businessRecommendations = {
+    "Startup": [
+      "Website Development",
+      "Social Media Branding",
+      "SEO & Digital Marketing"
+    ],
+
+    "Small Business": [
+      "Website Development",
+      "SEO & Digital Marketing",
+      "Social Media Branding"
+    ],
+
+    "Retail Shop": [
+      "E-commerce Website",
+      "Social Media Branding",
+      "SEO & Digital Marketing"
+    ],
+
+    "Educational Institute": [
+      "Website Development",
+      "Social Media Branding",
+      "Website Maintenance"
+    ],
+
+    "Personal Brand": [
+      "Website Development",
+      "Social Media Branding",
+      "SEO & Digital Marketing"
+    ],
+
+    "Corporate Business": [
+      "Website Development",
+      "SEO & Digital Marketing",
+      "Website Maintenance"
+    ],
+
+    "Other": [
+      "Website Development",
+      "Social Media Branding"
+    ]
+  };
+
+  const presenceRecommendations = {
+    "No online presence": [
+      "Website Development",
+      "Social Media Branding",
+      "SEO & Digital Marketing"
+    ],
+
+    "Website only": [
+      "SEO & Digital Marketing",
+      "Social Media Branding"
+    ],
+
+    "Social media only": [
+      "Website Development",
+      "SEO & Digital Marketing"
+    ],
+
+    "Website and social media": [
+      "SEO & Digital Marketing",
+      "Website Maintenance"
+    ]
+  };
+
+  // STEP NAVIGATION
+
+  function showStep(stepNumber) {
+    currentStep = stepNumber;
+
+    steps.forEach(step => {
+      step.classList.toggle(
+        "active",
+        Number(step.dataset.step) === stepNumber
+      );
+    });
+
+    const percentage = Math.round((stepNumber / 3) * 100);
+
+    stepLabel.textContent = `STEP ${stepNumber} OF 3`;
+    stepPercent.textContent = `${percentage}%`;
+    stepBar.style.width = `${percentage}%`;
+  }
+
+  // BUSINESS SELECTION
+
+  document.querySelectorAll(".ng-ai-choice").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document.querySelectorAll(".ng-ai-choice").forEach(item => {
+        item.classList.remove("selected");
+      });
+
+      button.classList.add("selected");
+      businessSelect.value = button.dataset.business;
+
+    });
+
+  });
+
+  // DIGITAL PRESENCE SELECTION
+
+  document.querySelectorAll(".ng-ai-presence").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document.querySelectorAll(".ng-ai-presence").forEach(item => {
+        item.classList.remove("selected");
+      });
+
+      button.classList.add("selected");
+      presenceSelect.value = button.dataset.presence;
+
+    });
+
+  });
+
+  // STEP 1 -> STEP 2
+
+  document.getElementById("ngStepOneNext").addEventListener("click", () => {
+
+    if (!businessSelect.value) {
+      alert("Please select your business category.");
+      return;
+    }
+
+    showStep(2);
+
+  });
+
+  // STEP 2 -> STEP 1
+
+  document.getElementById("ngStepTwoBack").addEventListener("click", () => {
+    showStep(1);
+  });
+
+  // STEP 2 -> STEP 3
+
+  document.getElementById("ngStepTwoNext").addEventListener("click", () => {
+
+    if (!presenceSelect.value) {
+      alert("Please select your digital presence.");
+      return;
+    }
+
+    showStep(3);
+
+  });
+
+  // STEP 3 -> STEP 2
+
+  document.getElementById("ngStepThreeBack").addEventListener("click", () => {
+    showStep(2);
+  });
+
+  // RECOMMENDATION ENGINE
+
+  function getRecommendations(business, presence, selectedServices) {
+
+    const businessList = businessRecommendations[business] || [];
+    const presenceList = presenceRecommendations[presence] || [];
+
+    const combined = [...new Set([
+      ...businessList,
+      ...presenceList
+    ])];
+
+    let suggested = combined.filter(service => {
+      return !selectedServices.includes(service);
+    });
+
+    if (selectedServices.includes("Complete Digital Solution")) {
+      suggested = [];
+    }
+
+    return suggested;
+  }
+
+  // CREATE RESULT CARD
+
+  function createResultCard(title, description, services) {
+
+    const card = document.createElement("div");
+    card.className = "ng-scanner-recommendation";
+
+    const heading = document.createElement("h4");
+    heading.textContent = title;
+
+    const paragraph = document.createElement("p");
+    paragraph.textContent = description;
+
+    const list = document.createElement("ul");
+
+    services.forEach(service => {
+      const item = document.createElement("li");
+      item.textContent = service;
+      list.appendChild(item);
+    });
+
+    card.append(heading, paragraph, list);
+
+    resultDetails.appendChild(card);
+  }
+
+  // DISPLAY RESULTS
+
+  function displayResults(business, presence, selectedServices) {
+
+    const suggestedServices = getRecommendations(
+      business,
+      presence,
+      selectedServices
+    );
+
+    resultDetails.replaceChildren();
+
+    createResultCard(
+      "Your Business Profile",
+      "Details submitted for your digital service scan.",
+      [
+        `Business Type: ${business}`,
+        `Digital Presence: ${presence}`
+      ]
+    );
+
+    createResultCard(
+      "Your Selected Services",
+      "These are the services you requested.",
+      selectedServices
+    );
+
+    createResultCard(
+      "Recommended Services",
+      "Additional services that may help improve your digital presence.",
+      suggestedServices.length
+        ? suggestedServices
+        : ["Your selected services already cover our recommendations."]
+    );
+
+    // WHATSAPP MESSAGE
+
+    const message = [
+      "Hello NextGen Digital Solutions!",
+      "",
+      "I completed the Digital Service Scanner.",
+      "",
+      `Business Type: ${business}`,
+      `Digital Presence: ${presence}`,
+      "",
+      `Selected Services: ${selectedServices.join(", ")}`,
+      "",
+      `Recommended Services: ${suggestedServices.join(", ") || "None"}`,
+      "",
+      "I would like to discuss my business requirements."
+    ].join("\n");
+
+    whatsappButton.href =
+      "https://wa.me/918984240820?text=" +
+      encodeURIComponent(message);
+
+  }
+
+  // START SCANNER
+
+  form.addEventListener("submit", event => {
+
+    event.preventDefault();
+
+    if (currentStep !== 3) return;
+
+    const business = businessSelect.value;
+    const presence = presenceSelect.value;
+
+    const selectedServices = Array.from(
+      form.querySelectorAll('input[name="ngServices"]:checked')
+    ).map(input => input.value);
+
+    if (!business) {
+      alert("Please select your business category.");
+      showStep(1);
+      return;
+    }
+
+    if (!presence) {
+      alert("Please select your digital presence.");
+      showStep(2);
+      return;
+    }
+
+    if (selectedServices.length === 0) {
+      alert("Please select at least one service.");
+      return;
+    }
+
+    // Hide form and show scanner
+
+    form.hidden = true;
+    scanAnimation.hidden = false;
+    results.hidden = true;
+
+    scanButton.disabled = true;
+
+    let progress = 0;
+
+    const messages = [
+      "Initializing business profile...",
+      "Analyzing digital requirements...",
+      "Checking online presence...",
+      "Matching suitable services...",
+      "Preparing your growth report..."
+    ];
+
+    let messageIndex = 0;
+
+    scanStatus.textContent = messages[0];
+    scanProgress.style.width = "0%";
+    scanPercent.textContent = "0%";
+
+    const messageTimer = setInterval(() => {
+
+      messageIndex = Math.min(messageIndex + 1, messages.length - 1);
+      scanStatus.textContent = messages[messageIndex];
+
+    }, 650);
+
+    scanTimer = setInterval(() => {
+
+      progress = Math.min(progress + 2, 100);
+
+      scanProgress.style.width = `${progress}%`;
+      scanPercent.textContent = `${progress}%`;
+
+      if (progress >= 100) {
+
+        clearInterval(scanTimer);
+        clearInterval(messageTimer);
+
+        scanTimer = null;
+
+        scanStatus.textContent = "Analysis completed!";
+
+        setTimeout(() => {
+
+          scanAnimation.hidden = true;
+          results.hidden = false;
+
+          displayResults(
+            business,
+            presence,
+            selectedServices
+          );
+
+          scanButton.disabled = false;
+
+          results.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+
+        }, 400);
+
+      }
+
+    }, 60);
+
+  });
+
+  // RESET SCANNER
+
+  resetButton.addEventListener("click", () => {
+
+    if (scanTimer) {
+      clearInterval(scanTimer);
+      scanTimer = null;
+    }
+
+    form.reset();
+
+    businessSelect.value = "";
+    presenceSelect.value = "";
+
+    document.querySelectorAll(
+      ".ng-ai-choice, .ng-ai-presence"
+    ).forEach(item => {
+      item.classList.remove("selected");
+    });
+
+    scanAnimation.hidden = true;
+    results.hidden = true;
+    form.hidden = false;
+
+    resultDetails.replaceChildren();
+
+    scanProgress.style.width = "0%";
+    scanPercent.textContent = "0%";
+
+    scanButton.disabled = false;
+
+    showStep(1);
+
+    document.getElementById("service-scanner").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  });
+
+  // INITIAL STATE
+
+  form.hidden = false;
+  scanAnimation.hidden = true;
+  results.hidden = true;
+
+  showStep(1);
+
+});
+

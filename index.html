@@ -1066,6 +1066,326 @@
 
   <!-- =============== SERVICES SECTION END =============== -->
 
+
+
+  <section class="ng-scanner-section" id="service-scanner">
+
+    <div class="ng-scanner-container">
+
+      <!-- Heading -->
+      <div class="ng-scanner-heading">
+        <span class="ng-scanner-eyebrow">NEXTGEN INTELLIGENCE SYSTEM</span>
+        <h2>AI Business Scanner</h2>
+        <p>Discover the digital potential of your business.</p>
+      </div>
+
+      <!-- Scanner Dashboard -->
+      <div class="ng-ai-scanner" id="ngScannerDashboard">
+
+        <!-- Topbar -->
+        <div class="ng-ai-topbar">
+          <div class="ng-ai-brand">
+            <div class="ng-ai-logo">
+              <i class="bi bi-cpu"></i>
+            </div>
+            <div>
+              <h3>NEXUS <span>SCANNER</span></h3>
+              <small>BUSINESS INTELLIGENCE v1.0</small>
+            </div>
+          </div>
+
+          <div class="ng-ai-status">
+            <span class="ng-status-dot"></span>
+            SYSTEM ACTIVE
+          </div>
+        </div>
+
+        <!-- Progress -->
+        <div class="ng-ai-progress-area">
+          <div class="ng-ai-progress-info">
+            <span id="ngStepLabel">STEP 1 OF 3</span>
+            <span id="ngStepPercent">33%</span>
+          </div>
+          <div class="ng-ai-progress-track">
+            <div class="ng-ai-progress-bar" id="ngStepBar"></div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <form id="ngScannerForm">
+
+          <!-- Hidden values -->
+          <select id="ngBusinessType" required hidden>
+            <option value="">Select business</option>
+            <option value="Startup">Startup</option>
+            <option value="Small Business">Small Business</option>
+            <option value="Retail Shop">Retail Shop</option>
+            <option value="Educational Institute">Educational Institute</option>
+            <option value="Personal Brand">Personal Brand</option>
+            <option value="Corporate Business">Corporate Business</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <select id="ngOnlinePresence" required hidden>
+            <option value="">Select presence</option>
+            <option value="No online presence">No online presence</option>
+            <option value="Website only">Website only</option>
+            <option value="Social media only">Social media only</option>
+            <option value="Website and social media">Website and social media</option>
+          </select>
+
+          <!-- STEP 1 -->
+          <div class="ng-ai-step active" data-step="1">
+
+            <div class="ng-ai-step-heading">
+              <span>01 — BUSINESS IDENTITY</span>
+              <h3>What describes your business?</h3>
+              <p>Select the category that best matches your business.</p>
+            </div>
+
+            <div class="ng-ai-choice-grid">
+
+              <button type="button" class="ng-ai-choice" data-business="Startup">
+                <i class="bi bi-rocket-takeoff"></i>
+                <strong>Startup</strong>
+                <small>New business venture</small>
+              </button>
+
+              <button type="button" class="ng-ai-choice" data-business="Small Business">
+                <i class="bi bi-shop"></i>
+                <strong>Small Business</strong>
+                <small>Growing local business</small>
+              </button>
+
+              <button type="button" class="ng-ai-choice" data-business="Retail Shop">
+                <i class="bi bi-bag"></i>
+                <strong>Retail Shop</strong>
+                <small>Store or product business</small>
+              </button>
+
+              <button type="button" class="ng-ai-choice" data-business="Educational Institute">
+                <i class="bi bi-mortarboard"></i>
+                <strong>Educational Institute</strong>
+                <small>School, college or academy</small>
+              </button>
+
+              <button type="button" class="ng-ai-choice" data-business="Personal Brand">
+                <i class="bi bi-person-badge"></i>
+                <strong>Personal Brand</strong>
+                <small>Creator or professional</small>
+              </button>
+
+              <button type="button" class="ng-ai-choice" data-business="Corporate Business">
+                <i class="bi bi-buildings"></i>
+                <strong>Corporate Business</strong>
+                <small>Established organization</small>
+              </button>
+
+              <button type="button" class="ng-ai-choice" data-business="Other">
+                <i class="bi bi-grid"></i>
+                <strong>Other</strong>
+                <small>Something different</small>
+              </button>
+
+            </div>
+
+            <div class="ng-ai-navigation">
+              <span class="ng-ai-hint">Choose one business category</span>
+              <button type="button" class="ng-ai-next" id="ngStepOneNext">
+                Continue <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="ng-ai-step" data-step="2">
+
+            <div class="ng-ai-step-heading">
+              <span>02 — DIGITAL PRESENCE</span>
+              <h3>Where does your business stand online?</h3>
+              <p>Tell us about your current digital presence.</p>
+            </div>
+
+            <div class="ng-ai-presence-grid">
+
+              <button type="button" class="ng-ai-presence" data-presence="No online presence">
+                <i class="bi bi-globe"></i>
+                <strong>No online presence</strong>
+                <small>My business is not online yet</small>
+              </button>
+
+              <button type="button" class="ng-ai-presence" data-presence="Website only">
+                <i class="bi bi-window"></i>
+                <strong>Website only</strong>
+                <small>I have a business website</small>
+              </button>
+
+              <button type="button" class="ng-ai-presence" data-presence="Social media only">
+                <i class="bi bi-instagram"></i>
+                <strong>Social media only</strong>
+                <small>My business uses social platforms</small>
+              </button>
+
+              <button type="button" class="ng-ai-presence" data-presence="Website and social media">
+                <i class="bi bi-laptop"></i>
+                <strong>Website and social media</strong>
+                <small>I use both platforms</small>
+              </button>
+
+            </div>
+
+            <div class="ng-ai-navigation">
+              <button type="button" class="ng-ai-back" id="ngStepTwoBack">
+                <i class="bi bi-arrow-left"></i> Back
+              </button>
+              <button type="button" class="ng-ai-next" id="ngStepTwoNext">
+                Continue <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="ng-ai-step" data-step="3">
+
+            <div class="ng-ai-step-heading">
+              <span>03 — DIGITAL REQUIREMENTS</span>
+              <h3>What services do you need?</h3>
+              <p>Select one or more services for your business.</p>
+            </div>
+
+            <div class="ng-ai-service-grid">
+
+              <label class="ng-ai-service">
+                <input type="checkbox" name="ngServices" value="Website Development">
+                <span class="ng-service-icon"><i class="bi bi-code-slash"></i></span>
+                <span class="ng-service-text">
+                  <strong>Website Development</strong>
+                  <small>Professional business website</small>
+                </span>
+                <i class="bi bi-check-circle-fill ng-service-check"></i>
+              </label>
+
+              <label class="ng-ai-service">
+                <input type="checkbox" name="ngServices" value="E-commerce Website">
+                <span class="ng-service-icon"><i class="bi bi-cart3"></i></span>
+                <span class="ng-service-text">
+                  <strong>E-commerce Website</strong>
+                  <small>Online store and shopping</small>
+                </span>
+                <i class="bi bi-check-circle-fill ng-service-check"></i>
+              </label>
+
+              <label class="ng-ai-service">
+                <input type="checkbox" name="ngServices" value="SEO & Digital Marketing">
+                <span class="ng-service-icon"><i class="bi bi-graph-up-arrow"></i></span>
+                <span class="ng-service-text">
+                  <strong>SEO & Digital Marketing</strong>
+                  <small>Improve online visibility</small>
+                </span>
+                <i class="bi bi-check-circle-fill ng-service-check"></i>
+              </label>
+
+              <label class="ng-ai-service">
+                <input type="checkbox" name="ngServices" value="Social Media Branding">
+                <span class="ng-service-icon"><i class="bi bi-megaphone"></i></span>
+                <span class="ng-service-text">
+                  <strong>Social Media Branding</strong>
+                  <small>Build your brand identity</small>
+                </span>
+                <i class="bi bi-check-circle-fill ng-service-check"></i>
+              </label>
+
+              <label class="ng-ai-service">
+                <input type="checkbox" name="ngServices" value="Website Maintenance">
+                <span class="ng-service-icon"><i class="bi bi-gear"></i></span>
+                <span class="ng-service-text">
+                  <strong>Website Maintenance</strong>
+                  <small>Updates and technical support</small>
+                </span>
+                <i class="bi bi-check-circle-fill ng-service-check"></i>
+              </label>
+
+              <label class="ng-ai-service">
+                <input type="checkbox" name="ngServices" value="Complete Digital Solution">
+                <span class="ng-service-icon"><i class="bi bi-stars"></i></span>
+                <span class="ng-service-text">
+                  <strong>Complete Digital Solution</strong>
+                  <small>All-in-one digital growth</small>
+                </span>
+                <i class="bi bi-check-circle-fill ng-service-check"></i>
+              </label>
+
+            </div>
+
+            <div class="ng-ai-navigation">
+              <button type="button" class="ng-ai-back" id="ngStepThreeBack">
+                <i class="bi bi-arrow-left"></i> Back
+              </button>
+              <button type="submit" class="ng-ai-next" id="ngScannerButton">
+                Scan My Business <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- SCANNING ANIMATION -->
+        <div class="ng-scanner-animation" id="ngScannerAnimation" hidden>
+          <div class="ng-scanner-radar">
+            <div class="ng-radar-ring ring-one"></div>
+            <div class="ng-radar-ring ring-two"></div>
+            <div class="ng-radar-ring ring-three"></div>
+            <div class="ng-radar-center">
+              <i class="bi bi-cpu"></i>
+            </div>
+            <div class="ng-radar-sweep"></div>
+          </div>
+
+          <h3>Analyzing Your Business</h3>
+          <p id="ngScannerStatus">Initializing digital profile...</p>
+
+          <div class="ng-scan-progress-track">
+            <div id="ngScannerProgress"></div>
+          </div>
+          <span class="ng-scan-percent" id="ngScanPercent">0%</span>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="ng-scanner-results" id="ngScannerResults" hidden>
+          <div class="ng-result-success">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>SCAN COMPLETED</span>
+          </div>
+
+          <h3>Your Digital Growth Report</h3>
+          <p class="ng-result-intro">
+            Here are the service recommendations based on your selections.
+          </p>
+
+          <div id="ngScannerResultDetails"></div>
+
+          <div class="ng-result-actions">
+            <a href="#" id="ngScannerWhatsApp" target="_blank" rel="noopener" class="ng-scanner-whatsapp">
+              <i class="bi bi-whatsapp"></i> Discuss on WhatsApp
+            </a>
+
+            <button type="button" id="ngScannerReset" class="ng-scanner-reset">
+              <i class="bi bi-arrow-repeat"></i> Scan Again
+            </button>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="ng-ai-footer">
+          <span><i class="bi bi-shield-check"></i> PRIVATE SESSION</span>
+          <span>POWERED BY NEXTGEN DIGITAL SOLUTIONS</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
   <!-- =========================================
      NEXTGEN — OUR PORTFOLIO
 ========================================= -->
