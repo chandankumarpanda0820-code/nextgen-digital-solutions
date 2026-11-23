@@ -5275,3 +5275,339 @@ a.footer-contact-item:hover {
     transition: none;
   }
 }
+
+/* =====================================
+   NEXTGEN DEVELOPER TERMINAL
+===================================== */
+
+.ng-terminal-section {
+  position: relative;
+  padding: 100px 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 50% 50%,
+      rgba(0, 255, 170, 0.07),
+      transparent 65%
+    ),
+    #05080d;
+  color: #fff;
+}
+
+.ng-terminal-container {
+  width: 100%;
+  max-width: 1050px;
+  margin: auto;
+}
+
+.ng-terminal-heading {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.ng-terminal-heading > span {
+  color: #00ffaa;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+.ng-terminal-heading h2 {
+  margin: 15px 0;
+  font-size: clamp(28px, 5vw, 45px);
+  font-weight: 800;
+  color: #fff;
+}
+
+.ng-terminal-heading h2 strong {
+  color: #00ffaa;
+}
+
+.ng-terminal-heading p {
+  color: #89959f;
+  font-size: 15px;
+}
+
+/* TERMINAL WINDOW */
+
+.ng-terminal-window {
+  position: relative;
+  background: rgba(7, 14, 20, 0.96);
+  border: 1px solid rgba(0, 255, 170, 0.35);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 0 35px rgba(0, 255, 170, 0.08),
+    0 20px 70px rgba(0, 0, 0, 0.5);
+}
+
+/* TOP BAR */
+
+.ng-terminal-topbar {
+  min-height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 20px;
+  background: #101922;
+  border-bottom: 1px solid rgba(0, 255, 170, 0.15);
+}
+
+.ng-terminal-dots {
+  display: flex;
+  gap: 7px;
+}
+
+.ng-terminal-dots span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.ng-terminal-dots span:nth-child(1) {
+  background: #ff5f57;
+}
+
+.ng-terminal-dots span:nth-child(2) {
+  background: #febc2e;
+}
+
+.ng-terminal-dots span:nth-child(3) {
+  background: #28c840;
+}
+
+.ng-terminal-title {
+  color: #a7b6c2;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+.ng-terminal-status {
+  color: #00ffaa;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* OUTPUT */
+
+.ng-terminal-output {
+  min-height: 260px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding: 25px;
+  color: #c1d2d0;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.ng-terminal-output p {
+  margin: 0 0 8px;
+  overflow-wrap: anywhere;
+}
+
+.ng-terminal-output p span,
+.ng-terminal-welcome {
+  color: #00ffaa;
+}
+
+.ng-terminal-output::-webkit-scrollbar {
+  width: 5px;
+}
+
+.ng-terminal-output::-webkit-scrollbar-thumb {
+  background: #00ffaa;
+  border-radius: 10px;
+}
+
+/* INPUT AREA */
+
+.ng-terminal-input-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 25px;
+  border-top: 1px solid rgba(0, 255, 170, 0.15);
+  background: rgba(0, 255, 170, 0.025);
+}
+
+.ng-terminal-prompt {
+  color: #00ffaa;
+  font-family: monospace;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.ng-terminal-input-area input {
+  width: 100%;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  caret-color: #00ffaa;
+}
+
+.ng-terminal-input-area input::placeholder {
+  color: #64727c;
+}
+
+.ng-terminal-input-area button {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border: 1px solid #00ffaa;
+  border-radius: 8px;
+  background: rgba(0, 255, 170, 0.1);
+  color: #00ffaa;
+  transition: 0.3s ease;
+}
+
+.ng-terminal-input-area button:hover {
+  background: #00ffaa;
+  color: #06110e;
+  box-shadow: 0 0 18px rgba(0, 255, 170, 0.5);
+}
+
+/* FOOTER */
+
+.ng-terminal-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  background: #101922;
+  border-top: 1px solid rgba(0, 255, 170, 0.12);
+  color: #778792;
+  font-size: 11px;
+}
+
+.ng-terminal-footer i {
+  color: #00ffaa;
+}
+
+/* MOBILE */
+
+@media (max-width: 576px) {
+  .ng-terminal-section {
+    padding: 70px 12px;
+  }
+
+  .ng-terminal-topbar {
+    padding: 0 12px;
+  }
+
+  .ng-terminal-title {
+    font-size: 10px;
+  }
+
+  .ng-terminal-status {
+    font-size: 9px;
+  }
+
+  .ng-terminal-output {
+    min-height: 230px;
+    padding: 18px 14px;
+    font-size: 12px;
+  }
+
+  .ng-terminal-input-area {
+    padding: 14px 12px;
+    gap: 8px;
+  }
+
+  .ng-terminal-prompt {
+    font-size: 10px;
+  }
+
+  .ng-terminal-input-area input {
+    font-size: 12px;
+  }
+
+  .ng-terminal-footer {
+    padding: 12px;
+    font-size: 9px;
+  }
+}
+
+.ng-terminal-boot {
+  padding: 22px 25px;
+  min-height: 260px;
+  background: #050b0b;
+  font-family: "Courier New", monospace;
+}
+
+.ng-boot-line {
+  color: #00ffaa;
+  font-size: 13px;
+  line-height: 2;
+  opacity: 0;
+  transform: translateY(6px);
+  animation: ngBootAppear 0.35s ease forwards;
+}
+
+.ng-boot-line::before {
+  content: ">";
+  color: #fff;
+  margin-right: 10px;
+}
+
+.ng-boot-success {
+  color: #65ff8c;
+}
+
+@keyframes ngBootAppear {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 576px) {
+  .ng-terminal-boot {
+    padding: 18px 14px;
+  }
+
+  .ng-boot-line {
+    font-size: 11px;
+  }
+}
+
+/* =====================================
+   NEXTGEN MATRIX DIGITAL RAIN
+===================================== */
+
+.ng-terminal-window {
+  position: relative;
+  isolation: isolate;
+}
+
+.ng-matrix-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+.ng-terminal-topbar,
+.ng-terminal-output,
+.ng-terminal-input-area,
+.ng-terminal-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.ng-terminal-output {
+  background: rgba(5, 11, 11, 0.48);
+}
+
+.ng-terminal-input-area {
+  background: rgba(5, 11, 11, 0.85);
+}

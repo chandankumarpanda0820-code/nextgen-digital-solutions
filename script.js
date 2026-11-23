@@ -1006,3 +1006,371 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 })();
+
+
+/* =====================================
+   NEXTGEN DEVELOPER TERMINAL
+   INTERACTIVE COMMAND SYSTEM
+   + PREMIUM BOOT ANIMATION
+   + MATRIX DIGITAL RAIN
+===================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const terminalForm = document.getElementById("ngTerminalForm");
+  const terminalInput = document.getElementById("ngTerminalInput");
+  const terminalOutput = document.getElementById("ngTerminalOutput");
+  const terminalWindow = document.querySelector(".ng-terminal-window");
+
+  if (!terminalForm || !terminalInput || !terminalOutput) return;
+
+  const company = {
+    name: "NextGen Digital Solutions",
+    tagline: "We Build. We Brand. We Grow.",
+    founder: "Chandan Kumar Panda",
+    phone: "8984240820",
+    email: "chandankumarpanda0820@gmail.com",
+    website: "https://nextgendigitalsbp.services/",
+    whatsapp: "https://wa.me/918984240820",
+    telegram: "https://t.me/nextgendigitalsolutionssbp",
+    founderInstagram: "https://www.instagram.com/pravatpanda0820/",
+    companyInstagram: "https://www.instagram.com/nextgendigitalsolutions.sbp/"
+  };
+
+  /* =====================================
+     TERMINAL OUTPUT
+  ===================================== */
+
+  function printLine(message, className = "") {
+    const line = document.createElement("p");
+    line.className = className;
+    line.textContent = message;
+    terminalOutput.appendChild(line);
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  }
+
+  function printHTML(html) {
+    const line = document.createElement("p");
+    line.innerHTML = html;
+    terminalOutput.appendChild(line);
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  }
+
+  /* =====================================
+     MATRIX DIGITAL RAIN
+  ===================================== */
+
+  function startMatrixRain() {
+
+    if (!terminalWindow) return;
+
+    if (terminalWindow.querySelector(".ng-matrix-canvas")) return;
+
+    const canvas = document.createElement("canvas");
+    canvas.className = "ng-matrix-canvas";
+
+    terminalWindow.prepend(canvas);
+
+    const ctx = canvas.getContext("2d");
+
+    if (!ctx) {
+      canvas.remove();
+      return;
+    }
+
+    const characters =
+      "01アイウエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    const fontSize = 14;
+
+    let drops = [];
+    let columns = 0;
+    let animationId;
+    let resizeObserver;
+
+    function resizeCanvas() {
+
+      const rect = terminalWindow.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      canvas.width = Math.floor(rect.width * dpr);
+      canvas.height = Math.floor(rect.height * dpr);
+
+      canvas.style.width = rect.width + "px";
+      canvas.style.height = rect.height + "px";
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      columns = Math.ceil(rect.width / fontSize);
+
+      drops = Array.from(
+        { length: columns },
+        () => Math.random() * -30
+      );
+    }
+
+    function drawMatrix() {
+
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+
+      ctx.fillStyle = "rgba(5, 11, 11, 0.12)";
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+
+        const character = characters.charAt(
+          Math.floor(Math.random() * characters.length)
+        );
+
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+
+        ctx.fillStyle = "#00ffaa";
+        ctx.fillText(character, x, y);
+
+        if (y > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i] += 0.45;
+      }
+
+      animationId = requestAnimationFrame(drawMatrix);
+    }
+
+    resizeCanvas();
+    drawMatrix();
+
+    window.addEventListener("resize", resizeCanvas);
+
+    if ("ResizeObserver" in window) {
+      resizeObserver = new ResizeObserver(resizeCanvas);
+      resizeObserver.observe(terminalWindow);
+    }
+
+  }
+
+  /* =====================================
+     PREMIUM BOOT ANIMATION
+  ===================================== */
+
+  function startTerminalBoot() {
+
+    const bootMessages = [
+      { text: "NEXTGEN DIGITAL SYSTEM INITIALIZING...", type: "" },
+      { text: "Loading terminal environment...", type: "" },
+      { text: "Checking system modules... OK", type: "ng-boot-success" },
+      { text: "Loading company profile... OK", type: "ng-boot-success" },
+      { text: "Connecting digital services... OK", type: "ng-boot-success" },
+      { text: "Security check... PASSED", type: "ng-boot-success" },
+      { text: "Welcome to NextGen Developer Terminal!", type: "ng-boot-success" }
+    ];
+
+    terminalOutput.innerHTML = "";
+    terminalOutput.classList.add("ng-terminal-boot");
+
+    terminalInput.disabled = true;
+
+    let index = 0;
+
+    function showNextMessage() {
+
+      if (index >= bootMessages.length) {
+
+        setTimeout(function () {
+
+          terminalOutput.classList.remove("ng-terminal-boot");
+          terminalOutput.innerHTML = "";
+
+          printLine("Welcome to NextGen Digital Solutions Terminal.");
+          printLine("Type 'help' to explore available commands.");
+          printLine(
+            "System ready. Let's build something amazing!",
+            "ng-terminal-welcome"
+          );
+
+          terminalInput.disabled = false;
+          terminalInput.focus();
+
+        }, 500);
+
+        return;
+      }
+
+      const message = bootMessages[index];
+
+      const line = document.createElement("p");
+      line.className = "ng-boot-line " + message.type;
+      line.textContent = message.text;
+
+      terminalOutput.appendChild(line);
+      terminalOutput.scrollTop = terminalOutput.scrollHeight;
+
+      index++;
+
+      setTimeout(showNextMessage, 450);
+    }
+
+    showNextMessage();
+  }
+
+  /* =====================================
+     AVAILABLE COMMANDS
+  ===================================== */
+
+  const commands = {
+
+    help: function () {
+      printLine("AVAILABLE COMMANDS", "ng-terminal-welcome");
+      printLine("about      - About NextGen");
+      printLine("services   - Explore our services");
+      printLine("projects   - Explore our projects");
+      printLine("whoami     - Developer identity");
+      printLine("contact    - Contact information");
+      printLine("socials    - Social media links");
+      printLine("website    - Open company website");
+      printLine("date       - Current date");
+      printLine("time       - Current local time");
+      printLine("clear      - Clear terminal");
+      printLine("exit       - Close current session");
+      printLine("help       - Show all commands");
+    },
+
+    about: function () {
+      printLine("COMPANY INFORMATION", "ng-terminal-welcome");
+      printLine(company.name);
+      printLine(company.tagline);
+      printLine("Location: Sambalpur, Odisha, India");
+      printLine("We create digital experiences for growing businesses.");
+    },
+
+    services: function () {
+      printLine("OUR DIGITAL SERVICES", "ng-terminal-welcome");
+      printLine("01. Website Development");
+      printLine("02. E-commerce Development");
+      printLine("03. SEO & Digital Marketing");
+      printLine("04. Social Media Branding");
+      printLine("05. Website Design & Maintenance");
+    },
+
+    projects: function () {
+      printLine("PROJECT SHOWCASE", "ng-terminal-welcome");
+      printLine("Explore our latest digital projects:");
+      printLine("Visit our website to discover our work.");
+    },
+
+    whoami: function () {
+      printLine("IDENTITY DETECTED", "ng-terminal-welcome");
+      printLine("Founder: " + company.founder);
+      printLine("Organization: " + company.name);
+      printLine("Role: Digital Solutions & Development");
+    },
+
+    contact: function () {
+      printLine("CONTACT INFORMATION", "ng-terminal-welcome");
+      printLine("Phone: " + company.phone);
+      printLine("Email: " + company.email);
+      printLine("Website: " + company.website);
+    },
+
+    socials: function () {
+      printLine("CONNECT WITH NEXTGEN", "ng-terminal-welcome");
+
+      printHTML(
+        '<a href="' + company.companyInstagram +
+        '" target="_blank" rel="noopener noreferrer" style="color:#00ffaa;">Instagram - NextGen</a>'
+      );
+
+      printHTML(
+        '<a href="' + company.telegram +
+        '" target="_blank" rel="noopener noreferrer" style="color:#00ffaa;">Telegram Channel</a>'
+      );
+
+      printHTML(
+        '<a href="' + company.whatsapp +
+        '" target="_blank" rel="noopener noreferrer" style="color:#00ffaa;">WhatsApp</a>'
+      );
+
+      printHTML(
+        '<a href="' + company.founderInstagram +
+        '" target="_blank" rel="noopener noreferrer" style="color:#00ffaa;">Founder Instagram</a>'
+      );
+    },
+
+    website: function () {
+      printLine("Opening NextGen website...");
+      window.open(company.website, "_blank", "noopener,noreferrer");
+    },
+
+    date: function () {
+      printLine("Current Date: " + new Date().toLocaleDateString());
+    },
+
+    time: function () {
+      printLine("SYSTEM CLOCK", "ng-terminal-welcome");
+      printLine("Current Time: " + new Date().toLocaleTimeString());
+      printLine(
+        "Timezone: " + Intl.DateTimeFormat().resolvedOptions().timeZone
+      );
+    },
+
+    clear: function () {
+      terminalOutput.innerHTML = "";
+    },
+
+    exit: function () {
+      terminalOutput.innerHTML = "";
+
+      printLine("NEXTGEN DEVELOPER TERMINAL", "ng-terminal-welcome");
+      printLine("Session closed successfully.");
+      printLine("Welcome back!");
+      printLine("Type 'help' to explore available commands.");
+    }
+  };
+
+  /* =====================================
+     COMMAND EXECUTION
+  ===================================== */
+
+  terminalForm.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+    if (terminalInput.disabled) return;
+
+    const command = terminalInput.value.trim().toLowerCase();
+
+    if (!command) return;
+
+    printHTML(
+      '<span style="color:#00ffaa">visitor@nextgen:~$</span> ' +
+      command.replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+    );
+
+    if (commands[command]) {
+      commands[command]();
+    } else {
+      printLine(
+        "Command not found: " + command +
+        ". Type 'help' to see available commands."
+      );
+    }
+
+    terminalInput.value = "";
+    terminalInput.focus();
+
+  });
+
+  /* =====================================
+     START TERMINAL
+  ===================================== */
+
+  startMatrixRain();
+  startTerminalBoot();
+
+});
