@@ -657,264 +657,352 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const chatToggle = document.getElementById("ng-chat-toggle");
-    const chatBox = document.getElementById("ng-chat-box");
-    const chatClose = document.getElementById("ng-chat-close");
-    const chatBody = document.getElementById("ng-chat-body");
+  const chatToggle = document.getElementById("ng-chat-toggle");
+  const chatBox = document.getElementById("ng-chat-box");
+  const chatClose = document.getElementById("ng-chat-close");
+  const chatBody = document.getElementById("ng-chat-body");
 
-    if (!chatToggle || !chatBox || !chatClose || !chatBody) return;
+  if (!chatToggle || !chatBox || !chatClose || !chatBody) return;
 
-    // ORIGINAL CHAT SCREEN
-    const originalChatContent = chatBody.innerHTML;
+  // ORIGINAL CHAT SCREEN
+  const originalChatContent = chatBody.innerHTML;
 
-    // COMPANY CONTACT DETAILS
-    const whatsappNumber = "918984240820";
-    const companyPhone = "8984240820";
-    const companyEmail = "chandankumarpanda0820@gmail.com";
+  // COMPANY CONTACT DETAILS
+  const whatsappNumber = "918984240820";
+  const companyPhone = "8984240820";
+  const companyEmail = "chandankumarpanda0820@gmail.com";
 
-    let selectedService = "";
+  let selectedService = "";
 
-    // OPEN CHAT
-    chatToggle.addEventListener("click", function () {
-        chatBox.classList.toggle("ng-chat-active");
-    });
+  // OPEN CHAT
+  chatToggle.addEventListener("click", function () {
+    chatBox.classList.toggle("ng-chat-active");
+  });
 
-    // RESET CHAT
-    function resetChat() {
-        chatBody.innerHTML = originalChatContent;
-        chatBody.scrollTop = 0;
-        selectedService = "";
+  // RESET CHAT
+  function resetChat() {
+    chatBody.innerHTML = originalChatContent;
+    chatBody.scrollTop = 0;
+    selectedService = "";
+  }
+
+  // CLOSE CHAT
+  chatClose.addEventListener("click", function () {
+    chatBox.classList.remove("ng-chat-active");
+    resetChat();
+  });
+
+  // ADD MESSAGE
+  function addMessage(message, type) {
+
+    const div = document.createElement("div");
+
+    div.className = type === "user"
+      ? "ng-user-message"
+      : "ng-bot-message";
+
+    div.textContent = message;
+
+    chatBody.appendChild(div);
+
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    return div;
+  }
+
+  // CREATE BUTTON
+  function createButton(text, className, callback) {
+
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.textContent = text;
+    button.className = className;
+
+    button.addEventListener("click", callback);
+
+    return button;
+  }
+
+  // ASK CUSTOMER YES / NO
+  function askContactPreference() {
+
+    addMessage(
+      "Kya aap WhatsApp par hamari NextGen team se baat karna chahte hain?",
+      "bot"
+    );
+
+    const options = document.createElement("div");
+    options.className = "ng-chat-options";
+
+    const yesButton = createButton(
+      "✓ YES, Contact Team",
+      "ng-chat-choice",
+      function () {
+
+        addMessage("YES, I want to contact the team.", "user");
+
+        showContactOptions();
+      }
+    );
+
+    const noButton = createButton(
+      "✕ NO, Show Contact Details",
+      "ng-chat-choice",
+      function () {
+
+        addMessage("NO, Show me your contact details.", "user");
+
+        showContactDetails();
+      }
+    );
+
+    options.appendChild(yesButton);
+    options.appendChild(noButton);
+
+    chatBody.appendChild(options);
+
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  // YES: WHATSAPP AND EMAIL OPTIONS
+  function showContactOptions() {
+
+    addMessage(
+      "Great! Please choose how you would like to contact our team.",
+      "bot"
+    );
+
+    const options = document.createElement("div");
+    options.className = "ng-chat-options";
+
+    // WHATSAPP
+    const whatsapp = document.createElement("a");
+
+    const whatsappMessage =
+      "Hello NextGen Digital Solutions! I am interested in " +
+      selectedService +
+      ". Please share more details.";
+
+    whatsapp.href =
+      "https://wa.me/" +
+      whatsappNumber +
+      "?text=" +
+      encodeURIComponent(whatsappMessage);
+
+    whatsapp.target = "_blank";
+    whatsapp.rel = "noopener noreferrer";
+    whatsapp.className = "ng-chat-whatsapp";
+
+    whatsapp.innerHTML =
+      '<i class="bi bi-whatsapp"></i> Contact via WhatsApp';
+
+    // EMAIL
+    const email = document.createElement("a");
+
+    const subject = "Service Enquiry - " + selectedService;
+
+    const emailMessage =
+      "Hello NextGen Digital Solutions,\n\n" +
+      "I am interested in " + selectedService +
+      ". Please share more details.\n\n" +
+      "Thank you.";
+
+    email.href =
+      "mailto:" + companyEmail +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(emailMessage);
+
+    email.className = "ng-chat-whatsapp";
+    email.style.background = "#164c88";
+
+    email.innerHTML =
+      '<i class="bi bi-envelope-fill"></i> Contact via Email';
+
+    options.appendChild(whatsapp);
+    options.appendChild(email);
+
+    chatBody.appendChild(options);
+
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  // NO: SHOW COMPANY DETAILS
+  function showContactDetails() {
+
+    addMessage(
+      "No problem! Here are our official contact details. You can contact us whenever you need assistance.",
+      "bot"
+    );
+
+    const details = document.createElement("div");
+
+    details.className = "ng-bot-message";
+
+    const title = document.createElement("strong");
+    title.textContent = "NextGen Digital Solutions";
+
+    const phone = document.createElement("p");
+    phone.style.margin = "10px 0 5px";
+    phone.textContent = "📞 Phone: " + companyPhone;
+
+    const email = document.createElement("p");
+    email.style.margin = "5px 0";
+    email.textContent = "✉ Email: " + companyEmail;
+
+    details.appendChild(title);
+    details.appendChild(phone);
+    details.appendChild(email);
+
+    chatBody.appendChild(details);
+
+    // CALL BUTTON
+    const callButton = document.createElement("a");
+
+    callButton.href = "tel:" + companyPhone;
+    callButton.className = "ng-chat-whatsapp";
+    callButton.innerHTML =
+      '<i class="bi bi-telephone-fill"></i> Call NextGen';
+
+    // EMAIL BUTTON
+    const emailButton = document.createElement("a");
+
+    emailButton.href = "mailto:" + companyEmail;
+    emailButton.className = "ng-chat-whatsapp";
+    emailButton.style.background = "#164c88";
+
+    emailButton.innerHTML =
+      '<i class="bi bi-envelope-fill"></i> Send Email';
+
+    chatBody.appendChild(callButton);
+    chatBody.appendChild(emailButton);
+
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  // SERVICE SELECTION
+  chatBody.addEventListener("click", function (event) {
+
+    const button = event.target.closest(
+      ".ng-chat-options button[data-service]"
+    );
+
+    if (!button) return;
+
+    selectedService = button.dataset.service;
+
+    addMessage(selectedService, "user");
+
+    // Prevent repeated selection
+    button.closest(".ng-chat-options").remove();
+
+    addMessage(
+      "Thank you for your interest in " +
+      selectedService + "!",
+      "bot"
+    );
+
+    askContactPreference();
+  });
+
+  // ESCAPE KEY
+  document.addEventListener("keydown", function (event) {
+
+    if (event.key === "Escape") {
+
+      chatBox.classList.remove("ng-chat-active");
+
+      resetChat();
     }
 
-    // CLOSE CHAT
-    chatClose.addEventListener("click", function () {
-        chatBox.classList.remove("ng-chat-active");
-        resetChat();
-    });
-
-    // ADD MESSAGE
-    function addMessage(message, type) {
-
-        const div = document.createElement("div");
-
-        div.className = type === "user"
-            ? "ng-user-message"
-            : "ng-bot-message";
-
-        div.textContent = message;
-
-        chatBody.appendChild(div);
-
-        chatBody.scrollTop = chatBody.scrollHeight;
-
-        return div;
-    }
-
-    // CREATE BUTTON
-    function createButton(text, className, callback) {
-
-        const button = document.createElement("button");
-
-        button.type = "button";
-        button.textContent = text;
-        button.className = className;
-
-        button.addEventListener("click", callback);
-
-        return button;
-    }
-
-    // ASK CUSTOMER YES / NO
-    function askContactPreference() {
-
-        addMessage(
-            "Kya aap WhatsApp par hamari NextGen team se baat karna chahte hain?",
-            "bot"
-        );
-
-        const options = document.createElement("div");
-        options.className = "ng-chat-options";
-
-        const yesButton = createButton(
-            "✓ YES, Contact Team",
-            "ng-chat-choice",
-            function () {
-
-                addMessage("YES, I want to contact the team.", "user");
-
-                showContactOptions();
-            }
-        );
-
-        const noButton = createButton(
-            "✕ NO, Show Contact Details",
-            "ng-chat-choice",
-            function () {
-
-                addMessage("NO, Show me your contact details.", "user");
-
-                showContactDetails();
-            }
-        );
-
-        options.appendChild(yesButton);
-        options.appendChild(noButton);
-
-        chatBody.appendChild(options);
-
-        chatBody.scrollTop = chatBody.scrollHeight;
-    }
-
-    // YES: WHATSAPP AND EMAIL OPTIONS
-    function showContactOptions() {
-
-        addMessage(
-            "Great! Please choose how you would like to contact our team.",
-            "bot"
-        );
-
-        const options = document.createElement("div");
-        options.className = "ng-chat-options";
-
-        // WHATSAPP
-        const whatsapp = document.createElement("a");
-
-        const whatsappMessage =
-            "Hello NextGen Digital Solutions! I am interested in " +
-            selectedService +
-            ". Please share more details.";
-
-        whatsapp.href =
-            "https://wa.me/" +
-            whatsappNumber +
-            "?text=" +
-            encodeURIComponent(whatsappMessage);
-
-        whatsapp.target = "_blank";
-        whatsapp.rel = "noopener noreferrer";
-        whatsapp.className = "ng-chat-whatsapp";
-
-        whatsapp.innerHTML =
-            '<i class="bi bi-whatsapp"></i> Contact via WhatsApp';
-
-        // EMAIL
-        const email = document.createElement("a");
-
-        const subject = "Service Enquiry - " + selectedService;
-
-        const emailMessage =
-            "Hello NextGen Digital Solutions,\n\n" +
-            "I am interested in " + selectedService +
-            ". Please share more details.\n\n" +
-            "Thank you.";
-
-        email.href =
-            "mailto:" + companyEmail +
-            "?subject=" + encodeURIComponent(subject) +
-            "&body=" + encodeURIComponent(emailMessage);
-
-        email.className = "ng-chat-whatsapp";
-        email.style.background = "#164c88";
-
-        email.innerHTML =
-            '<i class="bi bi-envelope-fill"></i> Contact via Email';
-
-        options.appendChild(whatsapp);
-        options.appendChild(email);
-
-        chatBody.appendChild(options);
-
-        chatBody.scrollTop = chatBody.scrollHeight;
-    }
-
-    // NO: SHOW COMPANY DETAILS
-    function showContactDetails() {
-
-        addMessage(
-            "No problem! Here are our official contact details. You can contact us whenever you need assistance.",
-            "bot"
-        );
-
-        const details = document.createElement("div");
-
-        details.className = "ng-bot-message";
-
-        const title = document.createElement("strong");
-        title.textContent = "NextGen Digital Solutions";
-
-        const phone = document.createElement("p");
-        phone.style.margin = "10px 0 5px";
-        phone.textContent = "📞 Phone: " + companyPhone;
-
-        const email = document.createElement("p");
-        email.style.margin = "5px 0";
-        email.textContent = "✉ Email: " + companyEmail;
-
-        details.appendChild(title);
-        details.appendChild(phone);
-        details.appendChild(email);
-
-        chatBody.appendChild(details);
-
-        // CALL BUTTON
-        const callButton = document.createElement("a");
-
-        callButton.href = "tel:" + companyPhone;
-        callButton.className = "ng-chat-whatsapp";
-        callButton.innerHTML =
-            '<i class="bi bi-telephone-fill"></i> Call NextGen';
-
-        // EMAIL BUTTON
-        const emailButton = document.createElement("a");
-
-        emailButton.href = "mailto:" + companyEmail;
-        emailButton.className = "ng-chat-whatsapp";
-        emailButton.style.background = "#164c88";
-
-        emailButton.innerHTML =
-            '<i class="bi bi-envelope-fill"></i> Send Email';
-
-        chatBody.appendChild(callButton);
-        chatBody.appendChild(emailButton);
-
-        chatBody.scrollTop = chatBody.scrollHeight;
-    }
-
-    // SERVICE SELECTION
-    chatBody.addEventListener("click", function (event) {
-
-        const button = event.target.closest(
-            ".ng-chat-options button[data-service]"
-        );
-
-        if (!button) return;
-
-        selectedService = button.dataset.service;
-
-        addMessage(selectedService, "user");
-
-        // Prevent repeated selection
-        button.closest(".ng-chat-options").remove();
-
-        addMessage(
-            "Thank you for your interest in " +
-            selectedService + "!",
-            "bot"
-        );
-
-        askContactPreference();
-    });
-
-    // ESCAPE KEY
-    document.addEventListener("keydown", function (event) {
-
-        if (event.key === "Escape") {
-
-            chatBox.classList.remove("ng-chat-active");
-
-            resetChat();
-        }
-
-    });
+  });
 
 });
+
+
+/* ===== NEXTGEN PREMIUM PRELOADER ===== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const preloader = document.getElementById("ng-preloader");
+  if (!preloader) return;
+
+  const startTime = Date.now();
+  let pageLoaded = document.readyState === "complete";
+
+  function hidePreloader() {
+    if (!pageLoaded) return;
+
+    const elapsedTime = Date.now() - startTime;
+    const remainingTime = Math.max(0, 2000 - elapsedTime);
+
+    setTimeout(function () {
+      preloader.classList.add("ng-loader-hide");
+
+      setTimeout(function () {
+        preloader.remove();
+      }, 650);
+
+    }, remainingTime);
+  }
+
+  if (!pageLoaded) {
+    window.addEventListener("load", function () {
+      pageLoaded = true;
+      hidePreloader();
+    }, { once: true });
+  } else {
+    hidePreloader();
+  }
+
+});
+
+/* ===== NEXTGEN SCROLL PROGRESS ===== */
+
+(function () {
+
+  const progressBar = document.getElementById("ng-scroll-progress");
+
+  if (!progressBar) return;
+
+  function updateScrollProgress() {
+
+    const scrollTop = window.scrollY;
+    const scrollHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    const progress = scrollHeight > 0
+      ? (scrollTop / scrollHeight) * 100
+      : 0;
+
+    progressBar.style.width = progress + "%";
+  }
+
+  window.addEventListener("scroll", updateScrollProgress, {
+    passive: true
+  });
+
+  window.addEventListener("resize", updateScrollProgress);
+
+  updateScrollProgress();
+
+})();
+
+/* ===== NEXTGEN ENERGY BUTTON ACTION ===== */
+
+(function () {
+
+  const energyButton = document.querySelector(".back-to-top");
+
+  if (!energyButton) return;
+
+  energyButton.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+})();

@@ -3952,307 +3952,1326 @@ a.footer-contact-item:hover {
   }
 }
 
-
 /* =========================================
    NEXTGEN — LIVE CHAT WIDGET
 ========================================= */
 
 #ng-chat-widget {
-    position: fixed;
-    right: 25px;
-    bottom: 25px;
-    z-index: 999999;
-    font-family: inherit;
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  z-index: 999999;
+  font-family: inherit;
 }
 
 /* FLOATING BUTTON */
 
 #ng-chat-toggle {
-    width: 64px;
-    height: 64px;
-    border: 2px solid #28baff;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #078bff, #003b91);
-    color: #fff;
-    font-size: 26px;
-    cursor: pointer;
-    box-shadow: 0 0 25px rgba(0, 136, 255, .55);
-    position: relative;
-    transition: .3s ease;
+  width: 64px;
+  height: 64px;
+  border: 2px solid #28baff;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #078bff, #003b91);
+  color: #fff;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(0, 136, 255, 0.55);
+  position: relative;
+  transition: 0.3s ease;
 }
 
 #ng-chat-toggle:hover {
-    transform: translateY(-5px) scale(1.06);
-    box-shadow: 0 0 35px #078bff;
+  transform: translateY(-5px) scale(1.06);
+  box-shadow: 0 0 35px #078bff;
 }
 
 .ng-chat-pulse {
-    position: absolute;
-    top: 3px;
-    right: 3px;
-    height: 13px;
-    width: 13px;
-    background: #20e68a;
-    border: 2px solid #fff;
-    border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  height: 13px;
+  width: 13px;
+  background: #20e68a;
+  border: 2px solid #fff;
+  border-radius: 50%;
 }
 
 /* CHAT WINDOW */
 
 #ng-chat-box {
-    display: none;
-    position: absolute;
-    right: 0;
-    bottom: 82px;
-    width: 360px;
-    max-width: calc(100vw - 30px);
-    background: #071426;
-    color: #fff;
-    border: 1px solid rgba(25, 143, 255, .7);
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, .5);
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: 82px;
+  width: 360px;
+  max-width: calc(100vw - 30px);
+  background: #071426;
+  color: #fff;
+  border: 1px solid rgba(25, 143, 255, 0.7);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
 }
 
 #ng-chat-box.ng-chat-active {
-    display: block;
-    animation: ngChatOpen .3s ease;
+  display: block;
+  animation: ngChatOpen 0.3s ease;
 }
 
 @keyframes ngChatOpen {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* HEADER */
 
 .ng-chat-header {
-    padding: 17px;
-    background: linear-gradient(120deg, #0756b9, #071d43);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  padding: 17px;
+  background: linear-gradient(120deg, #0756b9, #071d43);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .ng-chat-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .ng-chat-logo {
-    width: 43px;
-    height: 43px;
-    border-radius: 12px;
-    display: grid;
-    place-items: center;
-    background: linear-gradient(135deg, #08baff, #0756d8);
-    color: #fff;
-    font-size: 23px;
+  width: 43px;
+  height: 43px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #08baff, #0756d8);
+  color: #fff;
+  font-size: 23px;
 }
 
 .ng-chat-header h6 {
-    margin: 0 0 5px;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 700;
+  margin: 0 0 5px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
 }
 
 .ng-chat-header span {
-    color: #c0ddff;
-    font-size: 11px;
+  color: #c0ddff;
+  font-size: 11px;
 }
 
 .ng-online-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    background: #20e68a;
-    border-radius: 50%;
-    margin-right: 4px;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #20e68a;
+  border-radius: 50%;
+  margin-right: 4px;
 }
 
 #ng-chat-close {
-    border: none;
-    background: transparent;
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 /* CHAT BODY */
 
 .ng-chat-body {
-    padding: 16px;
-    height: 380px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #1769b7 #071426;
+  padding: 16px;
+  height: 380px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #1769b7 #071426;
 }
 
 .ng-chat-date {
-    text-align: center;
-    color: #7999bd;
-    font-size: 10px;
-    margin-bottom: 15px;
+  text-align: center;
+  color: #7999bd;
+  font-size: 10px;
+  margin-bottom: 15px;
 }
 
 .ng-bot-message,
 .ng-user-message {
-    max-width: 90%;
-    padding: 12px;
-    margin-bottom: 13px;
-    border-radius: 12px;
-    font-size: 13px;
-    line-height: 1.6;
-    overflow-wrap: anywhere;
+  max-width: 90%;
+  padding: 12px;
+  margin-bottom: 13px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .ng-bot-message {
-    background: #142b49;
-    border: 1px solid #234a75;
-    color: #e4efff;
+  background: #142b49;
+  border: 1px solid #234a75;
+  color: #e4efff;
 }
 
 .ng-user-message {
-    background: #075fc9;
-    color: #fff;
-    margin-left: auto;
-    text-align: right;
+  background: #075fc9;
+  color: #fff;
+  margin-left: auto;
+  text-align: right;
 }
 
 .ng-option-heading {
-    color: #a9c9ee;
-    font-size: 12px;
-    margin-bottom: 10px;
+  color: #a9c9ee;
+  font-size: 12px;
+  margin-bottom: 10px;
 }
 
 /* SERVICE OPTIONS */
 
 .ng-chat-options {
-    display: grid;
-    gap: 9px;
+  display: grid;
+  gap: 9px;
 }
 
 .ng-chat-options button {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding: 11px;
-    border: 1px solid #1769b7;
-    border-radius: 9px;
-    background: #0c2341;
-    color: #d8eaff;
-    text-align: left;
-    font-size: 12px;
-    cursor: pointer;
-    transition: .25s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #1769b7;
+  border-radius: 9px;
+  background: #0c2341;
+  color: #d8eaff;
+  text-align: left;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.25s ease;
 }
 
 .ng-chat-options button i {
-    font-size: 16px;
-    color: #29baff;
+  font-size: 16px;
+  color: #29baff;
 }
 
 .ng-chat-options button:hover {
-    background: #075fc9;
-    color: #fff;
-    transform: translateX(4px);
+  background: #075fc9;
+  color: #fff;
+  transform: translateX(4px);
 }
 
 /* WHATSAPP BUTTON */
 
 .ng-chat-whatsapp {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin-top: 12px;
-    border-radius: 9px;
-    background: #087cff;
-    color: #fff !important;
-    text-decoration: none !important;
-    text-align: center;
-    font-size: 13px;
-    font-weight: 600;
-    transition: .25s;
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 9px;
+  background: #087cff;
+  color: #fff !important;
+  text-decoration: none !important;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  transition: 0.25s;
 }
 
 .ng-chat-whatsapp:hover {
-    background: #0063d4;
-    box-shadow: 0 0 15px #087cff80;
+  background: #0063d4;
+  box-shadow: 0 0 15px #087cff80;
 }
 
 /* FOOTER */
 
 .ng-chat-footer {
-    padding: 12px;
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    border-top: 1px solid #203b5b;
-    font-size: 10px;
-    color: #8daacb;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  border-top: 1px solid #203b5b;
+  font-size: 10px;
+  color: #8daacb;
 }
 
 .ng-chat-footer strong {
-    color: #36baff;
+  color: #36baff;
 }
 
 /* MOBILE RESPONSIVE */
 
 @media (max-width: 480px) {
+  #ng-chat-widget {
+    right: 15px;
+    bottom: 15px;
+  }
 
-    #ng-chat-widget {
-        right: 15px;
-        bottom: 15px;
-    }
+  #ng-chat-toggle {
+    width: 58px;
+    height: 58px;
+  }
 
-    #ng-chat-toggle {
-        width: 58px;
-        height: 58px;
-    }
+  #ng-chat-box {
+    width: calc(100vw - 30px);
+    max-width: 360px;
+  }
 
-    #ng-chat-box {
-        width: calc(100vw - 30px);
-        max-width: 360px;
-    }
-
-    .ng-chat-body {
-        height: 350px;
-    }
+  .ng-chat-body {
+    height: 350px;
+  }
 }
-
-
 
 /* NEXTGEN CHAT YES / NO OPTIONS */
 
 .ng-chat-choice {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #168aff;
-    border-radius: 10px;
-    background: #102d50;
-    color: #fff;
-    text-align: left;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: .25s ease;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #168aff;
+  border-radius: 10px;
+  background: #102d50;
+  color: #fff;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
 }
 
 .ng-chat-choice:hover {
-    background: #075fc9;
-    transform: translateX(3px);
+  background: #075fc9;
+  transform: translateX(3px);
 }
 
 .ng-chat-options a {
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* ===== NEXTGEN PREMIUM PRELOADER ===== */
+
+#ng-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #050b18;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 0.6s ease,
+    visibility 0.6s ease;
+}
+
+.ng-loader-content {
+  width: 90%;
+  max-width: 350px;
+  text-align: center;
+  color: #fff;
+}
+
+.ng-loader-logo {
+  font-size: 65px;
+  font-weight: 900;
+  letter-spacing: -5px;
+  color: #ffffff;
+  margin-bottom: 15px;
+  animation: ngLogoPulse 1.5s infinite alternate;
+}
+
+.ng-loader-logo span {
+  color: #1688ff;
+}
+
+.ng-loader-content h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.ng-loader-content p {
+  color: #9aabc5;
+  font-size: 13px;
+  margin-bottom: 30px;
+}
+
+.ng-loader-track {
+  width: 100%;
+  height: 4px;
+  background: #18263d;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.ng-loader-progress {
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, #087cff, #00d4ff);
+  border-radius: 20px;
+  animation: ngLoading 1.5s ease-in-out infinite;
+}
+
+.ng-loader-content small {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #7186a5;
+}
+
+.ng-loader-hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@keyframes ngLoading {
+  0% {
+    transform: translateX(-110%);
+  }
+  100% {
+    transform: translateX(280%);
+  }
+}
+
+@keyframes ngLogoPulse {
+  from {
+    transform: scale(1);
+    text-shadow: 0 0 5px #087cff;
+  }
+  to {
+    transform: scale(1.06);
+    text-shadow: 0 0 25px #087cff;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ng-loader-logo,
+  .ng-loader-progress {
+    animation: none;
+  }
+}
+
+/* ===== NEXTGEN ANIMATED BACKGROUND ===== */
+
+#ng-animated-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: transparent;
+}
+
+.ng-orb {
+  position: absolute;
+  display: block;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.18;
+  animation: ngFloat 12s ease-in-out infinite alternate;
+}
+
+.ng-orb-one {
+  background: #087cff;
+  top: 5%;
+  left: -120px;
+}
+
+.ng-orb-two {
+  background: #00c8ff;
+  right: -120px;
+  top: 40%;
+  animation-delay: 2s;
+}
+
+.ng-orb-three {
+  background: #304dff;
+  bottom: -150px;
+  left: 35%;
+  animation-delay: 4s;
+}
+
+.ng-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 132, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 132, 255, 0.035) 1px, transparent 1px);
+  background-size: 55px 55px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+@keyframes ngFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(70px, 50px) scale(1.15);
+  }
+  100% {
+    transform: translate(-30px, 90px) scale(0.9);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ng-orb {
+    animation: none;
+  }
+}
+
+/* ===== NEXTGEN SCROLL PROGRESS ===== */
+
+#ng-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(90deg, #087cff, #00d4ff, #ffffff);
+  z-index: 1000000;
+  box-shadow: 0 0 12px rgba(0, 140, 255, 0.8);
+  transition: width 0.08s linear;
+}
+
+/* =========================================
+   NEXTGEN ENERGY FLOATING BACK TO TOP
+   Bottom Left | Neon Purple + Cyan
+========================================= */
+
+.back-to-top {
+  position: fixed !important;
+
+  top: auto !important;
+  bottom: 25px !important;
+  left: 25px !important;
+  right: auto !important;
+
+  transform: none !important;
+
+  width: 65px;
+  height: 85px;
+
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  color: #00d4ff !important;
+  text-decoration: none !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+
+  z-index: 99999 !important;
+
+  transition: transform 0.35s ease;
+}
+
+/* LIGHTNING ICON */
+
+.ng-energy-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  color: #b879ff;
+  font-size: 42px;
+
+  filter: drop-shadow(0 0 5px #a855f7) drop-shadow(0 0 12px #00d4ff);
+
+  animation: ngEnergyPulse 1.8s ease-in-out infinite alternate;
+
+  transition:
+    color 0.3s ease,
+    filter 0.3s ease;
+}
+
+/* GO TOP TEXT */
+
+.ng-energy-text {
+  color: #00d4ff;
+
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.8);
+
+  transition: letter-spacing 0.3s ease;
+}
+
+/* HOVER EFFECT */
+
+.back-to-top:hover {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  transform: translateY(-7px) scale(1.12) !important;
+}
+
+.back-to-top:hover .ng-energy-icon {
+  color: #00e5ff;
+
+  filter: drop-shadow(0 0 8px #00d4ff) drop-shadow(0 0 20px #a855f7)
+    drop-shadow(0 0 35px #00d4ff);
+
+  animation: ngEnergyBurst 0.5s ease;
+}
+
+.back-to-top:hover .ng-energy-text {
+  letter-spacing: 3px;
+  color: #d7b5ff;
+}
+
+/* ENERGY PULSE */
+
+@keyframes ngEnergyPulse {
+  from {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  to {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+}
+
+/* ENERGY BURST */
+
+@keyframes ngEnergyBurst {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.3) rotate(-12deg);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 576px) {
+  .back-to-top {
+    left: 12px !important;
+    right: auto !important;
+    bottom: 18px !important;
+
+    width: 50px;
+    height: 70px;
+  }
+
+  .ng-energy-icon {
+    font-size: 34px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .ng-energy-text {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .ng-energy-icon {
+    animation: none;
+  }
+}
+
+/* ==============================================
+   NEXTGEN DIGITAL SOLUTIONS
+   PREMIUM FOUNDER / OWNER SECTION
+   Navy + Electric Purple + Cyan
+============================================== */
+
+.ng-founder-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  padding: 115px 6% 75px;
+
+  background:
+    radial-gradient(
+      ellipse at 8% 45%,
+      rgba(131, 75, 255, 0.12),
+      transparent 38%
+    ),
+    radial-gradient(ellipse at 92% 85%, rgba(0, 190, 255, 0.1), transparent 35%);
+}
+
+/* Background Grid */
+
+.ng-founder-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background-image:
+    linear-gradient(rgba(115, 145, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(115, 145, 255, 0.025) 1px, transparent 1px);
+
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+/* Main Container */
+
+.ng-founder-container {
+  position: relative;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+/* ==============================================
+   SECTION HEADING
+============================================== */
+
+.ng-founder-heading {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.ng-founder-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 10px 20px;
+
+  border: 1px solid rgba(165, 120, 255, 0.35);
+  border-radius: 30px;
+
+  background: rgba(130, 75, 255, 0.08);
+
+  color: #c09aff;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+}
+
+.ng-founder-kicker i {
+  font-size: 14px;
+}
+
+.ng-founder-heading h2 {
+  margin: 22px 0 12px;
+
+  color: #ffffff;
+
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+
+.ng-founder-heading h2 span {
+  background: linear-gradient(100deg, #a879ff, #00d4ff);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.ng-founder-heading p {
+  color: #96a9c5;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* ==============================================
+   MAIN FOUNDER PROFILE
+============================================== */
+
+.ng-founder-profile {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: center;
+
+  gap: 75px;
+
+  padding: 55px;
+
+  background: linear-gradient(
+    125deg,
+    rgba(14, 24, 49, 0.95),
+    rgba(7, 17, 35, 0.96)
+  );
+
+  border: 1px solid rgba(140, 120, 255, 0.2);
+  border-radius: 32px;
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.25),
+    inset 0 0 35px rgba(100, 100, 255, 0.025);
+}
+
+/* ==============================================
+   FOUNDER PHOTO DESIGN
+============================================== */
+
+.ng-founder-visual {
+  position: relative;
+
+  width: 100%;
+  max-width: 410px;
+
+  margin: 0 auto;
+  padding: 18px;
+}
+
+.ng-founder-image-number {
+  position: absolute;
+  top: -65px;
+  left: -5px;
+
+  color: rgba(157, 113, 255, 0.09);
+
+  font-size: 150px;
+  font-weight: 900;
+  line-height: 1;
+
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ng-founder-glow {
+  position: absolute;
+  inset: -20px;
+
+  background: linear-gradient(135deg, #8a42ff, #00cfff);
+
+  filter: blur(75px);
+  opacity: 0.25;
+
+  z-index: 0;
+}
+
+.ng-founder-image-border {
+  position: relative;
+  z-index: 1;
+
+  padding: 3px;
+
+  background: linear-gradient(145deg, #b47aff, #00d4ff, #6a48ff);
+
+  border-radius: 25px 65px 25px 65px;
+
+  box-shadow:
+    12px 12px 0 rgba(120, 70, 255, 0.1),
+    0 0 35px rgba(130, 80, 255, 0.15);
+}
+
+.ng-founder-image-inner {
+  overflow: hidden;
+
+  border-radius: 23px 63px 23px 63px;
+
+  background: #101b33;
+}
+
+.ng-founder-photo {
+  display: block;
+
+  width: 100%;
+  height: 485px;
+
+  object-fit: cover;
+  object-position: center 25%;
+
+  transition: transform 0.8s ease;
+}
+
+.ng-founder-image-border:hover .ng-founder-photo {
+  transform: scale(1.06);
+}
+
+/* Photo Badge */
+
+.ng-founder-image-caption {
+  position: relative;
+  z-index: 2;
+
+  width: fit-content;
+  margin: -23px auto 0;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 13px 24px;
+
+  border-radius: 30px;
+
+  background: linear-gradient(100deg, #793eff, #087cff);
+
+  color: #ffffff;
+
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+
+  box-shadow: 0 8px 30px rgba(100, 70, 255, 0.4);
+}
+
+.ng-founder-status-dot {
+  width: 8px;
+  height: 8px;
+
+  background: #6cffce;
+  border-radius: 50%;
+
+  box-shadow: 0 0 10px #6cffce;
+}
+
+.ng-founder-side-text {
+  margin-top: 27px;
+
+  text-align: center;
+
+  color: #667d9d;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+/* ==============================================
+   FOUNDER INFORMATION
+============================================== */
+
+.ng-founder-details {
+  position: relative;
+  min-width: 0;
+  color: #ffffff;
+}
+
+.ng-founder-role {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: #00d4ff;
+
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.ng-role-line {
+  width: 35px;
+  height: 3px;
+
+  background: linear-gradient(90deg, #a879ff, #00d4ff);
+  border-radius: 5px;
+}
+
+.ng-founder-name {
+  margin: 22px 0 12px;
+
+  color: #ffffff;
+
+  font-size: clamp(32px, 4vw, 51px);
+  line-height: 1.13;
+
+  font-weight: 900;
+  letter-spacing: -1.8px;
+}
+
+.ng-founder-name span {
+  display: block;
+
+  background: linear-gradient(90deg, #a879ff, #00d4ff);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.ng-founder-designation {
+  color: #9fb1ca;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.ng-founder-designation strong {
+  color: #d4c3ff;
+  font-weight: 800;
+}
+
+.ng-founder-divider {
+  width: 85px;
+  height: 4px;
+
+  margin: 25px 0;
+
+  background: linear-gradient(90deg, #a879ff, #00d4ff);
+
+  border-radius: 5px;
+}
+
+.ng-founder-description {
+  color: #aabbd2;
+
+  font-size: 14px;
+  line-height: 2;
+}
+
+.ng-founder-motto {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 25px 0;
+
+  padding: 15px 18px;
+
+  border-left: 3px solid #a879ff;
+
+  background: linear-gradient(90deg, rgba(145, 85, 255, 0.11), transparent);
+
+  color: #d4b7ff;
+
+  font-size: 16px;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.ng-founder-motto i {
+  font-size: 25px;
+  color: #a879ff;
+}
+
+/* ==============================================
+   SOCIAL LINKS - ONE HORIZONTAL ROW
+============================================== */
+
+.ng-founder-social-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin: 28px 0 15px;
+
+  color: #91a8c7;
+
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+}
+
+.ng-founder-social-heading span {
+  flex: 1;
+  height: 1px;
+
+  background: linear-gradient(90deg, rgba(145, 120, 255, 0.45), transparent);
+}
+
+.ng-founder-socials {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 9px;
+
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding: 5px 2px 13px;
+
+  scrollbar-width: thin;
+  scrollbar-color: #8455ff transparent;
+}
+
+.ng-founder-socials a {
+  flex: 0 0 auto;
+
+  min-width: max-content;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 12px 13px;
+
+  border: 1px solid rgba(145, 120, 255, 0.25);
+  border-radius: 12px;
+
+  background: rgba(17, 29, 57, 0.85);
+
+  color: #cdbaff !important;
+  text-decoration: none !important;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  white-space: nowrap;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.ng-founder-socials a i {
+  color: #00d4ff;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.ng-founder-socials a:hover {
+  transform: translateY(-5px);
+
+  background: linear-gradient(120deg, #783cff, #087cff);
+
+  border-color: #00d4ff;
+
+  color: #ffffff !important;
+
+  box-shadow: 0 8px 24px rgba(105, 75, 255, 0.3);
+}
+
+.ng-founder-socials a:hover i {
+  color: #ffffff;
+}
+
+/* ==============================================
+   CONTACT BUTTON
+============================================== */
+
+.ng-founder-contact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+
+  margin-top: 12px;
+  padding: 15px 25px;
+
+  border: 1px solid rgba(0, 200, 255, 0.35);
+  border-radius: 12px;
+
+  background: linear-gradient(105deg, #783cff, #087cff);
+
+  color: #ffffff !important;
+  text-decoration: none !important;
+
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+
+  box-shadow: 0 8px 25px rgba(90, 70, 255, 0.25);
+
+  transition: all 0.3s ease;
+}
+
+.ng-founder-contact:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 12px 30px rgba(0, 153, 255, 0.35),
+    0 0 20px rgba(140, 80, 255, 0.15);
+}
+
+.ng-founder-contact i {
+  font-size: 16px;
+}
+
+/* ==============================================
+   BOTTOM BRAND LINE
+============================================== */
+
+.ng-founder-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+
+  margin-top: 45px;
+
+  color: #7185a3;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.ng-founder-bottom-line {
+  width: 55px;
+  height: 2px;
+
+  background: linear-gradient(90deg, #a879ff, #00d4ff);
+}
+
+/* ==============================================
+   TABLET RESPONSIVE
+============================================== */
+
+@media (max-width: 1000px) {
+  .ng-founder-profile {
+    grid-template-columns: 1fr;
+    gap: 55px;
+    padding: 40px;
+  }
+
+  .ng-founder-visual {
+    max-width: 370px;
+  }
+
+  .ng-founder-photo {
+    height: 440px;
+  }
+
+  .ng-founder-details {
+    text-align: center;
+  }
+
+  .ng-founder-role {
+    justify-content: center;
+  }
+
+  .ng-founder-divider {
+    margin: 25px auto;
+  }
+
+  .ng-founder-socials {
+    justify-content: flex-start;
+  }
+
+  .ng-founder-social-heading {
+    text-align: left;
+  }
+}
+
+/* ==============================================
+   MOBILE RESPONSIVE
+============================================== */
+
+@media (max-width: 576px) {
+  .ng-founder-section {
+    padding: 75px 15px 50px;
+  }
+
+  .ng-founder-heading {
+    margin-bottom: 45px;
+  }
+
+  .ng-founder-heading h2 {
+    font-size: 36px;
+  }
+
+  .ng-founder-heading p {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .ng-founder-profile {
+    padding: 20px 16px;
+    gap: 38px;
+    border-radius: 22px;
+  }
+
+  .ng-founder-visual {
+    max-width: 310px;
+  }
+
+  .ng-founder-photo {
+    height: 370px;
+  }
+
+  .ng-founder-image-number {
+    font-size: 105px;
+    top: -40px;
+  }
+
+  .ng-founder-name {
+    font-size: 34px;
+  }
+
+  .ng-founder-designation {
+    font-size: 12px;
+  }
+
+  .ng-founder-description {
+    font-size: 13px;
+    text-align: left;
+  }
+
+  .ng-founder-motto {
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .ng-founder-social-heading {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+  }
+
+  .ng-founder-socials {
+    gap: 8px;
+    justify-content: flex-start;
+  }
+
+  .ng-founder-socials a {
+    padding: 11px 12px;
+    font-size: 10px;
+  }
+
+  .ng-founder-bottom {
+    gap: 9px;
+    font-size: 7px;
+    letter-spacing: 1px;
+  }
+
+  .ng-founder-bottom-line {
+    width: 25px;
+  }
+}
+
+/* ==============================================
+   ACCESSIBILITY
+============================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .ng-founder-photo,
+  .ng-founder-socials a,
+  .ng-founder-contact {
+    transition: none;
+  }
 }
