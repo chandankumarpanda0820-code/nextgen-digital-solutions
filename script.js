@@ -934,7 +934,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!pageLoaded) return;
 
     const elapsedTime = Date.now() - startTime;
-    const remainingTime = Math.max(0, 2000 - elapsedTime);
+    const remainingTime = Math.max(0, 2500 - elapsedTime);
 
     setTimeout(function () {
       preloader.classList.add("ng-loader-hide");
@@ -1193,7 +1193,7 @@ document.addEventListener("DOMContentLoaded", function () {
           );
 
           terminalInput.disabled = false;
-          terminalInput.focus();
+          terminalInput.focus({ preventScroll: true });
 
         }, 500);
 
@@ -1827,4 +1827,466 @@ document.addEventListener("DOMContentLoaded", () => {
   showStep(1);
 
 });
+
+
+/* =========================================
+   NEXTGEN SMART CARD STUDIO — JAVASCRIPT
+========================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const form = document.getElementById("ngBusinessCardForm");
+  if (!form) return;
+
+  const $ = id => document.getElementById(id);
+
+  const fields = {
+    name: $("ngCardName"),
+    designation: $("ngCardDesignation"),
+    company: $("ngCardCompany"),
+    phone: $("ngCardPhone"),
+    email: $("ngCardEmail"),
+    website: $("ngCardWebsite"),
+    address: $("ngCardAddress"),
+    photo: $("ngCardPhoto"),
+    theme: $("ngCardTheme")
+  };
+
+  const preview = $("ngBusinessCard");
+  const generateBtn = $("ngCardGenerate");
+  const whatsappBtn = $("ngCardWhatsApp");
+  const confirmation = $("ngCardConfirmation");
+  const sentCheckbox = $("ngCardSentConfirm");
+  const unlockBtn = $("ngCardUnlock");
+  const downloadBtn = $("ngCardDownload");
+  const lockMessage = $("ngCardLockMessage");
+  const disclaimer = $("ngCardDisclaimer");
+
+  const previewFields = {
+    name: $("ngPreviewName"),
+    designation: $("ngPreviewDesignation"),
+    company: $("ngPreviewCompany"),
+    phone: $("ngPreviewPhone"),
+    email: $("ngPreviewEmail"),
+    website: $("ngPreviewWebsite"),
+    address: $("ngPreviewAddress")
+  };
+
+  const photoPreview = $("ngPreviewPhoto");
+  const avatarIcon = $("ngPreviewAvatar");
+
+  let generated = false;
+  let unlocked = false;
+  let photoData = "";
+
+  // LIVE PREVIEW
+
+  function updatePreview() {
+
+    previewFields.name.textContent =
+      fields.name.value.trim() || "YOUR NAME";
+
+    previewFields.designation.textContent =
+      fields.designation.value.trim() || "Your Designation";
+
+    previewFields.company.textContent =
+      fields.company.value.trim() || "Your Company";
+
+    previewFields.phone.textContent =
+      fields.phone.value.trim() || "Your Phone Number";
+
+    previewFields.email.textContent =
+      fields.email.value.trim() || "your@email.com";
+
+    previewFields.website.textContent =
+      fields.website.value.trim()
+        ? fields.website.value.replace(/^https?:\/\//, "")
+        : "yourwebsite.com";
+
+    previewFields.address.textContent =
+      fields.address.value.trim() || "Your Business Address";
+
+    preview.classList.remove(
+      "theme-blue",
+      "theme-black",
+      "theme-purple",
+      "theme-gold"
+    );
+
+    preview.classList.add(`theme-${fields.theme.value}`);
+
+  }
+
+  Object.values(fields).forEach(field => {
+
+    if (field && field !== fields.photo) {
+      field.addEventListener("input", updatePreview);
+      field.addEventListener("change", updatePreview);
+    }
+
+  });
+
+  // PROFILE PHOTO
+
+  fields.photo.addEventListener("change", event => {
+
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+      alert("Please upload a JPG, PNG or WebP image.");
+      fields.photo.value = "";
+      return;
+    }
+
+    if (file.size > 3 * 1024 * 1024) {
+      alert("Photo must be smaller than 3 MB.");
+      fields.photo.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = e => {
+
+      photoData = e.target.result;
+
+      photoPreview.src = photoData;
+      photoPreview.hidden = false;
+      avatarIcon.hidden = true;
+
+    };
+
+    reader.readAsDataURL(file);
+
+  });
+
+  // GENERATE CARD
+
+  generateBtn.addEventListener("click", () => {
+
+    if (!form.reportValidity()) return;
+
+    if (!/^\+?[0-9\s()-]{7,18}$/.test(fields.phone.value.trim())) {
+      alert("Please enter a valid phone number.");
+      fields.phone.focus();
+      return;
+    }
+
+    if (fields.website.value.trim()) {
+      try {
+        const website = new URL(fields.website.value.trim());
+        if (!["http:", "https:"].includes(website.protocol)) {
+          throw new Error("Invalid URL");
+        }
+      } catch {
+        alert("Please enter a valid website URL starting with https://");
+        fields.website.focus();
+        return;
+      }
+    }
+
+    generated = true;
+    unlocked = false;
+
+    updatePreview();
+
+    lockMessage.hidden = false;
+    confirmation.hidden = true;
+    unlockBtn.hidden = true;
+
+    sentCheckbox.checked = false;
+    downloadBtn.disabled = true;
+
+    whatsappBtn.disabled = false;
+    whatsappBtn.hidden = false;
+
+    disclaimer.textContent =
+      "WhatsApp submission is required before downloading.";
+
+    preview.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+
+  });
+
+  // BUILD WHATSAPP MESSAGE
+
+  function getCustomerMessage() {
+
+    return [
+      "Hello NextGen Digital Solutions!",
+      "",
+      "I have created my Digital Business Card.",
+      "",
+      "MY DETAILS",
+      `Name: ${fields.name.value.trim()}`,
+      `Designation: ${fields.designation.value.trim()}`,
+      `Company: ${fields.company.value.trim() || "Not provided"}`,
+      `Phone: ${fields.phone.value.trim()}`,
+      `Email: ${fields.email.value.trim()}`,
+      `Website: ${fields.website.value.trim() || "Not provided"}`,
+      `Address: ${fields.address.value.trim() || "Not provided"}`,
+      `Theme: ${fields.theme.value}`,
+      `Profile Photo: ${photoData ? "Uploaded on card" : "Not uploaded"}`,
+      "",
+      "Please find my business card request."
+    ].join("\n");
+
+  }
+
+  // WHATSAPP SUBMISSION
+
+  whatsappBtn.addEventListener("click", () => {
+
+    if (!generated) {
+      alert("Please generate your business card first.");
+      return;
+    }
+
+    const whatsappURL =
+      "https://wa.me/918984240820?text=" +
+      encodeURIComponent(getCustomerMessage());
+
+    window.open(whatsappURL, "_blank", "noopener");
+
+    confirmation.hidden = false;
+    lockMessage.hidden = false;
+
+    disclaimer.textContent =
+      "Send your WhatsApp message, return here and confirm submission.";
+
+  });
+
+  // CUSTOMER CONFIRMATION
+
+  sentCheckbox.addEventListener("change", () => {
+
+    unlockBtn.hidden = !sentCheckbox.checked;
+
+  });
+
+  unlockBtn.addEventListener("click", () => {
+
+    if (!generated || !sentCheckbox.checked) {
+      alert("Please confirm that you have sent your WhatsApp message.");
+      return;
+    }
+
+    unlocked = true;
+
+    lockMessage.hidden = true;
+    confirmation.hidden = true;
+    unlockBtn.hidden = true;
+
+    downloadBtn.disabled = false;
+
+    disclaimer.textContent =
+      "Download unlocked. Thank you for choosing NextGen!";
+
+  });
+
+  // QR CODE
+
+  async function createCardQR() {
+
+    if (typeof QRCode === "undefined") {
+      throw new Error("QR Code library could not load.");
+    }
+
+    const qrHolder = document.createElement("div");
+
+    qrHolder.style.position = "absolute";
+    qrHolder.style.left = "-9999px";
+    qrHolder.style.top = "0";
+
+    document.body.appendChild(qrHolder);
+
+    const vcard = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      `FN:${fields.name.value.trim()}`,
+      `ORG:${fields.company.value.trim()}`,
+      `TITLE:${fields.designation.value.trim()}`,
+      `TEL;TYPE=CELL:${fields.phone.value.trim()}`,
+      `EMAIL:${fields.email.value.trim()}`,
+      fields.website.value.trim()
+        ? `URL:${fields.website.value.trim()}`
+        : "",
+      fields.address.value.trim()
+        ? `ADR;TYPE=WORK:;;${fields.address.value.trim()}`
+        : "",
+      "END:VCARD"
+    ].filter(Boolean).join("\n");
+
+    new QRCode(qrHolder, {
+      text: vcard,
+      width: 110,
+      height: 110,
+      correctLevel: QRCode.CorrectLevel.M
+    });
+
+    await new Promise(resolve => setTimeout(resolve, 250));
+
+    const canvas = qrHolder.querySelector("canvas");
+
+    if (!canvas) {
+      qrHolder.remove();
+      throw new Error("QR code generation failed.");
+    }
+
+    const image = new Image();
+    image.src = canvas.toDataURL("image/png");
+
+    await new Promise((resolve, reject) => {
+      image.onload = resolve;
+      image.onerror = reject;
+    });
+
+    qrHolder.remove();
+
+    return image;
+
+  }
+
+  // DOWNLOAD BUSINESS CARD
+
+  downloadBtn.addEventListener("click", async () => {
+
+    if (!generated || !unlocked) {
+      alert("Please submit your WhatsApp details and unlock download first.");
+      return;
+    }
+
+    if (typeof html2canvas === "undefined") {
+      alert("Card download library is unavailable. Please refresh and try again.");
+      return;
+    }
+
+    downloadBtn.disabled = true;
+    downloadBtn.innerHTML =
+      '<i class="bi bi-hourglass-split"></i> Preparing Card...';
+
+    let originalQR = null;
+    let qrImage = null;
+
+    try {
+
+      // Add QR to card temporarily
+
+      originalQR = preview.querySelector(".ng-generated-qr");
+
+      if (originalQR) originalQR.remove();
+
+      qrImage = await createCardQR();
+
+      const qrWrapper = document.createElement("div");
+      qrWrapper.className = "ng-generated-qr";
+      qrWrapper.style.position = "absolute";
+      qrWrapper.style.width = "64px";
+      qrWrapper.style.height = "64px";
+      qrWrapper.style.right = "25px";
+      qrWrapper.style.top = "65px";
+      qrWrapper.style.padding = "4px";
+      qrWrapper.style.borderRadius = "5px";
+      qrWrapper.style.background = "#fff";
+      qrWrapper.style.zIndex = "5";
+
+      qrImage.style.width = "100%";
+      qrImage.style.height = "100%";
+
+      qrWrapper.appendChild(qrImage);
+      preview.appendChild(qrWrapper);
+
+      // Export PNG
+
+      const canvas = await html2canvas(preview, {
+        scale: 3,
+        backgroundColor: null,
+        useCORS: true,
+        logging: false
+      });
+
+      const link = document.createElement("a");
+
+      link.download =
+        `${fields.name.value.trim().replace(/[^a-z0-9]/gi, "-")}-business-card.png`;
+
+      link.href = canvas.toDataURL("image/png");
+
+      link.click();
+
+      qrWrapper.remove();
+
+      // Download VCF contact
+
+      const vcard = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        `FN:${fields.name.value.trim()}`,
+        `ORG:${fields.company.value.trim()}`,
+        `TITLE:${fields.designation.value.trim()}`,
+        `TEL;TYPE=CELL:${fields.phone.value.trim()}`,
+        `EMAIL:${fields.email.value.trim()}`,
+        fields.website.value.trim()
+          ? `URL:${fields.website.value.trim()}`
+          : "",
+        fields.address.value.trim()
+          ? `ADR;TYPE=WORK:;;${fields.address.value.trim()}`
+          : "",
+        "END:VCARD"
+      ].filter(Boolean).join("\r\n");
+
+      const contactBlob = new Blob(
+        [vcard],
+        { type: "text/vcard;charset=utf-8" }
+      );
+
+      const contactURL = URL.createObjectURL(contactBlob);
+
+      const contactLink = document.createElement("a");
+      contactLink.href = contactURL;
+      contactLink.download =
+        `${fields.name.value.trim().replace(/[^a-z0-9]/gi, "-")}.vcf`;
+
+      document.body.appendChild(contactLink);
+      contactLink.click();
+      contactLink.remove();
+
+      URL.revokeObjectURL(contactURL);
+
+      disclaimer.textContent =
+        "Your PNG card and contact file have been downloaded!";
+
+    } catch (error) {
+
+      console.error("Card download error:", error);
+      alert("Unable to download the card. Please try again.");
+
+    } finally {
+
+      const temporaryQR = preview.querySelector(".ng-generated-qr");
+      if (temporaryQR) temporaryQR.remove();
+
+      downloadBtn.disabled = !unlocked;
+      downloadBtn.innerHTML =
+        '<i class="bi bi-download"></i> Download Business Card';
+
+    }
+
+  });
+
+  // INITIAL STATE
+
+  updatePreview();
+
+  downloadBtn.disabled = true;
+  confirmation.hidden = true;
+  unlockBtn.hidden = true;
+
+});
+
+
 
