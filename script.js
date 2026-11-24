@@ -78,55 +78,144 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-/* =====================================
-   NAVBAR ACTIVE LINK ON SCROLL
-===================================== */
+/* ==========================================
+   NEXTGEN - COMPLETE NAVBAR ACTIVE SECTION
+   All Sections | Desktop + Mobile
+========================================== */
+
+
+/* ==========================================
+   NEXTGEN - SMART NAVBAR ACTIVE TRACKER
+   Accurate section detection
+========================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  const sections = document.querySelectorAll(
-    "#home, #about, #services, #portfolio, #pricing, #contact"
-  );
+  const sectionIds = [
+    "home",
+    "about",
+    "founder",
+    "services",
+    "portfolio",
+    "pricing",
+    "developer-terminal",
+    "service-scanner",
+    "smart-card-studio",
+    "contact"
+  ];
+
+  const sections = sectionIds
+    .map(id => document.getElementById(id))
+    .filter(Boolean)
+    .sort((a, b) => {
+      const position = a.compareDocumentPosition(b);
+
+      return position & Node.DOCUMENT_POSITION_FOLLOWING
+        ? -1
+        : 1;
+    });
 
   const navLinks = document.querySelectorAll(
-    ".navbar-nav .nav-link"
+    '.navbar-nav a.nav-link[href^="#"]'
   );
 
-  function updateActiveNav() {
+  if (!sections.length || !navLinks.length) return;
 
-    let currentSection = "home";
+  const navbar = document.querySelector(".navbar");
 
-    sections.forEach(section => {
-
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-
-      if (
-        window.scrollY >= sectionTop - 180 &&
-        window.scrollY < sectionTop + sectionHeight - 180
-      ) {
-        currentSection = section.getAttribute("id");
-      }
-
-    });
+  function setActiveSection(id) {
 
     navLinks.forEach(link => {
 
-      link.classList.remove("active");
+      const active =
+        link.getAttribute("href") === `#${id}`;
 
-      if (link.getAttribute("href") === "#" + currentSection) {
-        link.classList.add("active");
+      link.classList.toggle("active", active);
+
+      if (active) {
+        link.setAttribute("aria-current", "location");
+      } else {
+        link.removeAttribute("aria-current");
       }
 
     });
 
   }
 
-  window.addEventListener("scroll", updateActiveNav);
+  function updateActiveSection() {
 
-  updateActiveNav();
+    const navbarHeight = navbar
+      ? navbar.getBoundingClientRect().height
+      : 0;
+
+    const activationLine = navbarHeight + 30;
+
+    let currentSection = sections[0];
+
+    sections.forEach(section => {
+
+      const rect = section.getBoundingClientRect();
+
+      if (rect.top <= activationLine) {
+        currentSection = section;
+      }
+
+    });
+
+    // Bottom of page: activate the final section
+    const atPageBottom =
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 5;
+
+    if (atPageBottom) {
+      currentSection = sections[sections.length - 1];
+    }
+
+    setActiveSection(currentSection.id);
+
+  }
+
+  let scrollScheduled = false;
+
+  function handleScroll() {
+
+    if (scrollScheduled) return;
+
+    scrollScheduled = true;
+
+    requestAnimationFrame(() => {
+      updateActiveSection();
+      scrollScheduled = false;
+    });
+
+  }
+
+  window.addEventListener("scroll", handleScroll, {
+    passive: true
+  });
+
+  window.addEventListener("resize", handleScroll);
+
+  window.addEventListener("hashchange", handleScroll);
+
+  navLinks.forEach(link => {
+
+    link.addEventListener("click", function () {
+
+      const id = this.getAttribute("href").slice(1);
+
+      if (document.getElementById(id)) {
+        setActiveSection(id);
+      }
+
+    });
+
+  });
+
+  updateActiveSection();
 
 });
+
 
 
 
