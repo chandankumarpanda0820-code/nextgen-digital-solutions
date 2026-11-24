@@ -2287,6 +2287,3 @@ document.addEventListener("DOMContentLoaded", () => {
   unlockBtn.hidden = true;
 
 });
-
-
-

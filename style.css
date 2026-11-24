@@ -6977,3 +6977,19 @@ a.footer-contact-item:hover {
     font-size: 10px;
   }
 }
+
+.floating-social .instagram {
+  background: #e1306c;
+}
+
+.floating-social .facebook {
+  background: #1877f2;
+}
+
+.floating-social .linkedin {
+  background: #0a66c2;
+}
+
+.floating-social .telegram {
+  background: #229ed9;
+}
