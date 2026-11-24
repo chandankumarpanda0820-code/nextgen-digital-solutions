@@ -2357,3 +2357,102 @@ document.addEventListener("DOMContentLoaded", () => {
   unlockBtn.hidden = true;
 
 });
+
+
+/* ==========================================
+   NEXTGEN PREMIUM OFFER POPUP
+   Show on Every Page Load
+   Delay: 3 Seconds
+========================================== */
+
+(function () {
+  "use strict";
+
+  function initNextGenOfferPopup() {
+
+    const popup = document.getElementById("ngOfferPopup");
+    const closeBtn = document.getElementById("ngOfferClose");
+    const offerCTA = document.getElementById("ngOfferCTA");
+
+    // Check popup HTML elements
+    if (!popup || !closeBtn || !offerCTA) {
+      return;
+    }
+
+    let previousBodyOverflow = "";
+
+    // OPEN POPUP
+    function openPopup() {
+
+      if (popup.classList.contains("ng-offer-show")) {
+        return;
+      }
+
+      previousBodyOverflow = document.body.style.overflow;
+
+      popup.classList.add("ng-offer-show");
+
+      document.body.style.overflow = "hidden";
+    }
+
+    // CLOSE POPUP
+    function closePopup() {
+
+      popup.classList.remove("ng-offer-show");
+
+      document.body.style.overflow = previousBodyOverflow;
+    }
+
+    // SHOW POPUP AFTER 3 SECONDS
+    window.setTimeout(function () {
+      openPopup();
+    }, 2000);
+
+    // CLOSE BUTTON
+    closeBtn.addEventListener("click", function () {
+      closePopup();
+    });
+
+    // CLOSE WHEN CLICKING OUTSIDE MODAL
+    popup.addEventListener("click", function (event) {
+
+      if (event.target === popup) {
+        closePopup();
+      }
+
+    });
+
+    // CLOSE USING ESCAPE KEY
+    document.addEventListener("keydown", function (event) {
+
+      if (
+        event.key === "Escape" &&
+        popup.classList.contains("ng-offer-show")
+      ) {
+        closePopup();
+      }
+
+    });
+
+    // CLOSE WHEN CLAIM OFFER BUTTON IS CLICKED
+    offerCTA.addEventListener("click", function () {
+      closePopup();
+    });
+
+  }
+
+  // INITIALIZE AFTER HTML LOAD
+  if (document.readyState === "loading") {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      initNextGenOfferPopup
+    );
+
+  } else {
+
+    initNextGenOfferPopup();
+
+  }
+
+})();
