@@ -988,25 +988,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 })();
 
-/* ===== NEXTGEN ENERGY BUTTON ACTION ===== */
-
-(function () {
-
-  const energyButton = document.querySelector(".back-to-top");
-
-  if (!energyButton) return;
-
-  energyButton.addEventListener("click", function (event) {
-    event.preventDefault();
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  });
-
-})();
-
 
 /* =====================================
    NEXTGEN DEVELOPER TERMINAL
