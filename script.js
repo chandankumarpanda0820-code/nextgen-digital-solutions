@@ -1048,34 +1048,57 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /* ===== NEXTGEN SCROLL PROGRESS ===== */
 
+
+/* ==========================================
+   NEXTGEN OPTIMIZED SCROLL PROGRESS
+========================================== */
+
 (function () {
+    "use strict";
 
-  const progressBar = document.getElementById("ng-scroll-progress");
+    const progressBar = document.getElementById("ng-scroll-progress");
 
-  if (!progressBar) return;
+    if (!progressBar) return;
 
-  function updateScrollProgress() {
+    let progressScheduled = false;
 
-    const scrollTop = window.scrollY;
-    const scrollHeight =
-      document.documentElement.scrollHeight - window.innerHeight;
+    function updateScrollProgress() {
 
-    const progress = scrollHeight > 0
-      ? (scrollTop / scrollHeight) * 100
-      : 0;
+        const scrollTop = window.scrollY;
 
-    progressBar.style.width = progress + "%";
-  }
+        const scrollHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
 
-  window.addEventListener("scroll", updateScrollProgress, {
-    passive: true
-  });
+        const progress = scrollHeight > 0
+            ? Math.min(scrollTop / scrollHeight, 1)
+            : 0;
 
-  window.addEventListener("resize", updateScrollProgress);
+        progressBar.style.transform = `scaleX(${progress})`;
 
-  updateScrollProgress();
+        progressScheduled = false;
+    }
+
+    function handleProgressScroll() {
+
+        if (progressScheduled) return;
+
+        progressScheduled = true;
+
+        requestAnimationFrame(updateScrollProgress);
+    }
+
+    window.addEventListener("scroll", handleProgressScroll, {
+        passive: true
+    });
+
+    window.addEventListener("resize", handleProgressScroll, {
+        passive: true
+    });
+
+    updateScrollProgress();
 
 })();
+
 
 
 /* =====================================
