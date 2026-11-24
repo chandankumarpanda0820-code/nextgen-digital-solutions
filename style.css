@@ -7338,3 +7338,79 @@ a.footer-contact-item:hover {
     gap: 7px !important;
   }
 }
+
+/* ==========================================
+   NEXTGEN MOBILE PERFORMANCE OPTIMIZATION
+========================================== */
+
+@media (max-width: 768px) {
+  /* Stop expensive background animations */
+  .hero-grid-bg {
+    animation: none !important;
+  }
+
+  .hero-glow,
+  .about-glow {
+    animation: none !important;
+    filter: none !important;
+    opacity: 0.35;
+  }
+
+  /* Reduce hero animation workload */
+  .digital-universe {
+    animation: none !important;
+  }
+
+  .ring-one,
+  .ring-two,
+  .ring-three {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .universe-core,
+  .universe-orbit-dot,
+  .universe-floating-tag {
+    animation: none !important;
+  }
+
+  /* Stop unnecessary infinite animations */
+  .gradient-text,
+  .eyebrow-dot,
+  .social-btn,
+  .marquee-track,
+  .service-icon {
+    animation: none !important;
+  }
+
+  /* Reduce expensive visual effects */
+  #mainNavbar {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(5, 11, 24, 0.98) !important;
+  }
+
+  .universe-floating-tag {
+    backdrop-filter: none !important;
+  }
+
+  /* Reduce transitions */
+  .hero-primary-btn,
+  .hero-secondary-btn,
+  .service-card,
+  .project-card {
+    transition-duration: 0.15s !important;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
