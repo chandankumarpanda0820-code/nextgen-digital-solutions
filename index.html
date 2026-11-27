@@ -227,6 +227,67 @@
           </li>
 
 
+          
+
+          <!-- NEXTGEN SMART SEARCH BUTTON -->
+          <li class="nav-item ng-search-nav-item">
+            <button type="button" class="ng-search-trigger" id="ngSearchOpen" aria-label="Open website search"
+              aria-haspopup="dialog" aria-controls="ngSearchDialog">
+              <i class="bi bi-search"></i>
+              <span>Search</span>
+              <kbd>Ctrl K</kbd>
+            </button>
+          </li>
+
+          <!-- NEXTGEN SEARCH DIALOG -->
+          <div class="ng-search-overlay" id="ngSearchDialog" hidden>
+            <section class="ng-search-panel" role="dialog" aria-modal="true" aria-labelledby="ngSearchTitle">
+
+              <div class="ng-search-topline">
+                <div class="ng-search-brand">
+                  <span class="ng-search-brand-icon">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                  </span>
+                  <div>
+                    <h2 id="ngSearchTitle">Search NextGen</h2>
+                    <p>Find services, projects, pricing and more.</p>
+                  </div>
+                </div>
+                <button type="button" class="ng-search-close" id="ngSearchClose">
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              </div>
+
+              <label class="ng-search-field" for="ngSearchInput">
+                <i class="bi bi-search"></i>
+                <input id="ngSearchInput" type="search" placeholder="What are you looking for?" autocomplete="off">
+                <kbd>ESC</kbd>
+              </label>
+
+              <div class="ng-search-meta">
+                <span id="ngSearchStatus" role="status" aria-live="polite">
+                  Start typing to search this website
+                </span>
+              </div>
+
+              <div class="ng-search-results" id="ngSearchResults">
+                <div class="ng-search-empty">
+                  <i class="bi bi-stars"></i>
+                  <strong>Your next discovery starts here.</strong>
+                  <span>Try website, pricing, SEO or contact.</span>
+                </div>
+              </div>
+
+              <div class="ng-search-footer">
+                <span>⚡ NEXTGEN DIGITAL SOLUTIONS</span>
+                <span>WE BUILD. WE BRAND. WE GROW.</span>
+              </div>
+
+            </section>
+          </div>
+
+
+
           <!-- CLIENT ENQUIRY FORM BUTTON -->
 
           <li class="nav-item ms-lg-3 mb-2 mb-lg-0">

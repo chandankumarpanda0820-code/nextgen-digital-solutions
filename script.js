@@ -2479,3 +2479,364 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 })();
+
+
+
+/* =========================================
+   NEXTGEN SMART WEBSITE SEARCH
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const openButton = document.getElementById("ngSearchOpen");
+  const overlay = document.getElementById("ngSearchDialog");
+  const closeButton = document.getElementById("ngSearchClose");
+  const input = document.getElementById("ngSearchInput");
+  const resultsBox = document.getElementById("ngSearchResults");
+  const status = document.getElementById("ngSearchStatus");
+
+  if (!openButton || !overlay || !closeButton || !input || !resultsBox || !status) return;
+
+  // INDEX WEBSITE SECTIONS
+  const searchableSections = Array.from(
+    document.querySelectorAll("section[id]")
+  )
+  .filter(section => !section.closest("#ngSearchDialog"))
+  .map(section => {
+
+    const heading = section.querySelector("h1, h2, h3, h4");
+
+    const title = (
+      heading ? heading.textContent : section.id
+    ).replace(/\s+/g, " ").trim();
+
+    const text = (
+      section.innerText || section.textContent || ""
+    ).replace(/\s+/g, " ").trim();
+
+    return {
+      id: section.id,
+      title: title || section.id,
+      text: text,
+      normalized: (title + " " + text).toLowerCase()
+    };
+
+  })
+  .filter(item => item.text.length > 0);
+
+  let activeIndex = -1;
+  let currentResults = [];
+
+  // EMPTY STATE
+  function showEmpty(icon, title, description) {
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "ng-search-empty";
+
+    const iconElement = document.createElement("i");
+    iconElement.className = "bi " + icon;
+
+    const heading = document.createElement("strong");
+    heading.textContent = title;
+
+    const detail = document.createElement("span");
+    detail.textContent = description;
+
+    wrapper.append(iconElement, heading, detail);
+    resultsBox.replaceChildren(wrapper);
+  }
+
+  // SEARCH EXCERPT
+  function getExcerpt(text, query) {
+
+    const position = text.toLowerCase().indexOf(query.toLowerCase());
+
+    if (position < 0) {
+      return text.slice(0, 150);
+    }
+
+    const start = Math.max(0, position - 60);
+    const end = Math.min(text.length, position + query.length + 90);
+
+    return text.slice(start, end);
+  }
+
+  // SEARCH ENGINE
+  function renderResults(query) {
+
+    const term = query.trim().toLowerCase();
+
+    activeIndex = -1;
+    resultsBox.replaceChildren();
+
+    if (!term) {
+
+      currentResults = [];
+
+      status.textContent = "Start typing to search this website";
+
+      showEmpty(
+        "bi-stars",
+        "Your next discovery starts here.",
+        "Try website, pricing, SEO or contact."
+      );
+
+      return;
+    }
+
+    const terms = term.split(/\s+/).filter(Boolean);
+
+    currentResults = searchableSections
+      .map(item => {
+
+        const titleMatch = item.title.toLowerCase().includes(term);
+
+        const matches = terms.filter(word =>
+          item.normalized.includes(word)
+        ).length;
+
+        const exactPhrase = item.normalized.includes(term);
+
+        return {
+          ...item,
+          score:
+            (exactPhrase ? 8 : 0) +
+            (titleMatch ? 6 : 0) +
+            matches
+        };
+
+      })
+      .filter(item => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 8);
+
+    status.textContent = currentResults.length
+      ? currentResults.length + " results found"
+      : "No matching sections found";
+
+    if (!currentResults.length) {
+
+      showEmpty(
+        "bi-search",
+        "No results found",
+        "Try another keyword like services, portfolio or contact."
+      );
+
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+
+    currentResults.forEach((item, index) => {
+
+      const button = document.createElement("button");
+
+      button.type = "button";
+      button.className = "ng-search-result";
+      button.dataset.index = index;
+      button.setAttribute("role", "option");
+      button.setAttribute("aria-selected", "false");
+
+      const iconWrap = document.createElement("span");
+      iconWrap.className = "ng-search-result-icon";
+
+      const icon = document.createElement("i");
+      icon.className = "bi bi-arrow-up-right-circle";
+
+      iconWrap.appendChild(icon);
+
+      const copy = document.createElement("span");
+      copy.className = "ng-search-result-copy";
+
+      const title = document.createElement("span");
+      title.className = "ng-search-result-title";
+      title.textContent = item.title;
+
+      const excerpt = document.createElement("span");
+      excerpt.className = "ng-search-result-excerpt";
+      excerpt.textContent = getExcerpt(item.text, term);
+
+      copy.append(title, excerpt);
+
+      const arrow = document.createElement("span");
+      arrow.className = "ng-search-result-arrow";
+      arrow.innerHTML = '<i class="bi bi-arrow-up-right"></i>';
+
+      button.append(iconWrap, copy, arrow);
+
+      button.addEventListener("click", function () {
+        navigateTo(item.id);
+      });
+
+      fragment.appendChild(button);
+
+    });
+
+    resultsBox.appendChild(fragment);
+  }
+
+  // KEYBOARD RESULT NAVIGATION
+  function setActiveResult(index) {
+
+    const buttons = Array.from(
+      resultsBox.querySelectorAll(".ng-search-result")
+    );
+
+    if (!buttons.length) return;
+
+    activeIndex = (index + buttons.length) % buttons.length;
+
+    buttons.forEach((button, i) => {
+
+      const active = i === activeIndex;
+
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-selected", active ? "true" : "false");
+
+    });
+
+    buttons[activeIndex].scrollIntoView({
+      block: "nearest"
+    });
+  }
+
+  // OPEN SEARCH
+  function openSearch() {
+
+    overlay.hidden = false;
+
+    document.body.classList.add("ng-search-open");
+
+    input.value = "";
+
+    renderResults("");
+
+    setTimeout(() => input.focus(), 30);
+  }
+
+  // CLOSE SEARCH
+  function closeSearch() {
+
+    overlay.hidden = true;
+
+    document.body.classList.remove("ng-search-open");
+
+    openButton.focus();
+  }
+
+  // NAVIGATE TO SECTION
+  function navigateTo(id) {
+
+    const target = document.getElementById(id);
+
+    if (!target) return;
+
+    overlay.hidden = true;
+
+    document.body.classList.remove("ng-search-open");
+
+    if (window.bootstrap) {
+
+      const menu = document.getElementById("navbarContent");
+
+      if (menu && menu.classList.contains("show")) {
+
+        window.bootstrap.Collapse
+          .getOrCreateInstance(menu, { toggle: false })
+          .hide();
+
+      }
+    }
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    target.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "start"
+    });
+
+    if (history.replaceState) {
+      history.replaceState(null, "", "#" + encodeURIComponent(id));
+    }
+
+  }
+
+  // BUTTON EVENTS
+  openButton.addEventListener("click", openSearch);
+
+  closeButton.addEventListener("click", closeSearch);
+
+  overlay.addEventListener("click", function (event) {
+
+    if (event.target === overlay) {
+      closeSearch();
+    }
+
+  });
+
+  // LIVE SEARCH
+  input.addEventListener("input", function () {
+    renderResults(input.value);
+  });
+
+  // SEARCH KEYBOARD CONTROLS
+  input.addEventListener("keydown", function (event) {
+
+    if (event.key === "ArrowDown") {
+
+      event.preventDefault();
+      setActiveResult(activeIndex + 1);
+
+    } else if (event.key === "ArrowUp") {
+
+      event.preventDefault();
+      setActiveResult(activeIndex - 1);
+
+    } else if (event.key === "Enter") {
+
+      event.preventDefault();
+
+      if (activeIndex >= 0 && currentResults[activeIndex]) {
+        navigateTo(currentResults[activeIndex].id);
+      } else if (currentResults[0]) {
+        navigateTo(currentResults[0].id);
+      }
+
+    } else if (event.key === "Escape") {
+
+      closeSearch();
+
+    }
+
+  });
+
+  // CTRL + K SHORTCUT
+  document.addEventListener("keydown", function (event) {
+
+    if (
+      (event.ctrlKey || event.metaKey) &&
+      event.key.toLowerCase() === "k"
+    ) {
+
+      event.preventDefault();
+
+      if (overlay.hidden) {
+        openSearch();
+      } else {
+        input.focus();
+      }
+
+    } else if (event.key === "Escape" && !overlay.hidden) {
+
+      closeSearch();
+
+    }
+
+  });
+
+  status.textContent =
+    searchableSections.length + " website sections ready to search";
+
+});
