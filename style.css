@@ -12356,3 +12356,134 @@ a.footer-contact-item:hover i {
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================
+   NEXTGEN MOBILE PERFORMANCE OPTIMIZATION
+========================================== */
+
+@media (max-width: 768px) {
+  /* Stop expensive background animations */
+  .hero-grid-bg {
+    animation: none !important;
+  }
+
+  .hero-glow,
+  .about-glow {
+    animation: none !important;
+    filter: none !important;
+    opacity: 0.35;
+  }
+
+  /* Reduce hero animation workload */
+  .digital-universe {
+    animation: none !important;
+  }
+
+  .ring-one,
+  .ring-two,
+  .ring-three {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .universe-core,
+  .universe-orbit-dot,
+  .universe-floating-tag {
+    animation: none !important;
+  }
+
+  /* Stop unnecessary infinite animations */
+  .gradient-text,
+  .eyebrow-dot,
+  .social-btn,
+  .marquee-track,
+  .service-icon {
+    animation: none !important;
+  }
+
+  /* Reduce expensive visual effects */
+  #mainNavbar {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(5, 11, 24, 0.98) !important;
+  }
+
+  .universe-floating-tag {
+    backdrop-filter: none !important;
+  }
+
+  /* Reduce transitions */
+  .hero-primary-btn,
+  .hero-secondary-btn,
+  .service-card,
+  .project-card {
+    transition-duration: 0.15s !important;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================
+   NEXTGEN - MOBILE SCROLL PERFORMANCE FIX
+========================================== */
+
+@media (max-width: 768px) {
+  /* Disable smooth scrolling on mobile */
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  /* Remove expensive large blurred backgrounds */
+  .portfolio-section::before,
+  .portfolio-section::after,
+  .pricing-section::before,
+  .pricing-section::after,
+  .contact-section::before,
+  .contact-section::after,
+  .nextgen-footer::before,
+  .nextgen-footer::after {
+    display: none !important;
+    filter: none !important;
+  }
+
+  /* Reduce animated visual effects */
+  .about-visual-glow,
+  .about-card-glow {
+    animation: none !important;
+    filter: none !important;
+    opacity: 0.15 !important;
+  }
+
+  /* Reduce heavy shadows and blur */
+  .about-card,
+  .universe-floating-tag,
+  .about-floating-badge {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove hover-based effects on touch devices */
+  .service-card,
+  .project-card,
+  .pricing-card {
+    transition: none !important;
+  }
+
+  /* Avoid unnecessary animation during scrolling */
+  .service-reveal,
+  .project-reveal,
+  .pricing-reveal {
+    transition-duration: 0.2s !important;
+  }
+}
