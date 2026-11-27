@@ -4720,7 +4720,6 @@ a.footer-contact-item:hover i {
   }
 }
 
-
 /* =========================================
    NEXTGEN — PREMIUM LIVE CHAT EXPERIENCE
    Digital Support Center | Futuristic UI
@@ -4742,8 +4741,11 @@ a.footer-contact-item:hover i {
   height: 66px;
   border: 1px solid rgba(113, 211, 255, 0.9);
   border-radius: 22px;
-  background:
-    linear-gradient(145deg, rgba(37, 178, 255, 0.98), rgba(0, 65, 166, 0.98));
+  background: linear-gradient(
+    145deg,
+    rgba(37, 178, 255, 0.98),
+    rgba(0, 65, 166, 0.98)
+  );
   color: #fff;
   font-size: 27px;
   cursor: pointer;
@@ -4753,8 +4755,10 @@ a.footer-contact-item:hover i {
   box-shadow:
     0 10px 35px rgba(0, 136, 255, 0.35),
     0 0 25px rgba(0, 153, 255, 0.25),
-    inset 0 1px 0 rgba(255,255,255,0.35);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
   animation: ngChatFloat 4s ease-in-out infinite;
 }
 
@@ -4788,13 +4792,24 @@ a.footer-contact-item:hover i {
 }
 
 @keyframes ngChatFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
 }
 
 @keyframes ngChatRing {
-  0% { transform: scale(0.9); opacity: 0.8; }
-  100% { transform: scale(1.35); opacity: 0; }
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
 }
 
 /* CHAT WINDOW */
@@ -4814,7 +4829,7 @@ a.footer-contact-item:hover i {
   box-shadow:
     0 25px 80px rgba(0, 0, 0, 0.55),
     0 0 35px rgba(0, 119, 255, 0.13),
-    inset 0 1px 0 rgba(255,255,255,0.06);
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
 }
@@ -4840,7 +4855,11 @@ a.footer-contact-item:hover i {
 .ng-chat-header {
   padding: 18px;
   background:
-    radial-gradient(circle at 10% 0%, rgba(41,186,255,0.22), transparent 45%),
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(41, 186, 255, 0.22),
+      transparent 45%
+    ),
     linear-gradient(130deg, #0756b9, #071a39 85%);
   display: flex;
   align-items: center;
@@ -4862,7 +4881,9 @@ a.footer-contact-item:hover i {
 }
 
 @keyframes ngChatHeaderBeam {
-  to { left: 150%; }
+  to {
+    left: 150%;
+  }
 }
 
 .ng-chat-brand {
@@ -4883,7 +4904,7 @@ a.footer-contact-item:hover i {
   background: linear-gradient(135deg, #08baff, #0756d8);
   color: #fff;
   font-size: 23px;
-  border: 1px solid rgba(255,255,255,0.25);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 5px 20px rgba(0, 153, 255, 0.3);
 }
 
@@ -4912,15 +4933,17 @@ a.footer-contact-item:hover i {
 }
 
 @keyframes ngOnlinePulse {
-  50% { box-shadow: 0 0 3px rgba(32,230,138,0.4); }
+  50% {
+    box-shadow: 0 0 3px rgba(32, 230, 138, 0.4);
+  }
 }
 
 #ng-chat-close {
   width: 32px;
   height: 32px;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 10px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   color: #fff;
   font-size: 20px;
   cursor: pointer;
@@ -4944,7 +4967,11 @@ a.footer-contact-item:hover i {
   scrollbar-width: thin;
   scrollbar-color: #1769b7 #071426;
   background:
-    radial-gradient(circle at 100% 0%, rgba(0, 119, 255, 0.07), transparent 35%),
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(0, 119, 255, 0.07),
+      transparent 35%
+    ),
     #081629;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
@@ -4966,8 +4993,8 @@ a.footer-contact-item:hover i {
   text-align: center;
   color: #8ba9ce;
   font-size: 10px;
-  background: rgba(255,255,255,0.035);
-  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 20px;
 }
 
@@ -4984,8 +5011,14 @@ a.footer-contact-item:hover i {
 }
 
 @keyframes ngMessageIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .ng-bot-message {
@@ -4993,7 +5026,7 @@ a.footer-contact-item:hover i {
   border: 1px solid rgba(74, 144, 210, 0.3);
   color: #e4efff;
   border-bottom-left-radius: 4px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
 }
 
 .ng-user-message {
@@ -5028,12 +5061,19 @@ a.footer-contact-item:hover i {
   padding: 12px;
   border: 1px solid rgba(48, 135, 220, 0.42);
   border-radius: 12px;
-  background: linear-gradient(110deg, rgba(17, 48, 82, 0.9), rgba(10, 31, 55, 0.95));
+  background: linear-gradient(
+    110deg,
+    rgba(17, 48, 82, 0.9),
+    rgba(10, 31, 55, 0.95)
+  );
   color: #d8eaff;
   text-align: left;
   font-size: 12px;
   cursor: pointer;
-  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
 }
 
 .ng-chat-options button i {
@@ -5067,7 +5107,10 @@ a.footer-contact-item:hover i {
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .ng-chat-choice:hover {
@@ -5092,7 +5135,9 @@ a.footer-contact-item:hover i {
   text-align: center;
   font-size: 13px;
   font-weight: 700;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .ng-chat-whatsapp:hover {
@@ -5190,7 +5235,6 @@ a.footer-contact-item:hover i {
     animation: none !important;
   }
 }
-
 
 /* =========================================
    NEXTGEN — FUTURISTIC BRAND PRELOADER
@@ -5647,8 +5691,16 @@ a.footer-contact-item:hover i {
   overflow: hidden;
   padding: 125px 6% 90px;
   background:
-    radial-gradient(ellipse at 12% 45%, rgba(25, 121, 255, 0.13), transparent 36%),
-    radial-gradient(ellipse at 90% 15%, rgba(0, 208, 255, 0.08), transparent 32%),
+    radial-gradient(
+      ellipse at 12% 45%,
+      rgba(25, 121, 255, 0.13),
+      transparent 36%
+    ),
+    radial-gradient(
+      ellipse at 90% 15%,
+      rgba(0, 208, 255, 0.08),
+      transparent 32%
+    ),
     #070d18;
 }
 
@@ -5662,8 +5714,8 @@ a.footer-contact-item:hover i {
   opacity: 0.24;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(69, 186, 255, 0.10) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(69, 186, 255, 0.10) 1px, transparent 1px);
+    linear-gradient(rgba(69, 186, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(69, 186, 255, 0.1) 1px, transparent 1px);
   background-size: 65px 65px;
   mask-image: linear-gradient(90deg, black, transparent 95%);
 }
@@ -5761,8 +5813,11 @@ a.footer-contact-item:hover i {
   gap: 80px;
   padding: 65px;
   overflow: hidden;
-  background:
-    linear-gradient(130deg, rgba(18, 37, 62, 0.94), rgba(6, 14, 27, 0.98));
+  background: linear-gradient(
+    130deg,
+    rgba(18, 37, 62, 0.94),
+    rgba(6, 14, 27, 0.98)
+  );
   border: 1px solid rgba(69, 186, 255, 0.19);
   border-radius: 8px 32px 8px 32px;
   box-shadow:
@@ -5895,7 +5950,7 @@ a.footer-contact-item:hover i {
   object-position: center 25%;
   filter: saturate(0.9) contrast(1.05);
   transition:
-    transform 0.9s cubic-bezier(.2,.8,.2,1),
+    transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
     filter 0.6s ease;
 }
 
@@ -6104,7 +6159,7 @@ a.footer-contact-item:hover i {
   right: -20px;
   width: 100px;
   height: 100px;
-  background: rgba(69, 186, 255, 0.10);
+  background: rgba(69, 186, 255, 0.1);
   border-radius: 50%;
   filter: blur(25px);
   pointer-events: none;
@@ -6241,7 +6296,6 @@ a.footer-contact-item:hover i {
     scroll-behavior: auto !important;
   }
 }
-
 
 /* =====================================================
    NEXTGEN — FOUNDER EXECUTIVE SOCIAL DOCK
@@ -8470,8 +8524,16 @@ a.footer-contact-item:hover i {
   padding: 25px 24px 18px !important;
   color: #eaf2ff;
   background:
-    radial-gradient(ellipse at 100% 0%, rgba(69, 186, 255, 0.17), transparent 42%),
-    radial-gradient(ellipse at 0% 100%, rgba(69, 90, 255, 0.10), transparent 40%),
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(69, 186, 255, 0.17),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 0% 100%,
+      rgba(69, 90, 255, 0.1),
+      transparent 40%
+    ),
     linear-gradient(145deg, #11243c, #070e1b 75%);
   border: 1px solid rgba(112, 211, 255, 0.35);
   border-radius: 8px 25px 8px 25px;
@@ -8480,7 +8542,7 @@ a.footer-contact-item:hover i {
     0 0 35px rgba(69, 186, 255, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
   transform: translateY(30px) scale(0.96);
-  transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* DIGITAL GRID */
@@ -8490,11 +8552,11 @@ a.footer-contact-item:hover i {
   position: absolute;
   inset: 0;
   z-index: -1;
-  opacity: 0.20;
+  opacity: 0.2;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(69, 186, 255, 0.10) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(69, 186, 255, 0.10) 1px, transparent 1px);
+    linear-gradient(rgba(69, 186, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(69, 186, 255, 0.1) 1px, transparent 1px);
   background-size: 28px 28px;
   mask-image: linear-gradient(to bottom, black, transparent 85%);
 }
@@ -8508,7 +8570,13 @@ a.footer-contact-item:hover i {
   left: 12%;
   width: 76%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #45baff, #c5f3ff, transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #45baff,
+    #c5f3ff,
+    transparent
+  );
   box-shadow: 0 0 15px #45baff;
   pointer-events: none;
 }
@@ -8645,7 +8713,11 @@ a.footer-contact-item:hover i {
   position: relative;
   padding: 13px !important;
   overflow: hidden;
-  background: linear-gradient(120deg, rgba(69, 186, 255, 0.10), rgba(69, 186, 255, 0.025));
+  background: linear-gradient(
+    120deg,
+    rgba(69, 186, 255, 0.1),
+    rgba(69, 186, 255, 0.025)
+  );
   border: 1px solid rgba(112, 211, 255, 0.22);
   border-radius: 5px 17px 5px 17px;
   text-align: center;
@@ -8714,7 +8786,11 @@ a.footer-contact-item:hover i {
   margin: 12px 0 !important;
   padding: 11px !important;
   overflow: hidden;
-  background: linear-gradient(110deg, rgba(69, 186, 255, 0.14), rgba(69, 186, 255, 0.035));
+  background: linear-gradient(
+    110deg,
+    rgba(69, 186, 255, 0.14),
+    rgba(69, 186, 255, 0.035)
+  );
   border: 1px solid rgba(69, 186, 255, 0.3);
   border-radius: 5px 15px 5px 15px;
 }
@@ -8934,7 +9010,6 @@ a.footer-contact-item:hover i {
   }
 }
 
-
 /* ==========================================
    NEXTGEN MOBILE PERFORMANCE OPTIMIZATION
 ========================================== */
@@ -9066,8 +9141,6 @@ a.footer-contact-item:hover i {
   }
 }
 
-
-
 /* ==================================================
    NEXTGEN AURORA SEARCH — EXACT HTML MATCH
 ================================================== */
@@ -9081,20 +9154,20 @@ a.footer-contact-item:hover i {
   align-items: center;
   gap: 9px;
   padding: 10px 16px;
-  border: 1px solid rgba(39, 174, 255, .35);
+  border: 1px solid rgba(39, 174, 255, 0.35);
   border-radius: 10px;
-  background: rgba(14, 35, 59, .8);
+  background: rgba(14, 35, 59, 0.8);
   color: #eaf6ff;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: .3s ease;
+  transition: 0.3s ease;
 }
 
 .ng-search-trigger:hover {
   border-color: #00d9ff;
   background: #123251;
-  box-shadow: 0 0 20px rgba(0, 190, 255, .16);
+  box-shadow: 0 0 20px rgba(0, 190, 255, 0.16);
 }
 
 .ng-search-trigger > i {
@@ -9103,9 +9176,9 @@ a.footer-contact-item:hover i {
 
 .ng-search-trigger kbd {
   padding: 3px 6px;
-  border: 1px solid rgba(255,255,255,.14);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 5px;
-  background: rgba(255,255,255,.06);
+  background: rgba(255, 255, 255, 0.06);
   color: #9db5d0;
   font-size: 10px;
 }
@@ -9125,15 +9198,19 @@ a.footer-contact-item:hover i {
   align-items: center !important;
   padding: 24px !important;
   overflow-y: auto;
-  background: rgba(2, 8, 19, .86);
+  background: rgba(2, 8, 19, 0.86);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  animation: ngSearchFade .25s ease;
+  animation: ngSearchFade 0.25s ease;
 }
 
 @keyframes ngSearchFade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* MAIN PANEL */
@@ -9145,19 +9222,19 @@ a.footer-contact-item:hover i {
   max-height: 85vh;
   overflow-y: auto;
   padding: 32px;
-  border: 1px solid rgba(65, 157, 255, .3);
+  border: 1px solid rgba(65, 157, 255, 0.3);
   border-radius: 22px;
   background:
     radial-gradient(
       circle at 100% 0%,
-      rgba(0, 140, 255, .13),
+      rgba(0, 140, 255, 0.13),
       transparent 35%
     ),
     linear-gradient(145deg, #101e32, #091321 75%);
   box-shadow:
-    0 35px 100px rgba(0,0,0,.55),
-    0 0 40px rgba(0, 145, 255, .08);
-  animation: ngSearchPanelIn .35s cubic-bezier(.2,.8,.2,1);
+    0 35px 100px rgba(0, 0, 0, 0.55),
+    0 0 40px rgba(0, 145, 255, 0.08);
+  animation: ngSearchPanelIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .ng-search-panel::before {
@@ -9179,7 +9256,7 @@ a.footer-contact-item:hover i {
 @keyframes ngSearchPanelIn {
   from {
     opacity: 0;
-    transform: translateY(18px) scale(.98);
+    transform: translateY(18px) scale(0.98);
   }
   to {
     opacity: 1;
@@ -9210,12 +9287,12 @@ a.footer-contact-item:hover i {
   flex-shrink: 0;
   width: 49px;
   height: 49px;
-  border: 1px solid rgba(0, 207, 255, .3);
+  border: 1px solid rgba(0, 207, 255, 0.3);
   border-radius: 14px;
   background: linear-gradient(135deg, #087cff, #00bfe8);
   color: #fff;
   font-size: 22px;
-  box-shadow: 0 8px 25px rgba(0, 145, 255, .2);
+  box-shadow: 0 8px 25px rgba(0, 145, 255, 0.2);
 }
 
 .ng-search-brand h2 {
@@ -9223,7 +9300,7 @@ a.footer-contact-item:hover i {
   color: #f5f9ff;
   font-size: 27px;
   font-weight: 800;
-  letter-spacing: -.8px;
+  letter-spacing: -0.8px;
 }
 
 .ng-search-brand p {
@@ -9248,7 +9325,7 @@ a.footer-contact-item:hover i {
   color: #dceaff;
   font-size: 15px;
   cursor: pointer;
-  transition: .25s ease;
+  transition: 0.25s ease;
 }
 
 .ng-search-close:hover {
@@ -9271,14 +9348,14 @@ a.footer-contact-item:hover i {
   border-radius: 14px;
   background: #07111f;
   cursor: text;
-  transition: .25s ease;
+  transition: 0.25s ease;
 }
 
 .ng-search-field:focus-within {
   border-color: #168bff;
   box-shadow:
-    0 0 0 4px rgba(22, 139, 255, .12),
-    0 0 24px rgba(22, 139, 255, .08);
+    0 0 0 4px rgba(22, 139, 255, 0.12),
+    0 0 24px rgba(22, 139, 255, 0.08);
 }
 
 .ng-search-field > i {
@@ -9359,7 +9436,7 @@ a.footer-contact-item:hover i {
   padding: 22px;
   border: 1px dashed #30445d;
   border-radius: 14px;
-  background: rgba(255,255,255,.025);
+  background: rgba(255, 255, 255, 0.025);
   text-align: center;
 }
 
@@ -9392,7 +9469,7 @@ a.footer-contact-item:hover i {
   background: #102139;
   color: #fff;
   cursor: pointer;
-  transition: .22s ease;
+  transition: 0.22s ease;
 }
 
 .ng-search-result:hover,
@@ -9440,7 +9517,7 @@ a.footer-contact-item:hover i {
   border-top: 1px solid #263950;
   color: #8298b4;
   font-size: 10px;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
 }
 
 /* MOBILE */
@@ -9507,3 +9584,5 @@ a.footer-contact-item:hover i {
     transition: none !important;
   }
 }
+
+
