@@ -10989,653 +10989,179 @@ a.footer-contact-item:hover i {
   }
 }
 
-/* =====================================================
-   NEXTGEN — THE GOLDEN INVITATION
-   VIP DIGITAL OFFER EXPERIENCE
-   Midnight Black × Champagne Gold
-===================================================== */
+/* =========================================
+   NEXTGEN OFFER — COMPACT SIZE OVERRIDE
+========================================= */
 
 .ng-offer-overlay {
-  position: fixed !important;
-  inset: 0 !important;
-  z-index: 20000 !important;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-  overflow-y: auto;
-  background: rgba(5, 5, 4, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition:
-    opacity 0.45s ease,
-    visibility 0.45s ease;
+  padding: 10px !important;
 }
-
-.ng-offer-overlay.ng-offer-show {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-/* =====================================================
-   THE INVITATION — MAIN MODAL
-===================================================== */
 
 .ng-offer-modal {
-  position: relative;
-  isolation: isolate;
   width: 100%;
-  max-width: 465px !important;
-  max-height: calc(100vh - 36px);
-  overflow-y: auto;
-  padding: 30px 27px 21px !important;
-  color: #f5efdf;
-  background:
-    radial-gradient(
-      ellipse at 50% 0%,
-      rgba(214, 180, 106, 0.13),
-      transparent 45%
-    ),
-    linear-gradient(145deg, #25221b, #171612 48%, #10100e);
-  border: 1px solid rgba(214, 180, 106, 0.45);
-  border-radius: 3px;
-  box-shadow:
-    0 35px 110px rgba(0, 0, 0, 0.75),
-    0 0 55px rgba(214, 180, 106, 0.07),
-    inset 0 1px rgba(255, 255, 255, 0.07);
-  transform: translateY(35px) scale(0.96);
-  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-/* Inner gold frame */
-
-.ng-offer-modal > * {
-  position: relative;
-  z-index: 2;
+  max-width: 390px !important;
+  max-height: 90vh;
+  padding: 20px 19px 14px !important;
 }
 
 .ng-offer-modal::before {
-  content: "";
-  position: absolute;
-  inset: 9px;
-  z-index: 0;
-  border: 1px solid rgba(214, 180, 106, 0.17);
-  pointer-events: none;
+  inset: 6px;
 }
-
-/* Top metallic beam */
-
-.ng-offer-modal::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 12%;
-  width: 76%;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    #a77b32,
-    #fff0c2,
-    #d6b46a,
-    transparent
-  );
-  box-shadow: 0 0 16px rgba(214, 180, 106, 0.5);
-  pointer-events: none;
-}
-
-.ng-offer-show .ng-offer-modal {
-  transform: translateY(0) scale(1);
-}
-
-/* Corner details */
-
-.ng-offer-modal .ng-offer-top::before,
-.ng-offer-modal .ng-offer-top::after {
-  content: "";
-  position: absolute;
-  top: -15px;
-  width: 22px;
-  height: 22px;
-  border-top: 1px solid #d6b46a;
-}
-
-.ng-offer-modal .ng-offer-top::before {
-  left: 0;
-  border-left: 1px solid #d6b46a;
-}
-
-.ng-offer-modal .ng-offer-top::after {
-  right: 0;
-  border-right: 1px solid #d6b46a;
-}
-
-/* =====================================================
-   CUSTOM SCROLLBAR
-===================================================== */
-
-.ng-offer-modal::-webkit-scrollbar {
-  width: 4px;
-}
-
-.ng-offer-modal::-webkit-scrollbar-track {
-  background: #171612;
-}
-
-.ng-offer-modal::-webkit-scrollbar-thumb {
-  background: linear-gradient(#fff0c2, #a77b32);
-  border-radius: 10px;
-}
-
-/* =====================================================
-   CLOSE BUTTON
-===================================================== */
 
 .ng-offer-close {
-  position: absolute;
-  top: 17px;
-  right: 17px;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  color: #d6b46a;
-  background: rgba(214, 180, 106, 0.07);
-  border: 1px solid rgba(214, 180, 106, 0.3);
-  border-radius: 2px;
-  font-size: 21px;
-  line-height: 1;
-  cursor: pointer;
-  transition: 0.3s ease;
+  top: 11px;
+  right: 11px;
+  width: 28px;
+  height: 28px;
+  font-size: 17px;
 }
-
-.ng-offer-close:hover {
-  color: #17130b;
-  background: linear-gradient(135deg, #a77b32, #f0d99d);
-  border-color: #f0d99d;
-  transform: rotate(90deg);
-  box-shadow: 0 0 20px rgba(214, 180, 106, 0.25);
-}
-
-/* =====================================================
-   OFFER HEADER — EXCLUSIVE INVITATION
-===================================================== */
 
 .ng-offer-top {
-  position: relative;
-  z-index: 1;
-  text-align: center;
+  padding-top: 3px;
 }
 
 .ng-offer-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 8px 15px;
-  color: #e5c77d;
-  background: rgba(214, 180, 106, 0.07);
-  border: 1px solid rgba(214, 180, 106, 0.38);
-  border-radius: 2px;
-  font-size: 8px;
-  font-weight: 900;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  padding: 6px 11px;
+  font-size: 7px;
+  letter-spacing: 1.5px;
 }
 
 .ng-offer-icon {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 57px !important;
-  height: 57px !important;
-  margin: 18px auto 13px !important;
-  color: #17130b;
-  background: linear-gradient(135deg, #a77b32, #fff0c2 55%, #c49b50);
-  border: 1px solid rgba(255, 240, 194, 0.8);
-  border-radius: 2px !important;
-  box-shadow:
-    5px 5px 0 rgba(214, 180, 106, 0.12),
-    0 0 30px rgba(214, 180, 106, 0.13);
-  font-size: 25px !important;
-}
-
-.ng-offer-icon::after {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border: 1px solid rgba(50, 34, 9, 0.35);
+  width: 43px !important;
+  height: 43px !important;
+  margin: 11px auto 9px !important;
+  font-size: 19px !important;
 }
 
 .ng-offer-kicker {
-  margin: 0 0 10px;
-  color: #d6b46a;
-  font-size: 8px;
-  font-weight: 900;
-  letter-spacing: 3px;
+  margin-bottom: 6px;
+  font-size: 7px;
+  letter-spacing: 2px;
 }
 
 .ng-offer-top h2 {
-  margin: 0;
-  color: #f5efdf;
-  font-family: Georgia, serif;
-  font-size: 30px !important;
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.6px;
-}
-
-.ng-offer-top h2 span {
-  display: block;
-  margin-top: 5px;
-  color: transparent;
-  background: linear-gradient(100deg, #a77b32, #fff0c2 50%, #c49b50);
-  -webkit-background-clip: text;
-  background-clip: text;
-  font-style: italic;
+  font-size: 24px !important;
 }
 
 .ng-offer-description {
-  max-width: 365px;
-  margin: 12px auto 19px !important;
-  color: #b6ad9c;
-  font-size: 11px !important;
-  line-height: 1.8 !important;
+  margin: 8px auto 12px !important;
+  font-size: 10px !important;
+  line-height: 1.55 !important;
 }
-
-/* =====================================================
-   PRICE CARD — GOLDEN OFFER
-===================================================== */
 
 .ng-offer-price-card {
-  position: relative;
-  padding: 17px 15px !important;
-  overflow: hidden;
-  background:
-    linear-gradient(
-      120deg,
-      rgba(214, 180, 106, 0.11),
-      rgba(214, 180, 106, 0.025)
-    ),
-    #191812;
-  border: 1px solid rgba(214, 180, 106, 0.32);
-  border-radius: 2px;
-  text-align: center;
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.04);
-}
-
-.ng-offer-price-card::before {
-  content: "EXCLUSIVE";
-  position: absolute;
-  top: 11px;
-  right: -25px;
-  width: 105px;
-  padding: 4px 0;
-  color: #17130b;
-  background: linear-gradient(90deg, #a77b32, #f0d99d);
-  font-size: 7px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  transform: rotate(38deg);
+  padding: 12px 10px !important;
 }
 
 .ng-offer-price-label {
-  margin: 0 0 9px;
-  color: #b9ad96;
-  font-size: 8px;
-  font-weight: 900;
-  letter-spacing: 2px;
+  margin-bottom: 5px;
+  font-size: 7px;
 }
 
 .ng-old-price {
-  color: #c77c72;
-  font-size: 21px !important;
-  font-weight: 800;
-  text-decoration: line-through;
-  text-decoration-thickness: 1.5px;
+  font-size: 17px !important;
 }
-
-.ng-old-price small {
-  font-size: 9px;
-  font-weight: 700;
-}
-
-/* =====================================================
-   FREE MAINTENANCE RIBBON
-===================================================== */
 
 .ng-free-ribbon {
-  position: relative;
-  display: inline-block;
-  margin: 9px 0 5px !important;
-  padding: 9px 19px !important;
-  overflow: hidden;
-  color: #211a0c;
-  background: linear-gradient(100deg, #b58b46, #fff0c2, #d6b46a);
-  border: 1px solid rgba(255, 240, 194, 0.75);
-  border-radius: 2px;
-  font-size: 14px !important;
-  font-weight: 950;
-  letter-spacing: 0.8px;
-  box-shadow: 0 6px 20px rgba(214, 180, 106, 0.14);
-}
-
-.ng-free-ribbon::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -120%;
-  width: 65%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.4);
-  transform: skewX(-25deg);
-  transition: left 0.6s ease;
-}
-
-.ng-offer-price-card:hover .ng-free-ribbon::after {
-  left: 150%;
+  margin: 6px 0 3px !important;
+  padding: 7px 13px !important;
+  font-size: 12px !important;
 }
 
 .ng-saving-text {
-  margin: 7px 0 0;
-  color: #bdb29e;
-  font-size: 10px !important;
+  margin-top: 4px;
+  font-size: 9px !important;
 }
 
 .ng-saving-text strong {
-  color: #e5c77d;
-  font-size: 15px;
+  font-size: 13px;
 }
-
-/* =====================================================
-   MAIN PRICE
-===================================================== */
 
 .ng-offer-main-price {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 14px 0 !important;
-  padding: 14px 10px !important;
-  overflow: hidden;
-  background: linear-gradient(
-    110deg,
-    rgba(214, 180, 106, 0.12),
-    rgba(214, 180, 106, 0.025)
-  );
-  border: 1px solid rgba(214, 180, 106, 0.32);
-  border-radius: 2px;
-}
-
-.ng-offer-main-price::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: linear-gradient(#fff0c2, #a77b32);
-}
-
-.ng-offer-main-price span {
-  color: #b9ad96;
-  font-size: 8px;
-  font-weight: 900;
-  letter-spacing: 2px;
+  margin: 9px 0 !important;
+  padding: 9px !important;
 }
 
 .ng-offer-main-price strong {
-  margin: 5px 0;
-  color: transparent;
-  background: linear-gradient(100deg, #b58b46, #fff0c2, #d6b46a);
-  -webkit-background-clip: text;
-  background-clip: text;
-  font-family: Georgia, serif;
-  font-size: 34px !important;
-  font-weight: 600;
-  letter-spacing: -1px;
+  margin: 3px 0;
+  font-size: 27px !important;
+}
+
+.ng-offer-main-price span {
+  font-size: 7px;
 }
 
 .ng-offer-main-price small {
-  color: #a79c87;
-  font-size: 9px;
+  font-size: 8px;
 }
 
-/* =====================================================
-   OFFER FEATURES
-===================================================== */
-
 .ng-offer-features {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px !important;
-  margin: 15px 0 !important;
+  gap: 6px !important;
+  margin: 10px 0 !important;
 }
 
 .ng-offer-features div {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 10px 9px;
-  color: #ded5c4;
-  background: rgba(214, 180, 106, 0.035);
-  border: 1px solid rgba(214, 180, 106, 0.13);
-  border-radius: 2px;
-  font-size: 9px !important;
-  line-height: 1.6;
-  transition: 0.3s ease;
-}
-
-.ng-offer-features div:hover {
-  background: rgba(214, 180, 106, 0.09);
-  border-color: rgba(214, 180, 106, 0.45);
-  transform: translateY(-2px);
+  gap: 6px;
+  padding: 7px;
+  font-size: 8px !important;
 }
 
 .ng-offer-features i {
-  flex-shrink: 0;
-  color: #e5c77d;
-  font-size: 12px;
-  filter: drop-shadow(0 0 4px rgba(214, 180, 106, 0.3));
+  font-size: 10px;
 }
-
-/* =====================================================
-   CTA — CLAIM YOUR OFFER
-===================================================== */
 
 .ng-offer-cta {
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 11px;
-  width: 100%;
-  padding: 15px 17px !important;
-  overflow: hidden;
-  color: #17130b !important;
-  background: linear-gradient(105deg, #a77b32, #f0d99d 50%, #c49b50);
-  border: 1px solid #f0d99d;
-  border-radius: 2px;
-  box-shadow: 0 8px 25px rgba(214, 180, 106, 0.16);
-  font-size: 10px !important;
-  font-weight: 950;
-  letter-spacing: 1.5px;
-  text-align: center;
-  text-decoration: none !important;
-  transition: 0.35s ease;
+  padding: 12px !important;
+  font-size: 9px !important;
 }
-
-.ng-offer-cta::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: -110%;
-  width: 60%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.45);
-  transform: skewX(-25deg);
-  transition: left 0.65s ease;
-}
-
-.ng-offer-cta:hover {
-  color: #17130b !important;
-  transform: translateY(-3px);
-  box-shadow:
-    0 13px 32px rgba(214, 180, 106, 0.24),
-    0 0 22px rgba(214, 180, 106, 0.12);
-}
-
-.ng-offer-cta:hover::before {
-  left: 150%;
-}
-
-.ng-offer-cta:focus-visible,
-.ng-offer-close:focus-visible {
-  outline: 2px solid #fff0c2;
-  outline-offset: 4px;
-}
-
-/* =====================================================
-   TERMS & CONDITIONS
-===================================================== */
 
 .ng-offer-terms {
-  margin: 11px 0 !important;
-  color: #958b79;
-  font-size: 8px !important;
-  line-height: 1.8;
-  text-align: center;
+  margin: 7px 0 !important;
+  font-size: 7px !important;
 }
 
-/* =====================================================
-   BRAND SIGNATURE FOOTER
-===================================================== */
-
 .ng-offer-footer {
-  position: relative;
-  padding-top: 13px !important;
-  color: #f1e6cf;
-  border-top: 1px solid rgba(214, 180, 106, 0.22);
-  font-family: Georgia, serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-align: center;
+  padding-top: 9px !important;
+  font-size: 9px;
 }
 
 .ng-offer-footer span {
-  display: block;
-  margin-top: 6px;
-  color: #d6b46a;
-  font-family: inherit;
-  font-size: 8px;
-  letter-spacing: 2.5px;
+  margin-top: 4px;
+  font-size: 7px;
 }
 
-/* =====================================================
-   MOBILE RESPONSIVE
-===================================================== */
+/* MOBILE */
 
 @media (max-width: 576px) {
-  .ng-offer-overlay {
-    padding: 10px;
-  }
-
   .ng-offer-modal {
-    max-width: 390px !important;
-    max-height: calc(100vh - 20px);
-    padding: 27px 18px 17px !important;
-  }
-
-  .ng-offer-close {
-    top: 13px;
-    right: 13px;
-    width: 31px;
-    height: 31px;
-  }
-
-  .ng-offer-top h2 {
-    font-size: 25px !important;
-  }
-
-  .ng-offer-description {
-    font-size: 10px !important;
-    margin-bottom: 15px !important;
-  }
-
-  .ng-offer-features {
-    grid-template-columns: 1fr 1fr;
-    gap: 7px !important;
-  }
-
-  .ng-offer-features div {
-    padding: 8px;
-    font-size: 8px !important;
-  }
-
-  .ng-free-ribbon {
-    font-size: 13px !important;
-  }
-
-  .ng-offer-main-price strong {
-    font-size: 30px !important;
-  }
-
-  .ng-offer-cta {
-    padding: 14px 12px !important;
-    font-size: 9px !important;
-  }
-}
-
-/* =====================================================
-   VERY SMALL SCREENS
-===================================================== */
-
-@media (max-width: 360px) {
-  .ng-offer-modal {
-    padding: 25px 14px 15px !important;
+    max-width: 355px !important;
+    max-height: 92vh;
+    padding: 19px 15px 12px !important;
   }
 
   .ng-offer-top h2 {
     font-size: 22px !important;
   }
 
-  .ng-offer-features {
-    grid-template-columns: 1fr;
+  .ng-offer-description {
+    font-size: 9px !important;
   }
 
-  .ng-offer-badge {
-    font-size: 7px;
-    letter-spacing: 1.5px;
+  .ng-offer-features div {
+    font-size: 7.5px !important;
   }
 }
 
-/* =====================================================
-   ACCESSIBILITY
-===================================================== */
+/* SMALL MOBILE */
 
-@media (prefers-reduced-motion: reduce) {
-  .ng-offer-overlay,
-  .ng-offer-modal,
-  .ng-offer-close,
-  .ng-offer-cta,
-  .ng-offer-cta::before,
-  .ng-offer-features div,
-  .ng-free-ribbon::after {
-    animation: none !important;
-    transition: none !important;
+@media (max-width: 360px) {
+  .ng-offer-modal {
+    max-width: 320px !important;
+    padding: 17px 12px 10px !important;
+  }
+
+  .ng-offer-features {
+    gap: 5px !important;
   }
 }
 
