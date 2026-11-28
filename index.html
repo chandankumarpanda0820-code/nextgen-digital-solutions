@@ -14,7 +14,7 @@
 
   <meta name="description"
     content="NextGen Digital Solutions is an India-wide digital agency based in Sambalpur, Odisha, offering professional website development, e-commerce solutions, SEO, branding and digital marketing services across India.">
-    
+
   <!-- Google Font: Manrope -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,690 +92,602 @@
 
 <body>
 
-  <!-- Premium Preloader -->
-  <div id="ng-preloader">
+
+  <!-- START: NEXTGEN SCROLL PROGRESS BAR -->
+
+  <div class="ng-scroll-progress" id="ngScrollProgress" role="progressbar" aria-label="Page scroll progress"
+    aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+
+    <div class="ng-scroll-progress-fill" id="ngScrollProgressFill">
+    </div>
+
+  </div>
+
+  <!-- END: NEXTGEN SCROLL PROGRESS BAR -->
+
+
+  <!-- =================================================
+     NEXTGEN DIGITAL SOLUTIONS
+     PRELOADER START
+================================================== -->
+
+  <div class="ng-preloader" id="ngPreloader">
+
     <div class="ng-loader-content">
-      <div class="ng-loader-logo">NG<span>.</span></div>
 
-      <h3>NextGen Digital Solutions</h3>
-      <p>We Build. We Brand. We Grow.</p>
+      <!-- LOGO -->
 
-      <div class="ng-loader-track">
-        <div class="ng-loader-progress"></div>
+      <div class="ng-loader-logo">
+        <img src="images/logo.png" alt="NextGen Digital Solutions">
       </div>
 
-      <small>LOADING EXPERIENCE...</small>
+      <!-- BRAND NAME -->
+
+      <div class="ng-loader-brand">
+        <h1>NextGen</h1>
+        <span>DIGITAL SOLUTIONS</span>
+      </div>
+
+      <!-- TAGLINE -->
+
+      <p class="ng-loader-tagline">
+        POWERING YOUR DIGITAL FUTURE
+      </p>
+
+      <!-- PROGRESS -->
+
+      <div class="ng-loader-progress">
+
+        <div class="ng-progress-track">
+          <div class="ng-progress-fill" id="ngProgressFill"></div>
+        </div>
+
+        <div class="ng-progress-info">
+          <span id="ngLoadingText">INITIALIZING...</span>
+          <span id="ngLoadingPercent">0%</span>
+        </div>
+
+      </div>
+
     </div>
+
   </div>
 
-  <!-- Scroll Progress Bar -->
-  <div id="ng-scroll-progress"></div>
-
-  <!-- NextGen Animated Background -->
-  <div id="ng-animated-bg">
-    <span class="ng-orb ng-orb-one"></span>
-    <span class="ng-orb ng-orb-two"></span>
-    <span class="ng-orb ng-orb-three"></span>
-    <div class="ng-bg-grid"></div>
-  </div>
-
-
-  <!-- ================= NAVBAR START ================= -->
-
-  <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
-
-    <div class="container">
-
-      <!-- BRAND LOGO -->
-
-      <a class="navbar-brand" href="#home">
-
-        <span class="brand-icon">
-          <i class="bi bi-lightning-charge-fill"></i>
-        </span>
-
-        <span class="brand-text">
-          NextGen
-          <small>Digital Solutions</small>
-        </span>
-
-      </a>
-
-
-      <!-- MOBILE MENU BUTTON -->
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-
-        <i class="bi bi-list"></i>
-
-      </button>
-
-
-      <!-- NAVIGATION LINKS -->
-
-      <div class="collapse navbar-collapse" id="navbarContent">
-
-        <ul class="navbar-nav ms-auto align-items-lg-center">
-
-          <li class="nav-item">
-            <a class="nav-link active" href="#home">Home</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#founder">Founder</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#about">About</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#services">Services</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#portfolio">Our Work</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#pricing">Pricing</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link catalogue-nav-link"
-              href="https://chandankumarpanda0820-code.github.io/nextgen-digital-solutions/NextGen_Digital_Solutions_Client_Service_Catalogue.pdf"
-              target="_blank" rel="noopener noreferrer">
-              <i class="bi bi-file-earmark-pdf"></i>
-              Catalogue
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
-          </li>
+  <!-- =================================================
+     PRELOADER END
+================================================== -->
 
 
 
+  <!-- =================================================
+     NEXTGEN DIGITAL SOLUTIONS
+     NAVBAR START
+================================================== -->
 
-          <!-- NEXTGEN SMART SEARCH BUTTON -->
-          <li class="nav-item ng-search-nav-item">
-            <button type="button" class="ng-search-trigger" id="ngSearchOpen" aria-label="Open website search"
-              aria-haspopup="dialog" aria-controls="ngSearchDialog">
-              <i class="bi bi-search"></i>
-              <span>Search</span>
-              <kbd>Ctrl K</kbd>
-            </button>
-          </li>
+  <header class="ng-header" id="siteHeader">
 
+    <nav class="navbar navbar-expand-xl ng-navbar">
 
-          <!-- NEXTGEN SEARCH DIALOG -->
-          <div class="ng-search-overlay" id="ngSearchDialog" hidden>
-            <section class="ng-search-panel" role="dialog" aria-modal="true" aria-labelledby="ngSearchTitle">
+      <div class="container">
 
-              <div class="ng-search-topline">
-                <div class="ng-search-brand">
-                  <span class="ng-search-brand-icon">
-                    <i class="bi bi-lightning-charge-fill"></i>
-                  </span>
-                  <div>
-                    <h2 id="ngSearchTitle">Search NextGen</h2>
-                    <p>Find services, projects, pricing and more.</p>
-                  </div>
-                </div>
-                <button type="button" class="ng-search-close" id="ngSearchClose">
-                  <i class="bi bi-x-lg"></i>
-                </button>
-              </div>
+        <!-- BRAND LOGO START -->
 
-              <label class="ng-search-field" for="ngSearchInput">
-                <i class="bi bi-search"></i>
-                <input id="ngSearchInput" type="search" placeholder="What are you looking for?" autocomplete="off">
-                <kbd>ESC</kbd>
-              </label>
+        <a href="#home" class="navbar-brand ng-brand">
 
-              <div class="ng-search-meta">
-                <span id="ngSearchStatus" role="status" aria-live="polite">
-                  Start typing to search this website
-                </span>
-              </div>
+          <img src="images/logo.png" alt="NextGen Digital Solutions Logo" class="ng-logo" width="64" height="64">
 
-              <div class="ng-search-results" id="ngSearchResults">
-                <div class="ng-search-empty">
-                  <i class="bi bi-stars"></i>
-                  <strong>Your next discovery starts here.</strong>
-                  <span>Try website, pricing, SEO or contact.</span>
-                </div>
-              </div>
+          <span class="ng-brand-text">
+            <strong>NextGen</strong>
+            <small>DIGITAL SOLUTIONS</small>
+          </span>
 
-              <div class="ng-search-footer">
-                <span>⚡ NEXTGEN DIGITAL SOLUTIONS</span>
-                <span>WE BUILD. WE BRAND. WE GROW.</span>
-              </div>
+        </a>
 
-            </section>
-          </div>
+        <!-- BRAND LOGO END -->
 
 
+        <!-- UNIQUE MOBILE MENU BUTTON START -->
 
-          <!-- CLIENT ENQUIRY FORM BUTTON -->
+        <button class="navbar-toggler ng-menu-toggle" type="button" data-bs-toggle="collapse"
+          data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false"
+          aria-label="Open navigation menu">
 
-          <li class="nav-item ms-lg-3 mb-2 mb-lg-0">
+          <span class="ng-menu-symbol">
 
-            <a href="https://forms.gle/9gLMi8XyVvspHcJBA" class="nav-cta" target="_blank" rel="noopener noreferrer"
-              aria-label="Submit a Client Enquiry">
+            <span class="ng-menu-line line-one"></span>
 
-              <i class="bi bi-clipboard-check"></i>
-              Client Enquiry
+            <span class="ng-menu-line line-two"></span>
 
-            </a>
+            <span class="ng-menu-line line-three"></span>
 
-          </li>
+          </span>
+
+          <span class="ng-menu-label">MENU</span>
+
+        </button>
+
+        <!-- UNIQUE MOBILE MENU BUTTON END -->
 
 
-          <!-- EXISTING GET A QUOTE BUTTON -->
+        <!-- NAVIGATION START -->
 
-          <li class="nav-item ms-lg-2">
+        <div class="collapse navbar-collapse" id="mainNavbar">
 
-            <a href="#contact" class="nav-cta">
+          <ul class="navbar-nav mx-auto ng-nav">
 
-              Get a Quote
+            <li class="nav-item">
+              <a class="nav-link active" href="#home">Home</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#founder">Founder</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Services</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Projects</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#catalogue">Catalogue</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Get in Touch</a>
+            </li>
+
+          </ul>
+
+          <!-- NAVIGATION END -->
+
+
+          <!-- CLIENT INQUIRY START -->
+
+          <div class="ng-nav-action">
+
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfsRbX1Iihn8zd1axw14-dt2F0qeviMpRTspT46f6vhUB4D2g/viewform?pli=1"
+              class="ng-btn ng-btn-primary" target="_blank" rel="noopener noreferrer">
+
+              <span>Client Inquiry</span>
+
               <i class="bi bi-arrow-up-right"></i>
 
             </a>
 
-          </li>
+          </div>
 
-        </ul>
+          <!-- CLIENT INQUIRY END -->
+
+        </div>
 
       </div>
 
-    </div>
+    </nav>
 
-  </nav>
+  </header>
 
-  <!-- ================= NAVBAR END ================= -->
+  <!-- =================================================
+     NAVBAR END
+================================================== -->
 
 
-
-  <!-- FLOATING SOCIAL BAR START -->
-
-  <div class="floating-social">
-
-    <!-- WhatsApp -->
-    <a href="https://wa.me/918984240820" class="social-btn whatsapp" target="_blank" rel="noopener noreferrer"
-      aria-label="Chat on WhatsApp">
-      <i class="bi bi-whatsapp"></i>
-      <span>WhatsApp</span>
-    </a>
-
-    <!-- Call -->
-    <a href="tel:+918984240820" class="social-btn call" aria-label="Call us">
-      <i class="bi bi-telephone-fill"></i>
-      <span>Call Us</span>
-    </a>
-
-    <!-- Instagram -->
-    <a href="https://www.instagram.com/nextgendigitalsolutions.sbp?lqvp=MWVvNXVwbXB4M2J5YQ=="
-      class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-      <i class="bi bi-instagram"></i>
-      <span>Instagram</span>
-    </a>
-
-  </div>
-
-  </div>
-
-  <!-- FLOATING SOCIAL BAR END -->
-
-  <!-- =============== NEXTGEN FUTURISTIC HERO =============== -->
-
-  <section class="hero-section" id="home">
-
-    <div class="hero-grid-bg"></div>
-    <div class="hero-glow hero-glow-one"></div>
-    <div class="hero-glow hero-glow-two"></div>
-
+  <!-- ========== START: HOME / HERO SECTION ========== -->
+  <section id="home" class="ng-home">
     <div class="container">
-
       <div class="row align-items-center">
 
-        <!-- LEFT CONTENT -->
-
-        <div class="col-lg-7">
-
-          <div class="hero-content">
-
-            <div class="hero-eyebrow">
-              <span class="eyebrow-line"></span>
-              SAMBALPUR, ODISHA • DIGITAL SOLUTIONS
-              <span class="eyebrow-dot"></span>
-            </div>
-
-            <h1 class="hero-title">
-              WE DON'T JUST
-              <span>BUILD WEBSITES.</span>
-              <span class="outline-text">WE BUILD</span>
-              <span class="gradient-text">DIGITAL FUTURES.</span>
-            </h1>
-
-            <!-- LOCAL BUSINESS LOCATION -->
-
-            <p class="hero-location">
-              <i class="bi bi-geo-alt-fill"></i>
-              Based in Sambalpur, Odisha, India
-            </p>
-
-            <!-- SEO OPTIMIZED DESCRIPTION -->
-
-            <p class="hero-description">
-              NextGen Digital Solutions is a Sambalpur-based digital
-              agency helping businesses grow through professional
-              website development, e-commerce solutions, SEO and
-              digital marketing services. We turn bold ideas into
-              powerful digital experiences that move businesses forward.
-            </p>
-
-            <div class="hero-actions">
-
-              <a href="#contact" class="hero-primary-btn">
-                <span>Let's Create Together</span>
-                <i class="bi bi-arrow-up-right"></i>
-              </a>
-
-              <a href="#portfolio" class="hero-secondary-btn">
-                Explore Our Universe
-                <i class="bi bi-arrow-down-right"></i>
-              </a>
-
-            </div>
-
-            <div class="hero-bottom-info">
-
-              <span>01 / DIGITAL INNOVATION</span>
-
-              <div class="hero-info-line"></div>
-
-              <span>MADE FOR WHAT'S NEXT</span>
-
-            </div>
-
+        <!-- LEFT: HERO IMAGE -->
+        <div class="col-lg-6 ng-home-image">
+          <div class="ng-image-wrapper">
+            <img src="images/home-hero.png" class="img-fluid" alt="NextGen Digital Solutions">
           </div>
-
         </div>
 
-
-        <!-- RIGHT DIGITAL VISUAL -->
-
-        <div class="col-lg-5">
-
-          <div class="digital-universe">
-
-            <div class="universe-ring ring-one"></div>
-            <div class="universe-ring ring-two"></div>
-            <div class="universe-ring ring-three"></div>
-
-            <div class="universe-core">
-
-              <div class="core-inner">
-
-                <i class="bi bi-lightning-charge-fill"></i>
-
-              </div>
-
-            </div>
-
-            <div class="universe-label label-top">
-              <span></span>
-              CREATIVE TECHNOLOGY
-            </div>
-
-            <div class="universe-label label-bottom">
-              <span>NG.</span>
-              THE NEXT GENERATION
-            </div>
-
-            <div class="universe-orbit-dot dot-one"></div>
-            <div class="universe-orbit-dot dot-two"></div>
-            <div class="universe-orbit-dot dot-three"></div>
-
-            <div class="universe-floating-tag tag-web">
-              <i class="bi bi-code-slash"></i>
-              <span>WEB DESIGN</span>
-            </div>
-
-            <div class="universe-floating-tag tag-growth">
-              <i class="bi bi-graph-up-arrow"></i>
-              <span>BRAND GROWTH</span>
-            </div>
-
-            <div class="universe-floating-tag tag-digital">
-              <i class="bi bi-stars"></i>
-              <span>DIGITAL EXPERIENCE</span>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- BOTTOM MARQUEE -->
-
-    <div class="hero-marquee">
-
-      <div class="marquee-track">
-
-        <span>DESIGN</span>
-        <i class="bi bi-asterisk"></i>
-        <span>DEVELOP</span>
-        <i class="bi bi-asterisk"></i>
-        <span>INNOVATE</span>
-        <i class="bi bi-asterisk"></i>
-        <span>GROW</span>
-        <i class="bi bi-asterisk"></i>
-        <span>DESIGN</span>
-        <i class="bi bi-asterisk"></i>
-        <span>DEVELOP</span>
-        <i class="bi bi-asterisk"></i>
-        <span>INNOVATE</span>
-        <i class="bi bi-asterisk"></i>
-        <span>GROW</span>
-        <i class="bi bi-asterisk"></i>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- =============== HERO SECTION END =============== -->
-
-
-  <!-- ==========================================
-     NEXTGEN FOUNDER / OWNER SECTION
-========================================== -->
-
-  <section id="founder" class="ng-founder-section">
-
-    <div class="ng-founder-container">
-
-      <!-- Section Heading -->
-      <div class="ng-founder-heading">
-
-        <span class="ng-founder-kicker">
-          <i class="bi bi-stars"></i>
-          THE PERSON BEHIND NEXTGEN
-        </span>
-
-        <h2>
-          Meet The <span>Founder</span>
-        </h2>
-
-        <p>
-          Vision creates possibilities. Leadership makes them reality.
-        </p>
-
-      </div>
-
-      <!-- Main Founder Profile -->
-      <div class="ng-founder-profile">
-
-        <!-- Left: Founder Image -->
-        <div class="ng-founder-visual">
-
-          <div class="ng-founder-image-number">01</div>
-
-          <div class="ng-founder-glow"></div>
-
-          <div class="ng-founder-image-border">
-
-            <div class="ng-founder-image-inner">
-
-              <img src="images/chandan-founder.webp"
-                alt="Chandan Kumar Panda - Founder and Owner of NextGen Digital Solutions" class="ng-founder-photo"
-                loading="lazy" decoding="async" width="700" height="967">
-
-            </div>
-
-          </div>
-
-          <div class="ng-founder-image-caption">
-            <span class="ng-founder-status-dot"></span>
-            FOUNDER & OWNER
-          </div>
-
-          <div class="ng-founder-side-text">
+        <!-- RIGHT: HERO CONTENT -->
+        <div class="col-lg-6 ng-home-content">
+          <span class="ng-home-tag">
+            <span class="ng-tag-dot"></span>
             NEXTGEN DIGITAL SOLUTIONS
-          </div>
+          </span>
 
-        </div>
+          <h1>
+            Turning Your
+            <span>Ideas</span>
+            Into Digital Reality.
+          </h1>
 
-
-        <!-- Right: Founder Information -->
-        <div class="ng-founder-details">
-
-          <div class="ng-founder-role">
-            <span class="ng-role-line"></span>
-            FOUNDER / OWNER
-          </div>
-
-          <h3 class="ng-founder-name">
-            Chandan Kumar
-            <span>Panda</span>
-          </h3>
-
-          <div class="ng-founder-designation">
-            Founder & Owner of
-            <strong>NextGen Digital Solutions</strong>
-          </div>
-
-          <div class="ng-founder-divider"></div>
-
-          <p class="ng-founder-description">
-            Hello, I'm Chandan Kumar Panda, the Founder and
-            Owner of NextGen Digital Solutions.
-
-            My vision is to help businesses, startups and
-            individuals establish a strong digital presence
-            through innovative technology, creative design
-            and smart digital solutions.
-
-            I believe every business deserves the opportunity
-            to grow in the digital world. At NextGen, we turn
-            ideas into meaningful digital experiences through
-            dedication, creativity and continuous innovation.
+          <p>
+            We create modern websites, powerful digital
+            experiences and smart technology solutions
+            that help businesses move forward.
           </p>
 
-          <div class="ng-founder-motto">
-            <i class="bi bi-quote"></i>
-            <span>We Build. We Brand. We Grow.</span>
+          <div class="ng-home-actions">
+            <a href="#contact" class="ng-btn ng-btn-primary">
+              Start Your Project <i class="bi bi-arrow-up-right"></i>
+            </a>
+
+            <a href="#services" class="ng-home-secondary">
+              Explore Services
+              <i class="bi bi-arrow-down-right"></i>
+            </a>
           </div>
 
-
-          <!-- Social Media Links -->
-          <div class="ng-founder-social-heading">
-            CONNECT WITH ME
+          <div class="ng-home-note">
             <span></span>
+            Creative Thinking. Digital Excellence.
           </div>
-
-          <div class="ng-founder-socials">
-
-            <!-- WhatsApp -->
-            <a href="https://wa.me/918984240820" target="_blank" rel="noopener noreferrer" class="ng-founder-social"
-              aria-label="WhatsApp">
-              <i class="bi bi-whatsapp"></i>
-              <span>WhatsApp</span>
-            </a>
-
-            <!-- Email -->
-            <a href="mailto:chandankumarpanda0820@gmail.com" class="ng-founder-social" aria-label="Email">
-              <i class="bi bi-envelope-fill"></i>
-              <span>Email</span>
-            </a>
-
-            <!-- Telegram -->
-            <a href="https://t.me/nextgendigitalsolutionssbp" target="_blank" rel="noopener noreferrer"
-              class="ng-founder-social" aria-label="Telegram Channel">
-              <i class="bi bi-telegram"></i>
-              <span>Telegram</span>
-            </a>
-
-            <!-- Founder Instagram -->
-            <a href="https://www.instagram.com/pravatpanda0820/" target="_blank" rel="noopener noreferrer"
-              class="ng-founder-social" aria-label="Founder Instagram">
-              <i class="bi bi-instagram"></i>
-              <span>Founder IG</span>
-            </a>
-
-            <!-- Company Instagram -->
-            <a href="https://www.instagram.com/nextgendigitalsolutions.sbp/" target="_blank" rel="noopener noreferrer"
-              class="ng-founder-social" aria-label="NextGen Instagram">
-              <i class="bi bi-building"></i>
-              <span>NextGen IG</span>
-            </a>
-
-          </div>
-
-
-          <!-- Contact CTA -->
-          <a href="https://wa.me/918984240820?text=Hello%20Chandan%2C%20I%20visited%20your%20website." target="_blank"
-            rel="noopener noreferrer" class="ng-founder-contact">
-            <span>Connect With Founder</span>
-            <i class="bi bi-arrow-up-right"></i>
-          </a>
-
         </div>
 
       </div>
-
-      <!-- Bottom Brand Line -->
-      <div class="ng-founder-bottom">
-        <span>BUILT WITH VISION</span>
-        <span class="ng-founder-bottom-line"></span>
-        <span>POWERED BY INNOVATION</span>
-      </div>
-
     </div>
-
   </section>
+  <!-- ========== END: HOME / HERO SECTION ========== -->
 
-  <!-- ===== END FOUNDER SECTION ===== -->
 
-  <!-- =============== ABOUT SECTION START =============== -->
+  <!-- =====================================================
+     START: NEXTGEN CREATIVE EDITORIAL ABOUT SECTION
+===================================================== -->
 
-  <section class="about-section" id="about">
+  <section id="about" class="ng-editorial-about">
 
     <div class="container">
 
-      <!-- SECTION HEADING -->
-
-      <div class="about-heading">
-
-        <div class="section-eyebrow">
-          <span></span>
-          GET TO KNOW NEXTGEN
-        </div>
-
-        <h2>
-          NOT JUST AN AGENCY.
-          <span>A DIGITAL PARTNER.</span>
-        </h2>
-
-        <p>
-          We combine creativity, technology and strategy
-          to help businesses build a stronger digital future.
-        </p>
-
+      <!-- TOP LABEL -->
+      <div class="ng-editorial-top">
+        <span class="ng-editorial-kicker">
+          <span class="ng-editorial-dot"></span>
+          GET TO KNOW US
+        </span>
+        <span class="ng-editorial-index">01 / ABOUT</span>
       </div>
 
+      <!-- BIG EDITORIAL HEADING -->
+      <div class="ng-editorial-heading">
+        <h2>
+          WE ARE
+          <span class="ng-heading-blue">NEXTGEN<span class="ng-heading-period">.</span></span>
+        </h2>
 
-      <div class="row align-items-center g-5">
+        <div class="ng-heading-bottom">
+          <p>Ideas. Innovation. Digital Impact.</p>
+          <span class="ng-heading-line"></span>
+        </div>
+      </div>
 
-        <!-- LEFT CONTENT -->
+      <!-- MAIN ABOUT CONTENT -->
+      <div class="row align-items-center ng-editorial-main">
 
-        <div class="col-lg-6">
+        <!-- LEFT: COMPANY INTRODUCTION -->
+        <div class="col-lg-7">
 
-          <div class="about-content">
+          <div class="ng-editorial-copy">
 
-            <span class="about-small-label">
-              WHO WE ARE
+            <span class="ng-editorial-small-label">
+              / WHO WE ARE
             </span>
 
             <h3>
-              Turning Ideas Into
-              <span>Digital Impact.</span>
+              We turn bold ideas into
+              <span>digital experiences.</span>
             </h3>
 
             <p>
-              NextGen Digital Solutions is a creative digital
-              agency focused on website development, branding
-              and digital marketing.
+              NextGen Digital Solutions is a digital
+              solutions company focused on helping
+              businesses establish and strengthen
+              their digital presence.
             </p>
 
             <p>
-              We believe every business deserves a powerful
-              online presence. Our goal is to turn your ideas
-              into meaningful digital experiences that help
-              your brand stand out.
+              By combining creativity, technology and
+              thoughtful digital strategies, we aim to
+              create meaningful online experiences
+              that help businesses connect with their
+              audience and move forward.
             </p>
 
-            <a href="#services" class="about-link">
-              Discover What We Do
-              <i class="bi bi-arrow-up-right"></i>
+            <a href="#services" class="ng-editorial-link">
+              EXPLORE OUR SERVICES
+              <span class="ng-editorial-link-arrow">
+                <i class="bi bi-arrow-up-right"></i>
+              </span>
             </a>
 
           </div>
 
         </div>
 
+        <!-- RIGHT: CREATIVE GRAPHIC -->
+        <div class="col-lg-5">
 
-        <!-- RIGHT VISUAL -->
+          <div class="ng-editorial-art">
 
-        <div class="col-lg-6">
+            <div class="ng-art-outline"></div>
+            <div class="ng-art-circle"></div>
+            <div class="ng-art-square"></div>
 
-          <div class="about-visual">
+            <div class="ng-art-cross cross-one">+</div>
+            <div class="ng-art-cross cross-two">+</div>
 
-            <div class="about-visual-glow"></div>
+            <div class="ng-art-center">
+              <span>NG</span>
+              <small>DIGITAL</small>
+            </div>
 
-            <div class="about-main-card">
+            <div class="ng-art-side-text">
+              THINK<br>
+              CREATE<br>
+              <span>GROW.</span>
+            </div>
 
-              <div class="about-card-top">
-                <span>OUR MINDSET</span>
-                <i class="bi bi-stars"></i>
+            <div class="ng-art-bottom">
+              CREATIVITY MEETS TECHNOLOGY
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- MISSION AND VISION -->
+      <div class="ng-editorial-values">
+
+        <div class="ng-editorial-value-heading">
+          <span>/ WHAT DRIVES US</span>
+          <p>Our purpose. Our direction.</p>
+        </div>
+
+        <div class="row g-4">
+
+          <!-- MISSION -->
+          <div class="col-md-6">
+            <article class="ng-editorial-card ng-mission-card">
+
+              <div class="ng-editorial-card-top">
+                <span class="ng-editorial-card-number">01</span>
+                <i class="bi bi-bullseye"></i>
               </div>
 
-              <div class="about-symbol">
-                <i class="bi bi-lightning-charge-fill"></i>
-              </div>
+              <span class="ng-editorial-card-label">
+                OUR PURPOSE
+              </span>
 
-              <h4>THINK BIGGER.</h4>
-              <h4 class="about-gradient-text">
-                CREATE BETTER.
-              </h4>
+              <h4>Our Mission<span>.</span></h4>
 
               <p>
-                Innovation starts with a bold idea.
+                To deliver creative, reliable and
+                effective digital solutions that
+                empower businesses to build their
+                online presence, connect with people
+                and achieve their goals.
               </p>
 
-              <div class="about-card-footer">
-                <span>NEXTGEN DIGITAL SOLUTIONS</span>
-                <span>NG. / 01</span>
+              <div class="ng-editorial-card-footer">
+                <span>MAKE IDEAS MATTER</span>
+                <i class="bi bi-arrow-up-right"></i>
               </div>
 
-            </div>
+            </article>
+          </div>
 
-            <div class="about-floating-card about-float-one">
-              <i class="bi bi-palette"></i>
-              <span>CREATIVITY</span>
-            </div>
+          <!-- VISION -->
+          <div class="col-md-6">
+            <article class="ng-editorial-card ng-vision-card">
 
-            <div class="about-floating-card about-float-two">
-              <i class="bi bi-rocket-takeoff"></i>
-              <span>INNOVATION</span>
+              <div class="ng-editorial-card-top">
+                <span class="ng-editorial-card-number">02</span>
+                <i class="bi bi-eye"></i>
+              </div>
+
+              <span class="ng-editorial-card-label">
+                OUR FUTURE
+              </span>
+
+              <h4>Our Vision<span>.</span></h4>
+
+              <p>
+                To become a trusted digital solutions
+                partner known for innovation,
+                creativity and meaningful technology
+                experiences that help shape a smarter
+                digital future.
+              </p>
+
+              <div class="ng-editorial-card-footer">
+                <span>BUILD WHAT'S NEXT</span>
+                <i class="bi bi-arrow-up-right"></i>
+              </div>
+
+            </article>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- BOTTOM STATEMENT -->
+      <div class="ng-editorial-footer">
+        <span>THE FUTURE IS DIGITAL.</span>
+        <span class="ng-footer-blue">LET'S BUILD IT TOGETHER.</span>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+     END: NEXTGEN CREATIVE EDITORIAL ABOUT SECTION
+===================================================== -->
+
+
+  <!-- =====================================================
+     START: NEXTGEN FOUNDER — SIGNATURE EXPERIENCE
+===================================================== -->
+
+  <section class="ng-signature-founder" id="founder">
+
+    <div class="container">
+
+      <!-- TOP BAR -->
+      <div class="ng-sf-topbar">
+        <div class="ng-sf-top-label">
+          <span class="ng-sf-live-dot"></span>
+          THE FOUNDER'S STORY
+        </div>
+
+        <div class="ng-sf-top-index">
+          NEXTGEN DIGITAL SOLUTIONS / 002
+        </div>
+      </div>
+
+
+      <!-- GIANT HEADING -->
+      <div class="ng-sf-heading">
+        <div class="ng-sf-heading-small">
+          THE MIND
+          <span>BEHIND</span>
+        </div>
+
+        <h2>
+          NEXT<span>GEN.</span>
+        </h2>
+
+        <div class="ng-sf-heading-note">
+          ONE VISION.<br>
+          A DIGITAL FUTURE.
+        </div>
+      </div>
+
+
+      <!-- MAIN FOUNDER COMPOSITION -->
+      <div class="ng-sf-main">
+
+        <!-- LEFT: PHOTO -->
+        <div class="ng-sf-portrait">
+
+          <div class="ng-sf-photo-background"></div>
+
+          <div class="ng-sf-photo-frame">
+
+            <img src="images/chandan-founder.webp" alt="Chandan Kumar Panda - Founder of NextGen Digital Solutions"
+              width="650" height="780" loading="lazy" decoding="async">
+
+          </div>
+
+          <div class="ng-sf-photo-label">
+            <span>FOUNDER</span>
+            <strong>CHANDAN KUMAR PANDA</strong>
+          </div>
+
+          <div class="ng-sf-photo-index">
+            01 / THE PERSON
+          </div>
+
+          <div class="ng-sf-blue-square"></div>
+
+        </div>
+
+
+        <!-- RIGHT: INTRODUCTION -->
+        <div class="ng-sf-information">
+
+          <div class="ng-sf-intro-label">
+            <span>01</span>
+            <span>INTRODUCING THE FOUNDER</span>
+          </div>
+
+          <p class="ng-sf-hello">
+            HELLO, I'M
+          </p>
+
+          <h3>
+            Chandan
+            <span>Kumar Panda.</span>
+          </h3>
+
+          <div class="ng-sf-designation">
+            <span></span>
+            FOUNDER &amp; OWNER
+          </div>
+
+          <div class="ng-sf-divider"></div>
+
+          <p class="ng-sf-description-main">
+            Building ideas into digital experiences.
+          </p>
+
+          <p class="ng-sf-description">
+            I'm the founder of NextGen Digital Solutions,
+            driven by a passion for technology, creativity
+            and building meaningful digital experiences.
+          </p>
+
+          <p class="ng-sf-description">
+            My vision is to help businesses, startups and
+            individuals strengthen their digital presence
+            through modern websites, creative design and
+            smart digital solutions.
+          </p>
+
+
+          <!-- PERSONAL PHILOSOPHY -->
+          <div class="ng-sf-philosophy">
+
+            <span class="ng-sf-philosophy-line"></span>
+
+            <p>
+              "Every great digital journey begins with
+              an idea and the courage to build it."
+            </p>
+
+          </div>
+
+
+          <!-- CONTACT -->
+          <div class="ng-sf-connect">
+
+            <p class="ng-sf-connect-label">
+              LET'S CONNECT
+            </p>
+
+            <div class="ng-sf-social-links">
+
+              <a href="https://wa.me/918984240820" target="_blank" rel="noopener noreferrer"
+                aria-label="WhatsApp Chandan">
+                <span class="ng-sf-social-icon">
+                  <i class="bi bi-whatsapp"></i>
+                </span>
+                <span>WHATSAPP</span>
+                <i class="bi bi-arrow-up-right ng-sf-arrow"></i>
+              </a>
+
+
+              <a href="https://www.instagram.com/pravatpanda0820/" target="_blank" rel="noopener noreferrer"
+                aria-label="Instagram Chandan">
+                <span class="ng-sf-social-icon">
+                  <i class="bi bi-instagram"></i>
+                </span>
+                <span>INSTAGRAM</span>
+                <i class="bi bi-arrow-up-right ng-sf-arrow"></i>
+              </a>
+
+
+              <a href="mailto:chandankumarpanda0820@gmail.com" aria-label="Email Chandan">
+                <span class="ng-sf-social-icon">
+                  <i class="bi bi-envelope"></i>
+                </span>
+                <span>EMAIL ME</span>
+                <i class="bi bi-arrow-up-right ng-sf-arrow"></i>
+              </a>
+
             </div>
 
           </div>
@@ -785,28 +697,17 @@
       </div>
 
 
-      <!-- STATS -->
+      <!-- BOTTOM SIGNATURE -->
+      <div class="ng-sf-footer">
 
-      <div class="about-stats">
-
-        <div class="about-stat-item">
-          <h3>01<span>+</span></h3>
-          <p>Creative Vision</p>
+        <div class="ng-sf-footer-left">
+          <span>CHANDAN KUMAR PANDA</span>
+          <span>FOUNDER &amp; OWNER — NEXTGEN</span>
         </div>
 
-        <div class="about-stat-item">
-          <h3>06</h3>
-          <p>Digital Services</p>
-        </div>
-
-        <div class="about-stat-item">
-          <h3>100<span>%</span></h3>
-          <p>Commitment</p>
-        </div>
-
-        <div class="about-stat-item">
-          <h3>∞</h3>
-          <p>Ideas & Possibilities</p>
+        <div class="ng-sf-footer-right">
+          ONE VISION.
+          <strong>ENDLESS POSSIBILITIES.</strong>
         </div>
 
       </div>
@@ -815,258 +716,236 @@
 
   </section>
 
-  <!-- =============== ABOUT SECTION END =============== -->
+  <!-- =====================================================
+     END: NEXTGEN FOUNDER — SIGNATURE EXPERIENCE
+===================================================== -->
 
 
-  <!-- =============== SERVICES SECTION START =============== -->
+  <!-- =====================================================
+     START: NEXTGEN SERVICES SECTION
+===================================================== -->
 
-  <section class="services-section" id="services">
+  <section class="ng-services" id="services">
 
     <div class="container">
 
       <!-- SECTION HEADER -->
+      <div class="ng-services-header">
 
-      <div class="services-header">
+        <div>
+          <span class="ng-services-eyebrow">
+            <span></span>
+            WHAT WE DO
+          </span>
 
-        <div class="section-eyebrow">
-          <span></span>
-          WHAT WE DO
+          <h2>
+            OUR DIGITAL
+            <span>SERVICES.</span>
+          </h2>
         </div>
 
-        <h2>
-          OUR DIGITAL
-          <span>EXPERTISE.</span>
-        </h2>
+        <div class="ng-services-intro">
+          <p>
+            We combine creativity, technology and strategy
+            to help businesses build a powerful digital presence.
+          </p>
 
-        <p>
-          NextGen Digital Solutions provides professional digital
-          services in Sambalpur, Odisha, helping businesses build
-          their online presence, connect with customers and grow
-          through innovative technology and creative strategies.
-        </p>
+          <span>CREATIVE IDEAS. DIGITAL RESULTS.</span>
+        </div>
 
       </div>
 
 
       <!-- SERVICES GRID -->
+      <div class="ng-services-grid">
 
-      <div class="row g-4">
 
         <!-- SERVICE 01 -->
+        <article class="ng-service-card">
 
-        <div class="col-lg-4 col-md-6">
-
-          <div class="service-card">
-
-            <div class="service-card-top">
-              <span>01 / DEVELOPMENT</span>
-              <i class="bi bi-arrow-up-right"></i>
-            </div>
-
-            <div class="service-icon">
-              <i class="bi bi-code-slash"></i>
-            </div>
-
-            <h3>Website Development in Sambalpur</h3>
-
-            <p>
-              Get modern, responsive and professional website
-              development solutions in Sambalpur. We create
-              business websites that deliver great user experiences
-              across desktop, tablet and mobile devices.
-            </p>
-
-            <a href="#contact" class="service-link">
-              Explore Service
-              <i class="bi bi-arrow-right"></i>
-            </a>
-
+          <div class="ng-service-top">
+            <span class="ng-service-number">01</span>
+            <i class="bi bi-code-slash"></i>
           </div>
 
-        </div>
+          <h3>Website Development</h3>
+
+          <p>
+            Modern, responsive and professional websites
+            designed to establish your business online.
+          </p>
+
+          <div class="ng-service-tags">
+            <span>Business Website</span>
+            <span>Portfolio</span>
+            <span>Landing Page</span>
+          </div>
+
+          <a href="#contact" class="ng-service-link">
+            EXPLORE SERVICE
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+
+        </article>
 
 
         <!-- SERVICE 02 -->
+        <article class="ng-service-card">
 
-        <div class="col-lg-4 col-md-6">
-
-          <div class="service-card">
-
-            <div class="service-card-top">
-              <span>02 / E-COMMERCE</span>
-              <i class="bi bi-arrow-up-right"></i>
-            </div>
-
-            <div class="service-icon">
-              <i class="bi bi-cart3"></i>
-            </div>
-
-            <h3>E-Commerce Website Development</h3>
-
-            <p>
-              Launch your online store with professional
-              e-commerce website development in Sambalpur.
-              Get attractive designs, smooth shopping experiences
-              and convenient online store features.
-            </p>
-
-            <a href="#contact" class="service-link">
-              Explore Service
-              <i class="bi bi-arrow-right"></i>
-            </a>
-
+          <div class="ng-service-top">
+            <span class="ng-service-number">02</span>
+            <i class="bi bi-cart3"></i>
           </div>
 
-        </div>
+          <h3>E-Commerce Website Development</h3>
+
+          <p>
+            Powerful online stores that help businesses
+            showcase products and sell online.
+          </p>
+
+          <div class="ng-service-tags">
+            <span>Online Store</span>
+            <span>Shopping Cart</span>
+            <span>Payment Integration</span>
+          </div>
+
+          <a href="#contact" class="ng-service-link">
+            EXPLORE SERVICE
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+
+        </article>
 
 
         <!-- SERVICE 03 -->
+        <article class="ng-service-card">
 
-        <div class="col-lg-4 col-md-6">
-
-          <div class="service-card">
-
-            <div class="service-card-top">
-              <span>03 / MARKETING</span>
-              <i class="bi bi-arrow-up-right"></i>
-            </div>
-
-            <div class="service-icon">
-              <i class="bi bi-megaphone"></i>
-            </div>
-
-            <h3>Digital Marketing Services</h3>
-
-            <p>
-              Grow your business with digital marketing solutions
-              in Sambalpur. Build brand awareness, reach relevant
-              audiences and develop an effective online marketing
-              presence.
-            </p>
-
-            <a href="#contact" class="service-link">
-              Explore Service
-              <i class="bi bi-arrow-right"></i>
-            </a>
-
+          <div class="ng-service-top">
+            <span class="ng-service-number">03</span>
+            <i class="bi bi-megaphone"></i>
           </div>
 
-        </div>
+          <h3>Digital Marketing Services</h3>
+
+          <p>
+            Strategic digital promotion to increase brand
+            awareness, reach potential customers and grow online.
+          </p>
+
+          <div class="ng-service-tags">
+            <span>Online Campaigns</span>
+            <span>Lead Generation</span>
+            <span>Brand Promotion</span>
+          </div>
+
+          <a href="#contact" class="ng-service-link">
+            EXPLORE SERVICE
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+
+        </article>
 
 
         <!-- SERVICE 04 -->
+        <article class="ng-service-card">
 
-        <div class="col-lg-4 col-md-6">
-
-          <div class="service-card">
-
-            <div class="service-card-top">
-              <span>04 / SOCIAL MEDIA</span>
-              <i class="bi bi-arrow-up-right"></i>
-            </div>
-
-            <div class="service-icon">
-              <i class="bi bi-instagram"></i>
-            </div>
-
-            <h3>Social Media Management</h3>
-
-            <p>
-              Strengthen your brand's social media presence with
-              creative content, consistent posting and strategic
-              social media management for businesses in Sambalpur.
-            </p>
-
-            <a href="#contact" class="service-link">
-              Explore Service
-              <i class="bi bi-arrow-right"></i>
-            </a>
-
+          <div class="ng-service-top">
+            <span class="ng-service-number">04</span>
+            <i class="bi bi-instagram"></i>
           </div>
 
-        </div>
+          <h3>Social Media Management</h3>
+
+          <p>
+            Build a consistent social media presence through
+            creative content, post planning and account management.
+          </p>
+
+          <div class="ng-service-tags">
+            <span>Instagram</span>
+            <span>Facebook</span>
+            <span>Content Planning</span>
+          </div>
+
+          <a href="#contact" class="ng-service-link">
+            EXPLORE SERVICE
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+
+        </article>
 
 
         <!-- SERVICE 05 -->
+        <article class="ng-service-card">
 
-        <div class="col-lg-4 col-md-6">
-
-          <div class="service-card">
-
-            <div class="service-card-top">
-              <span>05 / SEO</span>
-              <i class="bi bi-arrow-up-right"></i>
-            </div>
-
-            <div class="service-icon">
-              <i class="bi bi-search"></i>
-            </div>
-
-            <h3>SEO Services in Sambalpur</h3>
-
-            <p>
-              Improve your website's visibility with search engine
-              optimization services. Strengthen your online presence
-              and help potential customers discover your business
-              through relevant Google searches.
-            </p>
-
-            <a href="#contact" class="service-link">
-              Explore Service
-              <i class="bi bi-arrow-right"></i>
-            </a>
-
+          <div class="ng-service-top">
+            <span class="ng-service-number">05</span>
+            <i class="bi bi-search"></i>
           </div>
 
-        </div>
+          <h3>SEO Services in Sambalpur</h3>
+
+          <p>
+            Improve your website's search visibility and help
+            potential customers discover your business online.
+          </p>
+
+          <div class="ng-service-tags">
+            <span>On-Page SEO</span>
+            <span>Technical SEO</span>
+            <span>Local SEO</span>
+          </div>
+
+          <a href="#contact" class="ng-service-link">
+            EXPLORE SERVICE
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+
+        </article>
 
 
         <!-- SERVICE 06 -->
+        <article class="ng-service-card">
 
-        <div class="col-lg-4 col-md-6">
-
-          <div class="service-card">
-
-            <div class="service-card-top">
-              <span>06 / BRANDING</span>
-              <i class="bi bi-arrow-up-right"></i>
-            </div>
-
-            <div class="service-icon">
-              <i class="bi bi-palette"></i>
-            </div>
-
-            <h3>Branding & Graphic Design</h3>
-
-            <p>
-              Create a memorable business identity with creative
-              logo design, professional graphics and consistent
-              visual branding solutions for businesses in Sambalpur.
-            </p>
-
-            <a href="#contact" class="service-link">
-              Explore Service
-              <i class="bi bi-arrow-right"></i>
-            </a>
-
+          <div class="ng-service-top">
+            <span class="ng-service-number">06</span>
+            <i class="bi bi-palette"></i>
           </div>
 
-        </div>
+          <h3>Branding &amp; Graphic Design</h3>
+
+          <p>
+            Create a memorable brand identity with professional
+            graphics, logo designs and engaging video content.
+          </p>
+
+          <div class="ng-service-tags">
+            <span>Logo Design</span>
+            <span>Graphic Design</span>
+            <span>Video Making</span>
+          </div>
+
+          <a href="#contact" class="ng-service-link">
+            EXPLORE SERVICE
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+
+        </article>
 
       </div>
 
 
       <!-- BOTTOM CTA -->
+      <div class="ng-services-bottom">
 
-      <div class="services-bottom">
+        <div>
+          <span>HAVE A PROJECT IN MIND?</span>
+          <h3>LET'S BUILD SOMETHING GREAT.</h3>
+        </div>
 
-        <p>
-          HAVE A PROJECT IN MIND?
-          <span>LET'S MAKE IT HAPPEN.</span>
-        </p>
-
-        <a href="#contact">
-          Start Your Project
+        <a href="#contact" class="ng-services-cta">
+          START YOUR PROJECT
           <i class="bi bi-arrow-up-right"></i>
         </a>
 
@@ -1076,245 +955,391 @@
 
   </section>
 
-  <!-- =============== SERVICES SECTION END =============== -->
+  <!-- =====================================================
+     END: NEXTGEN SERVICES SECTION
+===================================================== -->
 
 
-  <!-- =========================================
-     NEXTGEN — OUR PORTFOLIO
-========================================= -->
+  <!-- =====================================================
+     START: NEXTGEN PROJECTS SECTION
+===================================================== -->
 
-  <section class="portfolio-section" id="portfolio">
+  <section class="ng-projects" id="projects">
 
     <div class="container">
 
-      <!-- SECTION HEADER -->
-      <div class="portfolio-header">
+      <!-- TOP HEADER -->
+      <div class="ng-projects-top">
 
-        <span class="portfolio-subtitle">
-          OUR CREATIVE WORK
+        <span class="ng-projects-eyebrow">
+          <span></span>
+          OUR SELECTED WORK
         </span>
 
-        <h2>
-          SELECTED <span>PROJECTS.</span>
-        </h2>
+        <span class="ng-projects-index">
+          PORTFOLIO / 2026
+        </span>
 
-        <p>
-          Explore some of our creative digital projects.
-          Every project represents our passion for design,
-          technology and meaningful digital experiences.
-        </p>
+      </div>
+
+
+      <!-- MAIN HEADING -->
+      <div class="ng-projects-heading">
+
+        <div>
+          <p>IDEAS INTO REALITY.</p>
+
+          <h2>
+            SELECTED
+            <span>PROJECTS.</span>
+          </h2>
+        </div>
+
+        <div class="ng-projects-intro">
+          <p>
+            A collection of digital experiences, creative
+            concepts and websites built with technology,
+            imagination and attention to detail.
+          </p>
+        </div>
 
       </div>
 
 
       <!-- PROJECT GRID -->
-      <div class="row g-4 portfolio-grid">
+      <div class="ng-projects-grid">
+
 
         <!-- PROJECT 01 -->
-        <div class="col-lg-6">
+        <article class="ng-project-card ng-project-featured">
 
-          <div class="project-card">
+          <div class="ng-project-preview ng-preview-nexora">
 
-            <span class="project-number">PROJECT / 01</span>
+            <div class="ng-preview-browser">
+              <div class="ng-preview-browser-top">
+                <span></span>
+                <span></span>
+                <span></span>
+                <small>NEXORA INSTITUTE</small>
+              </div>
 
-            <div class="project-visual">
-              <i class="bi bi-mortarboard-fill"></i>
+              <div class="ng-preview-nexora-content">
+                <span>THE FUTURE STARTS HERE</span>
+
+                <strong>
+                  DON'T JUST LEARN.
+                  <br>
+                  CREATE YOUR FUTURE.
+                </strong>
+
+                <div class="ng-preview-nexora-line"></div>
+
+                <small>
+                  LEARN · CREATE · GROW
+                </small>
+              </div>
             </div>
 
-            <div class="project-info">
-
-              <span class="project-category">
-                EDUCATION WEBSITE
-              </span>
-
-              <h3>Nexora Institute</h3>
-
-              <p>
-                A modern educational institute website
-                designed to present courses, information
-                and digital learning opportunities.
-              </p>
-
-              <a href="https://chandankumarpanda0820-code.github.io/nexora-institute/" target="_blank"
-                rel="noopener noreferrer" class="project-link">
-                VIEW LIVE PROJECT
-                <i class="bi bi-arrow-up-right"></i>
-              </a>
-
-            </div>
+            <span class="ng-project-preview-label">
+              EDUCATION WEBSITE
+            </span>
 
           </div>
 
-        </div>
+          <div class="ng-project-info">
+
+            <div class="ng-project-meta">
+              <span>01 / EDUCATION & TECHNOLOGY</span>
+              <span>2026</span>
+            </div>
+
+            <h3>Nexora Institute</h3>
+
+            <p>
+              A professional institute website designed
+              to showcase educational programs, technology
+              courses and learning opportunities.
+            </p>
+
+            <div class="ng-project-tech">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+            </div>
+
+            <a href="https://chandankumarpanda0820-code.github.io/nexora-institute/" target="_blank"
+              rel="noopener noreferrer" class="ng-project-visit">
+              EXPLORE PROJECT
+              <i class="bi bi-arrow-up-right"></i>
+            </a>
+
+          </div>
+
+        </article>
 
 
         <!-- PROJECT 02 -->
-        <div class="col-lg-6">
+        <article class="ng-project-card">
 
-          <div class="project-card">
+          <div class="ng-project-preview ng-preview-portfolio">
 
-            <span class="project-number">PROJECT / 02</span>
+            <div class="ng-preview-portfolio-content">
 
-            <div class="project-visual">
-              <i class="bi bi-buildings-fill"></i>
-            </div>
+              <span>PERSONAL PORTFOLIO</span>
 
-            <div class="project-info">
-
-              <span class="project-category">
-                REAL ESTATE WEBSITE
-              </span>
-
-              <h3>Luxora Estates</h3>
+              <strong>
+                CHANDAN<span>.</span>
+              </strong>
 
               <p>
-                A luxury real estate website concept
-                featuring an elegant digital experience
-                for premium property discovery.
+                CREATIVE DEVELOPER
               </p>
 
-              <a href="https://chandankumarpanda0820-code.github.io/luxora-estates/" target="_blank"
-                rel="noopener noreferrer" class="project-link">
-                VIEW LIVE PROJECT
-                <i class="bi bi-arrow-up-right"></i>
-              </a>
+              <div class="ng-preview-portfolio-bar"></div>
+
+              <small>
+                DESIGN / DEVELOP / CREATE
+              </small>
 
             </div>
+
+            <span class="ng-project-preview-label">
+              DEVELOPER PORTFOLIO
+            </span>
 
           </div>
 
-        </div>
+          <div class="ng-project-info">
+
+            <div class="ng-project-meta">
+              <span>02 / PERSONAL BRANDING</span>
+              <span>2026</span>
+            </div>
+
+            <h3>Chandan Kumar Panda Portfolio</h3>
+
+            <p>
+              A personal developer portfolio presenting
+              technical skills, education, development
+              journey and selected work.
+            </p>
+
+            <div class="ng-project-tech">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Bootstrap</span>
+            </div>
+
+            <a href="https://chandankumarpanda0820-code.github.io/Portfolio-chandan/" target="_blank"
+              rel="noopener noreferrer" class="ng-project-visit">
+              EXPLORE PROJECT
+              <i class="bi bi-arrow-up-right"></i>
+            </a>
+
+          </div>
+
+        </article>
 
 
         <!-- PROJECT 03 -->
-        <div class="col-lg-6">
+        <article class="ng-project-card">
 
-          <div class="project-card">
+          <div class="ng-project-preview ng-preview-digital">
 
-            <span class="project-number">PROJECT / 03</span>
+            <div class="ng-preview-digital-content">
 
-            <div class="project-visual">
-              <i class="bi bi-heart-pulse-fill"></i>
-            </div>
+              <span>MY DIGITAL UNIVERSE</span>
 
-            <div class="project-info">
+              <strong>
+                THINK.
+                <br>
+                CREATE.
+                <br>
+                BUILD<span>.</span>
+              </strong>
 
-              <span class="project-category">
-                SOCIAL SUPPORT PLATFORM
-              </span>
-
-              <h3>LifeDrop</h3>
-
-              <p>
-                A blood support network concept created
-                to connect donors and support patients
-                affected by sickle cell and thalassemia.
-              </p>
-
-              <a href="https://chandankumarpanda0820-code.github.io/LifeDrop/" target="_blank" rel="noopener noreferrer"
-                class="project-link">
-                VIEW LIVE PROJECT
-                <i class="bi bi-arrow-up-right"></i>
-              </a>
+              <small>
+                CHANDAN'S DIGITAL WORLD
+              </small>
 
             </div>
+
+            <span class="ng-project-preview-label">
+              CREATIVE DIGITAL WEBSITE
+            </span>
 
           </div>
 
-        </div>
+          <div class="ng-project-info">
+
+            <div class="ng-project-meta">
+              <span>03 / CREATIVE DIGITAL EXPERIENCE</span>
+              <span>2026</span>
+            </div>
+
+            <h3>Chandan's Digital World</h3>
+
+            <p>
+              A personal digital headquarters showcasing
+              creative projects, technical interests,
+              ideas and a continuous learning journey.
+            </p>
+
+            <div class="ng-project-tech">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Bootstrap</span>
+            </div>
+
+            <a href="https://chandankumarpanda0820-code.github.io/chandans-digital-world/" target="_blank"
+              rel="noopener noreferrer" class="ng-project-visit">
+              EXPLORE PROJECT
+              <i class="bi bi-arrow-up-right"></i>
+            </a>
+
+          </div>
+
+        </article>
 
 
         <!-- PROJECT 04 -->
-        <div class="col-lg-6">
+        <article class="ng-project-card">
 
-          <div class="project-card">
+          <div class="ng-project-preview ng-preview-luxora">
 
-            <span class="project-number">PROJECT / 04</span>
+            <div class="ng-preview-luxora-content">
 
-            <div class="project-visual">
-              <i class="bi bi-stars"></i>
-            </div>
+              <span>THE ART OF LUXURY</span>
 
-            <div class="project-info">
+              <strong>
+                LUXORA
+                <br>
+                ESTATES.
+              </strong>
 
-              <span class="project-category">
-                PERSONAL BRAND WEBSITE
-              </span>
-
-              <h3>Chandan's Digital World</h3>
-
-              <p>
-                A personal digital space showcasing
-                creative projects, coding notes,
-                achievements and learning journey.
-              </p>
-
-              <a href="https://chandankumarpanda0820-code.github.io/chandans-digital-world/" target="_blank"
-                rel="noopener noreferrer" class="project-link">
-                VIEW LIVE PROJECT
-                <i class="bi bi-arrow-up-right"></i>
-              </a>
+              <small>
+                EXCEPTIONAL PROPERTIES.
+                <br>
+                EXTRAORDINARY LIVING.
+              </small>
 
             </div>
+
+            <span class="ng-project-preview-label">
+              REAL ESTATE WEBSITE
+            </span>
 
           </div>
 
-        </div>
+          <div class="ng-project-info">
+
+            <div class="ng-project-meta">
+              <span>04 / REAL ESTATE</span>
+              <span>2026</span>
+            </div>
+
+            <h3>Luxora Estates</h3>
+
+            <p>
+              A premium real estate website concept
+              showcasing luxury properties, curated
+              residences and property services.
+            </p>
+
+            <div class="ng-project-tech">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Bootstrap</span>
+            </div>
+
+            <a href="https://chandankumarpanda0820-code.github.io/luxora-estates/" target="_blank"
+              rel="noopener noreferrer" class="ng-project-visit">
+              EXPLORE PROJECT
+              <i class="bi bi-arrow-up-right"></i>
+            </a>
+
+          </div>
+
+        </article>
 
 
         <!-- PROJECT 05 -->
-        <div class="col-lg-6">
+        <article class="ng-project-card">
 
-          <div class="project-card">
+          <div class="ng-project-preview ng-preview-lifedrop">
 
-            <span class="project-number">PROJECT / 05</span>
+            <div class="ng-preview-lifedrop-content">
 
-            <div class="project-visual">
-              <i class="bi bi-code-slash"></i>
-            </div>
+              <span>EVERY DROP MATTERS</span>
 
-            <div class="project-info">
+              <strong>
+                GIVE BLOOD.
+                <br>
+                <span>SAVE LIVES.</span>
+              </strong>
 
-              <span class="project-category">
-                DEVELOPER PORTFOLIO
-              </span>
-
-              <h3>Personal Portfolio</h3>
-
-              <p>
-                A personal developer portfolio presenting
-                skills, projects, education and professional
-                journey through a modern web experience.
-              </p>
-
-              <a href="https://chandankumarpanda0820-code.github.io/Portfolio-chandan/" target="_blank"
-                rel="noopener noreferrer" class="project-link">
-                VIEW LIVE PROJECT
-                <i class="bi bi-arrow-up-right"></i>
-              </a>
+              <small>
+                LIFEDROP — BLOOD SUPPORT NETWORK
+              </small>
 
             </div>
+
+            <span class="ng-project-preview-label">
+              SOCIAL IMPACT PLATFORM
+            </span>
 
           </div>
 
-        </div>
+          <div class="ng-project-info">
+
+            <div class="ng-project-meta">
+              <span>05 / SOCIAL IMPACT</span>
+              <span>2026</span>
+            </div>
+
+            <h3>LifeDrop</h3>
+
+            <p>
+              A blood support network concept designed
+              to connect patients with voluntary donors
+              and authorized blood banks.
+            </p>
+
+            <div class="ng-project-tech">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Bootstrap</span>
+            </div>
+
+            <a href="https://chandankumarpanda0820-code.github.io/LifeDrop/" target="_blank" rel="noopener noreferrer"
+              class="ng-project-visit">
+              EXPLORE PROJECT
+              <i class="bi bi-arrow-up-right"></i>
+            </a>
+
+          </div>
+
+        </article>
+
 
       </div>
 
 
-      <!-- BOTTOM CTA -->
-      <div class="portfolio-bottom">
+      <!-- BOTTOM STATEMENT -->
+      <div class="ng-projects-footer">
 
-        <h3>HAVE A PROJECT IN MIND?</h3>
+        <div>
+          <span>BUILT WITH CREATIVITY.</span>
+          <strong>POWERED BY TECHNOLOGY.</strong>
+        </div>
 
-        <p>
-          Let's turn your idea into something extraordinary.
-        </p>
-
-        <a href="#contact" class="btn btn-primary">
-          START YOUR PROJECT
-          <i class="bi bi-arrow-right ms-2"></i>
-        </a>
+        <span class="ng-projects-footer-number">
+          05 SELECTED PROJECTS
+        </span>
 
       </div>
 
@@ -1322,465 +1347,523 @@
 
   </section>
 
+  <!-- =====================================================
+     END: NEXTGEN PROJECTS SECTION
+===================================================== -->
 
-  <!-- =========================================
-     NEXTGEN — PRICING SECTION
-========================================= -->
 
-  <section class="pricing-section" id="pricing">
+  <!-- START: NEXTGEN CATALOGUE SECTION -->
+
+  <section class="ng-catalogue" id="catalogue">
+
+    <div class="container">
+
+      <div class="ng-cat-header">
+        <span class="ng-cat-label">EXPLORE OUR CATALOGUE / 006</span>
+
+        <h2>
+          OUR DIGITAL
+          <span>CATALOGUE.</span>
+        </h2>
+
+        <p>
+          Explore the services and digital solutions offered by
+          NextGen Digital Solutions. Discover how we can help
+          your business grow in the digital world.
+        </p>
+      </div>
+
+      <div class="ng-cat-content">
+
+        <!-- Catalogue Information -->
+        <div class="ng-cat-info">
+
+          <span class="ng-cat-tag">OFFICIAL COMPANY CATALOGUE</span>
+
+          <h3>
+            Everything Your Business Needs,
+            <span>In One Place.</span>
+          </h3>
+
+          <p>
+            Explore our official client service catalogue to
+            understand our services, solutions and offerings.
+            Find the right digital solution for your business.
+          </p>
+
+          <div class="ng-cat-details">
+            <div>
+              <span class="ng-cat-detail-icon">
+                <i class="bi bi-file-earmark-pdf"></i>
+              </span>
+              <div>
+                <strong>PDF Catalogue</strong>
+                <small>Official digital document</small>
+              </div>
+            </div>
+
+            <div>
+              <span class="ng-cat-detail-icon">
+                <i class="bi bi-eye"></i>
+              </span>
+              <div>
+                <strong>Easy Preview</strong>
+                <small>View directly on our website</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="ng-cat-actions">
+
+            <a href="https://raw.githubusercontent.com/chandankumarpanda0820-code/nextgen-digital-solutions/main/NextGen_Digital_Solutions_Client_Service_Catalogue.pdf"
+              target="_blank" rel="noopener noreferrer" class="ng-cat-btn ng-cat-btn-primary">
+              <i class="bi bi-eye"></i>
+              View Full Catalogue
+            </a>
+
+            <a href="https://raw.githubusercontent.com/chandankumarpanda0820-code/nextgen-digital-solutions/main/NextGen_Digital_Solutions_Client_Service_Catalogue.pdf"
+              download="NextGen_Digital_Solutions_Client_Service_Catalogue.pdf" class="ng-cat-btn ng-cat-btn-outline">
+              <i class="bi bi-download"></i>
+              Download PDF
+            </a>
+
+          </div>
+
+          <span class="ng-cat-note">
+            <i class="bi bi-shield-check"></i>
+            Official NextGen Digital Solutions Document
+          </span>
+
+        </div>
+
+        <!-- PDF Preview -->
+        <div class="ng-cat-preview">
+
+          <div class="ng-cat-preview-top">
+            <span>
+              <i class="bi bi-file-earmark-pdf"></i>
+              CATALOGUE PREVIEW
+            </span>
+            <span class="ng-cat-live-dot">LIVE DOCUMENT</span>
+          </div>
+
+          <div class="ng-cat-pdf-frame">
+
+            <iframe
+              src="https://docs.google.com/gview?embedded=1&url=https%3A%2F%2Fraw.githubusercontent.com%2Fchandankumarpanda0820-code%2Fnextgen-digital-solutions%2Fmain%2FNextGen_Digital_Solutions_Client_Service_Catalogue.pdf"
+              title="NextGen Digital Solutions Client Service Catalogue" loading="lazy">
+            </iframe>
+
+          </div>
+
+          <div class="ng-cat-preview-footer">
+            <span>NextGen Digital Solutions</span>
+            <span>PDF DOCUMENT</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- END: NEXTGEN CATALOGUE SECTION -->
+
+
+  <!-- =====================================================
+     START: NEXTGEN GET IN TOUCH SECTION
+===================================================== -->
+
+  <section class="ng-contact" id="contact">
 
     <div class="container">
 
       <!-- SECTION HEADER -->
-      <div class="pricing-header">
+      <div class="ng-contact-header">
 
-        <span class="pricing-subtitle">
-          SIMPLE & TRANSPARENT PRICING
+        <span class="ng-contact-label">
+          LET'S CONNECT / 007
         </span>
 
         <h2>
-          INVEST IN YOUR
-          <span>DIGITAL GROWTH.</span>
+          LET'S START
+          <span>SOMETHING GREAT.</span>
         </h2>
 
         <p>
-          Flexible digital solutions designed to help
-          businesses build their online presence and grow.
+          Have an idea, a project or a business goal?
+          Let's discuss how NextGen Digital Solutions
+          can help you bring it to life.
         </p>
 
       </div>
 
-
-      <!-- WEBSITE DEVELOPMENT -->
-      <div class="pricing-category">
-
-        <div class="pricing-category-heading">
-          <span>01 / WEBSITE DEVELOPMENT</span>
-          <h3>Build Your Digital Presence.</h3>
-        </div>
-
-        <div class="row g-4">
-
-          <!-- STARTER -->
-          <div class="col-lg-4 col-md-6">
-
-            <div class="pricing-card">
-
-              <span class="pricing-plan">STARTER</span>
-
-              <h4>Starter Website</h4>
-
-              <p class="pricing-description">
-                Perfect for individuals and small businesses
-                starting their online journey.
-              </p>
-
-              <div class="pricing-price">
-                <span>₹</span>4,999
-                <small>Starting at</small>
-              </div>
-
-              <div class="pricing-divider"></div>
-
-              <ul class="pricing-features">
-                <li><i class="bi bi-check-circle-fill"></i> Up to 5 Pages</li>
-                <li><i class="bi bi-check-circle-fill"></i> Mobile Responsive Design</li>
-                <li><i class="bi bi-check-circle-fill"></i> Contact Form</li>
-                <li><i class="bi bi-check-circle-fill"></i> Basic SEO Setup</li>
-                <li><i class="bi bi-check-circle-fill"></i> Social Media Links</li>
-              </ul>
-
-              <a href="#contact" class="pricing-btn">
-                GET STARTED
-                <i class="bi bi-arrow-up-right"></i>
-              </a>
-
-            </div>
-
-          </div>
-
-
-          <!-- BUSINESS -->
-          <div class="col-lg-4 col-md-6">
-
-            <div class="pricing-card pricing-featured">
-
-              <span class="pricing-popular">MOST POPULAR</span>
-
-              <span class="pricing-plan">BUSINESS</span>
-
-              <h4>Business Website</h4>
-
-              <p class="pricing-description">
-                A professional website for growing businesses
-                looking to attract more customers.
-              </p>
-
-              <div class="pricing-price">
-                <span>₹</span>9,999
-                <small>Starting at</small>
-              </div>
-
-              <div class="pricing-divider"></div>
-
-              <ul class="pricing-features">
-                <li><i class="bi bi-check-circle-fill"></i> Up to 10 Pages</li>
-                <li><i class="bi bi-check-circle-fill"></i> Premium Responsive Design</li>
-                <li><i class="bi bi-check-circle-fill"></i> Advanced Contact Form</li>
-                <li><i class="bi bi-check-circle-fill"></i> SEO Friendly Structure</li>
-                <li><i class="bi bi-check-circle-fill"></i> WhatsApp Integration</li>
-                <li><i class="bi bi-check-circle-fill"></i> Social Media Integration</li>
-              </ul>
-
-              <a href="#contact" class="pricing-btn">
-                GET STARTED
-                <i class="bi bi-arrow-up-right"></i>
-              </a>
-
-            </div>
-
-          </div>
-
-
-          <!-- PREMIUM -->
-          <div class="col-lg-4 col-md-6">
-
-            <div class="pricing-card">
-
-              <span class="pricing-plan">PREMIUM</span>
-
-              <h4>Premium Website</h4>
-
-              <p class="pricing-description">
-                Advanced digital experiences for brands
-                that want more powerful functionality.
-              </p>
-
-              <div class="pricing-price">
-                <span>₹</span>17,999
-                <small>Starting at</small>
-              </div>
-
-              <div class="pricing-divider"></div>
-
-              <ul class="pricing-features">
-                <li><i class="bi bi-check-circle-fill"></i> Custom Page Structure</li>
-                <li><i class="bi bi-check-circle-fill"></i> Premium UI/UX Design</li>
-                <li><i class="bi bi-check-circle-fill"></i> Advanced Animations</li>
-                <li><i class="bi bi-check-circle-fill"></i> Advanced SEO Setup</li>
-                <li><i class="bi bi-check-circle-fill"></i> Custom Functionality</li>
-                <li><i class="bi bi-check-circle-fill"></i> Priority Support</li>
-              </ul>
-
-              <a href="#contact" class="pricing-btn">
-                GET STARTED
-                <i class="bi bi-arrow-up-right"></i>
-              </a>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- DIGITAL MARKETING -->
-      <div class="pricing-category marketing-pricing">
-
-        <div class="pricing-category-heading">
-          <span>02 / DIGITAL MARKETING</span>
-          <h3>Grow Your Brand Online.</h3>
-        </div>
-
-        <div class="row g-4">
-
-          <!-- BASIC MARKETING -->
-          <div class="col-lg-4 col-md-6">
-
-            <div class="pricing-card">
-
-              <span class="pricing-plan">BASIC</span>
-
-              <h4>Social Starter</h4>
-
-              <p class="pricing-description">
-                Build a consistent social media presence
-                for your business.
-              </p>
-
-              <div class="pricing-price">
-                <span>₹</span>2,999
-                <small>Per month / Starting at</small>
-              </div>
-
-              <div class="pricing-divider"></div>
-
-              <ul class="pricing-features">
-                <li><i class="bi bi-check-circle-fill"></i> Social Media Management</li>
-                <li><i class="bi bi-check-circle-fill"></i> Basic Creative Posts</li>
-                <li><i class="bi bi-check-circle-fill"></i> Content Planning</li>
-                <li><i class="bi bi-check-circle-fill"></i> Monthly Performance Summary</li>
-              </ul>
-
-              <a href="#contact" class="pricing-btn">
-                CHOOSE PLAN
-                <i class="bi bi-arrow-up-right"></i>
-              </a>
-
-            </div>
-
-          </div>
-
-
-          <!-- GROWTH MARKETING -->
-          <div class="col-lg-4 col-md-6">
-
-            <div class="pricing-card pricing-featured">
-
-              <span class="pricing-popular">RECOMMENDED</span>
-
-              <span class="pricing-plan">GROWTH</span>
-
-              <h4>Business Growth</h4>
-
-              <p class="pricing-description">
-                Improve brand visibility and engage
-                with your target audience.
-              </p>
-
-              <div class="pricing-price">
-                <span>₹</span>4,999
-                <small>Per month / Starting at</small>
-              </div>
-
-              <div class="pricing-divider"></div>
-
-              <ul class="pricing-features">
-                <li><i class="bi bi-check-circle-fill"></i> Social Media Management</li>
-                <li><i class="bi bi-check-circle-fill"></i> Creative Content Design</li>
-                <li><i class="bi bi-check-circle-fill"></i> Basic SEO Activities</li>
-                <li><i class="bi bi-check-circle-fill"></i> Content Strategy</li>
-                <li><i class="bi bi-check-circle-fill"></i> Monthly Reporting</li>
-              </ul>
-
-              <a href="#contact" class="pricing-btn">
-                CHOOSE PLAN
-                <i class="bi bi-arrow-up-right"></i>
-              </a>
-
-            </div>
-
-          </div>
-
-
-          <!-- PREMIUM MARKETING -->
-          <div class="col-lg-4 col-md-6">
-
-            <div class="pricing-card">
-
-              <span class="pricing-plan">PREMIUM</span>
-
-              <h4>Brand Accelerator</h4>
-
-              <p class="pricing-description">
-                A broader digital marketing solution
-                for ambitious brands.
-              </p>
-
-              <div class="pricing-price">
-                <span>₹</span>7,999
-                <small>Per month / Starting at</small>
-              </div>
-
-              <div class="pricing-divider"></div>
-
-              <ul class="pricing-features">
-                <li><i class="bi bi-check-circle-fill"></i> Advanced Social Media Management</li>
-                <li><i class="bi bi-check-circle-fill"></i> Premium Creative Content</li>
-                <li><i class="bi bi-check-circle-fill"></i> SEO Optimization</li>
-                <li><i class="bi bi-check-circle-fill"></i> Brand Strategy</li>
-                <li><i class="bi bi-check-circle-fill"></i> Performance Reporting</li>
-                <li><i class="bi bi-check-circle-fill"></i> Marketing Consultation</li>
-              </ul>
-
-              <a href="#contact" class="pricing-btn">
-                CHOOSE PLAN
-                <i class="bi bi-arrow-up-right"></i>
-              </a>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- CUSTOM PACKAGE -->
-      <div class="pricing-custom">
-
-        <div>
-          <span>NEED SOMETHING DIFFERENT?</span>
-          <h3>Let's Build a Custom Package.</h3>
-          <p>
-            Tell us your requirements and get a solution
-            tailored to your business goals.
+      <div class="ng-contact-layout">
+
+        <!-- LEFT: CONTACT INFORMATION -->
+        <div class="ng-contact-info">
+
+          <span class="ng-contact-small-title">
+            GET IN TOUCH WITH US
+          </span>
+
+          <h3>
+            Let's Talk About
+            <span>Your Next Project.</span>
+          </h3>
+
+          <p class="ng-contact-description">
+            We're ready to understand your requirements
+            and help you find the right digital solution
+            for your business.
           </p>
+
+          <!-- WHATSAPP -->
+          <a href="https://wa.me/918984240820" target="_blank" rel="noopener noreferrer" class="ng-contact-item">
+
+            <span class="ng-contact-icon">
+              <i class="bi bi-whatsapp"></i>
+            </span>
+
+            <span class="ng-contact-item-text">
+              <small>CHAT WITH US</small>
+              <strong>+91 89842 40820</strong>
+            </span>
+
+            <i class="bi bi-arrow-up-right ng-contact-arrow"></i>
+
+          </a>
+
+          <!-- PHONE -->
+          <a href="tel:+918984240820" class="ng-contact-item">
+
+            <span class="ng-contact-icon">
+              <i class="bi bi-telephone"></i>
+            </span>
+
+            <span class="ng-contact-item-text">
+              <small>CALL US</small>
+              <strong>+91 89842 40820</strong>
+            </span>
+
+            <i class="bi bi-arrow-up-right ng-contact-arrow"></i>
+
+          </a>
+
+          <!-- EMAIL -->
+          <a href="mailto:chandankumarpanda0820@gmail.com" class="ng-contact-item">
+
+            <span class="ng-contact-icon">
+              <i class="bi bi-envelope"></i>
+            </span>
+
+            <span class="ng-contact-item-text">
+              <small>EMAIL US</small>
+              <strong>chandankumarpanda0820@gmail.com</strong>
+            </span>
+
+            <i class="bi bi-arrow-up-right ng-contact-arrow"></i>
+
+          </a>
+
+          <!-- LOCATION -->
+          <div class="ng-contact-item ng-contact-location">
+
+            <span class="ng-contact-icon">
+              <i class="bi bi-geo-alt"></i>
+            </span>
+
+            <span class="ng-contact-item-text">
+              <small>OUR LOCATION</small>
+              <strong>Sambalpur, Odisha, India</strong>
+            </span>
+
+          </div>
+
         </div>
 
-        <a href="#contact" class="pricing-custom-btn">
-          REQUEST A CUSTOM QUOTE
-          <i class="bi bi-arrow-up-right"></i>
-        </a>
+        <!-- RIGHT: INQUIRY CARD -->
+        <div class="ng-contact-card">
+
+          <div class="ng-contact-card-top">
+            <span>PROJECT INQUIRY</span>
+            <span class="ng-contact-card-number">NG / 007</span>
+          </div>
+
+          <div class="ng-contact-card-content">
+
+            <div class="ng-contact-card-icon">
+              <i class="bi bi-send"></i>
+            </div>
+
+            <h3>
+              Have a Project
+              <span>in Mind?</span>
+            </h3>
+
+            <p>
+              Tell us about your business, project requirements
+              and goals. Submit your inquiry and our team
+              can get in touch with you.
+            </p>
+
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfsRbX1Iihn8zd1axw14-dt2F0qeviMpRTspT46f6vhUB4D2g/viewform?pli=1"
+              target="_blank" rel="noopener noreferrer" class="ng-contact-submit">
+
+              SEND YOUR INQUIRY
+              <i class="bi bi-arrow-up-right"></i>
+
+            </a>
+
+            <span class="ng-contact-card-note">
+              <i class="bi bi-shield-check"></i>
+              Let's build something meaningful together.
+            </span>
+
+          </div>
+
+          <div class="ng-contact-card-bottom">
+            <span>NEXTGEN DIGITAL SOLUTIONS</span>
+            <span>POWERING YOUR DIGITAL FUTURE</span>
+          </div>
+
+        </div>
 
       </div>
 
-
-      <!-- PRICING NOTE -->
-      <p class="pricing-note">
-        * All prices are starting prices. Final quotation depends
-        on project requirements, features and scope. Domain,
-        hosting, paid advertising and third-party services may
-        involve additional charges.
-      </p>
+      <!-- BOTTOM MESSAGE -->
+      <div class="ng-contact-bottom">
+        <span>HAVE AN IDEA?</span>
+        <strong>LET'S MAKE IT HAPPEN.</strong>
+      </div>
 
     </div>
 
   </section>
 
+  <!-- =====================================================
+     END: NEXTGEN GET IN TOUCH SECTION
+===================================================== -->
 
 
-  <!-- =========================================
-     NEXTGEN — CONTACT SECTION
-========================================= -->
+  <!-- =====================================================
+     START: NEXTGEN DIGITAL SOLUTIONS FOOTER
+     SPLIT SIGNATURE DESIGN
+===================================================== -->
 
-  <section class="contact-section" id="contact">
+  <footer class="ng-split-footer" id="footer">
 
-    <div class="container">
+    <!-- ================================
+       UPPER WHITE FOOTER
+  ================================= -->
 
-      <!-- HEADER -->
-      <div class="contact-header">
+    <div class="ng-footer-main">
 
-        <span class="contact-subtitle">
-          LET'S CONNECT
-        </span>
+      <div class="container">
 
-        <h2>
-          HAVE AN IDEA?
-          <span>LET'S BUILD IT.</span>
-        </h2>
+        <!-- BRAND INTRO -->
+        <div class="ng-footer-brand">
 
-        <p>
-          Looking for a reliable website development and digital marketing
-          agency in Sambalpur, Odisha? Tell us about your project.
-          Let's build something extraordinary together.
-        </p>
+          <a href="#home" class="ng-footer-logo">
+            <img src="images/logo.png" alt="NextGen Digital Solutions Logo" width="160" height="auto" loading="lazy"
+              decoding="async">
+          </a>
 
-      </div>
+          <p>
+            NextGen Digital Solutions is committed to helping
+            businesses grow through modern websites, creative
+            design, digital marketing and innovative technology.
+            We turn ideas into meaningful digital experiences.
+          </p>
+
+          <span class="ng-footer-tagline">
+            WHERE SKILLS MEET DIGITAL OPPORTUNITY.
+          </span>
+
+        </div>
 
 
-      <div class="row g-5 align-items-start">
+        <!-- FOOTER COLUMNS -->
+        <div class="ng-footer-grid">
 
-        <!-- LEFT CONTACT INFORMATION -->
-        <div class="col-lg-5">
 
-          <div class="contact-info">
+          <!-- COLUMN 1: QUICK LINKS -->
+          <div class="ng-footer-column">
 
-            <span class="contact-small-title">
-              GET IN TOUCH
+            <span class="ng-footer-heading">
+              EXPLORE
             </span>
 
-            <h3>
-              Let's Start a
-              <span>Conversation.</span>
-            </h3>
+            <h3>Quick Links</h3>
 
-            <p>
-              Whether you need website development, e-commerce solutions,
-              SEO services, digital marketing or a complete branding solution
-              in Sambalpur, Odisha, we're ready to help your business grow.
-            </p>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#founder">Founder</a></li>
+              <li><a href="#services">Our Services</a></li>
+              <li><a href="#projects">Our Projects</a></li>
+              <li><a href="#catalogue">Digital Catalogue</a></li>
+              <li><a href="#contact">Get in Touch</a></li>
+            </ul>
+
+          </div>
+
+
+          <!-- COLUMN 2: SERVICES -->
+          <div class="ng-footer-column">
+
+            <span class="ng-footer-heading">
+              WHAT WE DO
+            </span>
+
+            <h3>Our Services</h3>
+
+            <ul>
+              <li>
+                <a href="#services">Website Development</a>
+              </li>
+
+              <li>
+                <a href="#services">E-Commerce Development</a>
+              </li>
+
+              <li>
+                <a href="#services">Digital Marketing</a>
+              </li>
+
+              <li>
+                <a href="#services">Social Media Management</a>
+              </li>
+
+              <li>
+                <a href="#services">SEO Services</a>
+              </li>
+
+              <li>
+                <a href="#services">Branding & Graphic Design</a>
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <!-- COLUMN 3: CONTACT & SOCIAL -->
+          <div class="ng-footer-column ng-footer-contact">
+
+            <span class="ng-footer-heading">
+              LET'S CONNECT
+            </span>
+
+            <h3>Contact Us</h3>
 
 
             <!-- WHATSAPP -->
-            <a href="https://wa.me/918984240820" target="_blank" rel="noopener noreferrer" class="contact-detail">
+            <a href="https://wa.me/918984240820" target="_blank" rel="noopener noreferrer"
+              class="ng-footer-contact-link">
 
-              <div class="contact-icon">
-                <i class="bi bi-whatsapp"></i>
-              </div>
+              <i class="bi bi-whatsapp"></i>
+              <span>+91 89842 40820</span>
 
-              <div>
-                <span>WHATSAPP US</span>
-                <h4>+91 89842 40820</h4>
-              </div>
+            </a>
 
-              <i class="bi bi-arrow-up-right contact-arrow"></i>
+
+            <!-- CALL -->
+            <a href="tel:+918984240820" class="ng-footer-contact-link">
+
+              <i class="bi bi-telephone-fill"></i>
+              <span>Call Us</span>
 
             </a>
 
 
             <!-- EMAIL -->
-            <a href="mailto:chandankumarpanda0820@gmail.com" class="contact-detail">
+            <a href="mailto:chandankumarpanda0820@gmail.com" class="ng-footer-contact-link">
 
-              <div class="contact-icon">
-                <i class="bi bi-envelope"></i>
-              </div>
-
-              <div>
-                <span>EMAIL US</span>
-                <h4>chandankumarpanda0820@gmail.com</h4>
-              </div>
-
-              <i class="bi bi-arrow-up-right contact-arrow"></i>
+              <i class="bi bi-envelope"></i>
+              <span>chandankumarpanda0820@gmail.com</span>
 
             </a>
 
 
             <!-- LOCATION -->
-            <a href="https://www.google.com/maps/search/?api=1&query=House+No+1%2C+Lane+No+1%2C+Near+Small+Hanuman+Temple%2C+Mahaveerpara%2C+Dhanupali%2C+Sambalpur%2C+Odisha"
-              target="_blank" rel="noopener noreferrer" class="contact-detail">
+            <div class="ng-footer-contact-link ng-footer-address">
 
-              <div class="contact-icon">
-                <i class="bi bi-geo-alt"></i>
-              </div>
+              <i class="bi bi-geo-alt"></i>
 
-              <div>
-                <span>OUR LOCATION</span>
-                <h4>Sambalpur, Odisha, India</h4>
-              </div>
-
-              <i class="bi bi-arrow-up-right contact-arrow"></i>
-
-            </a>
-
-
-            <!-- WORK MODE -->
-            <div class="contact-detail">
-
-              <div class="contact-icon">
-                <i class="bi bi-globe2"></i>
-              </div>
-
-              <div>
-                <span>WORKING MODE</span>
-                <h4>Local & Online Projects</h4>
-              </div>
+              <span>
+                Sambalpur, Odisha, India
+              </span>
 
             </div>
 
 
-            <!-- RESPONSE MESSAGE -->
-            <div class="contact-note">
+            <!-- SOCIAL MEDIA -->
+            <div class="ng-footer-social-area">
 
-              <i class="bi bi-lightning-charge-fill"></i>
+              <span class="ng-footer-social-title">
+                FOLLOW OUR JOURNEY
+              </span>
 
-              <p>
-                Have a project in mind? Send your inquiry
-                and let's discuss your next big idea.
-              </p>
+              <div class="ng-footer-socials">
+
+
+                <!-- INSTAGRAM -->
+                <a href="https://www.instagram.com/nextgendigitalsolutions.sbp/" target="_blank"
+                  rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+
+                  <i class="bi bi-instagram"></i>
+
+                </a>
+
+
+                <!-- TELEGRAM -->
+                <a href="https://t.me/nextgendigitalsolutionssbp" target="_blank" rel="noopener noreferrer"
+                  aria-label="Telegram" title="Telegram">
+
+                  <i class="bi bi-telegram"></i>
+
+                </a>
+
+
+                <!-- LINKEDIN -->
+                <a href="https://www.linkedin.com/in/chandan-kumar-panda/" target="_blank" rel="noopener noreferrer"
+                  aria-label="LinkedIn" title="LinkedIn">
+
+                  <i class="bi bi-linkedin"></i>
+
+                </a>
+
+
+                <!-- WHATSAPP -->
+                <a href="https://wa.me/918984240820" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+                  title="WhatsApp">
+
+                  <i class="bi bi-whatsapp"></i>
+
+                </a>
+
+
+                <!-- CALL -->
+                <a href="tel:+918984240820" aria-label="Call NextGen" title="Call Us">
+
+                  <i class="bi bi-telephone-fill"></i>
+
+                </a>
+
+
+                <!-- FACEBOOK -->
+                <a href="https://www.facebook.com/share/18sdx9C7yx/" target="_blank" rel="noopener noreferrer"
+                  aria-label="Facebook" title="Facebook">
+
+                  <i class="bi bi-facebook"></i>
+
+                </a>
+
+
+              </div>
 
             </div>
 
@@ -1789,191 +1872,26 @@
         </div>
 
 
-        <!-- RIGHT CONTACT FORM -->
-        <div class="col-lg-7">
+        <!-- PROJECT CTA -->
+        <div class="ng-footer-cta">
 
-          <div class="contact-form-wrapper">
+          <div class="ng-footer-cta-text">
 
-            <div class="contact-form-heading">
+            <span>HAVE A PROJECT IN MIND?</span>
 
-              <span>PROJECT INQUIRY / 01</span>
-
-              <h3>Tell Us About Your Project.</h3>
-
-              <p>
-                Fill in the details below. Your inquiry
-                will be sent directly to our WhatsApp.
-              </p>
-
-            </div>
-
-
-            <form id="whatsappContactForm">
-
-              <div class="row g-4">
-
-                <!-- NAME -->
-                <div class="col-md-6">
-
-                  <label for="contactName">FULL NAME *</label>
-
-                  <input type="text" id="contactName" name="name" placeholder="Enter your full name" required>
-
-                </div>
-
-
-                <!-- PHONE -->
-                <div class="col-md-6">
-
-                  <label for="contactPhone">PHONE NUMBER *</label>
-
-                  <input type="tel" id="contactPhone" name="phone" placeholder="Enter your phone number"
-                    pattern="[0-9]{10}" maxlength="10" required>
-
-                </div>
-
-
-                <!-- EMAIL -->
-                <div class="col-md-6">
-
-                  <label for="contactEmail">EMAIL ADDRESS *</label>
-
-                  <input type="email" id="contactEmail" name="email" placeholder="Enter your email address" required>
-
-                </div>
-
-
-                <!-- BUSINESS -->
-                <div class="col-md-6">
-
-                  <label for="businessName">BUSINESS NAME</label>
-
-                  <input type="text" id="businessName" name="business" placeholder="Your business name">
-
-                </div>
-
-
-                <!-- SERVICE -->
-                <div class="col-md-6">
-
-                  <label for="contactService">REQUIRED SERVICE *</label>
-
-                  <select id="contactService" name="service" required>
-
-                    <option value="">Select a service</option>
-
-                    <option value="Website Development">
-                      Website Development
-                    </option>
-
-                    <option value="E-Commerce Development">
-                      E-Commerce Development
-                    </option>
-
-                    <option value="Digital Marketing">
-                      Digital Marketing
-                    </option>
-
-                    <option value="Social Media Management">
-                      Social Media Management
-                    </option>
-
-                    <option value="SEO Optimization">
-                      SEO Optimization
-                    </option>
-
-                    <option value="Branding & Graphic Design">
-                      Branding & Graphic Design
-                    </option>
-
-                    <option value="Complete Digital Solution">
-                      Complete Digital Solution
-                    </option>
-
-                    <option value="Other">
-                      Other
-                    </option>
-
-                  </select>
-
-                </div>
-
-
-                <!-- BUDGET -->
-                <div class="col-md-6">
-
-                  <label for="contactBudget">ESTIMATED BUDGET</label>
-
-                  <select id="contactBudget" name="budget">
-
-                    <option value="">Select your budget</option>
-
-                    <option value="Below ₹5,000">
-                      Below ₹5,000
-                    </option>
-
-                    <option value="₹5,000 - ₹10,000">
-                      ₹5,000 - ₹10,000
-                    </option>
-
-                    <option value="₹10,000 - ₹20,000">
-                      ₹10,000 - ₹20,000
-                    </option>
-
-                    <option value="₹20,000 - ₹50,000">
-                      ₹20,000 - ₹50,000
-                    </option>
-
-                    <option value="Above ₹50,000">
-                      Above ₹50,000
-                    </option>
-
-                    <option value="Not decided yet">
-                      Not decided yet
-                    </option>
-
-                  </select>
-
-                </div>
-
-
-                <!-- MESSAGE -->
-                <div class="col-12">
-
-                  <label for="contactMessage">
-                    PROJECT DETAILS *
-                  </label>
-
-                  <textarea id="contactMessage" name="message" rows="5"
-                    placeholder="Tell us about your project requirements..." required></textarea>
-
-                </div>
-
-
-                <!-- SUBMIT -->
-                <div class="col-12">
-
-                  <button type="submit" class="contact-submit-btn">
-
-                    SEND INQUIRY ON WHATSAPP
-
-                    <i class="bi bi-whatsapp"></i>
-
-                  </button>
-
-                  <p class="contact-form-note">
-                    <i class="bi bi-shield-check"></i>
-                    Your details will be shared with NextGen
-                    Digital Solutions through WhatsApp.
-                  </p>
-
-                </div>
-
-              </div>
-
-            </form>
+            <h3>
+              Let's create something extraordinary.
+            </h3>
 
           </div>
+
+          <a href="#contact" class="ng-footer-cta-btn">
+
+            START YOUR PROJECT
+
+            <i class="bi bi-arrow-up-right"></i>
+
+          </a>
 
         </div>
 
@@ -1981,187 +1899,66 @@
 
     </div>
 
-  </section>
+
+    <!-- ================================
+       LOWER BLACK SIGNATURE FOOTER
+  ================================= -->
+
+    <div class="ng-footer-signature">
+
+      <div class="container">
 
 
-  <!-- =========================================
-     NEXTGEN — PREMIUM FOOTER
-========================================= -->
+        <!-- SIGNATURE TOP -->
+        <div class="ng-footer-signature-top">
 
-  <footer class="nextgen-footer">
+          <span>
+            THE DIGITAL FUTURE STARTS HERE.
+          </span>
 
-    <div class="container">
+          <span>
+            NEXTGEN DIGITAL SOLUTIONS / INDIA
+          </span>
 
-      <!-- MAIN FOOTER -->
-      <div class="row g-5 footer-main">
+        </div>
 
-        <!-- BRAND -->
-        <div class="col-lg-4 col-md-6">
 
-          <a href="#home" class="footer-brand">
+        <!-- OVERSIZED BRAND NAME -->
+        <div class="ng-footer-big-text">
 
-            <span class="footer-logo-icon">
-              <i class="bi bi-lightning-charge-fill"></i>
-            </span>
+          NEXT<span>GEN.</span>
 
-            <span>
-              NEXTGEN
-              <small>DIGITAL SOLUTIONS</small>
-            </span>
+        </div>
 
-          </a>
 
-          <p class="footer-description">
-            NextGen Digital Solutions is a digital agency based in
-            Sambalpur, Odisha, helping businesses grow through
-            professional website development, e-commerce solutions,
-            SEO, digital marketing and creative branding.
+        <!-- BLUE SIGNATURE LINE -->
+        <div class="ng-footer-signature-line"></div>
+
+
+        <!-- FOOTER BOTTOM -->
+        <div class="ng-footer-bottom">
+
+          <p>
+            © <span id="ngFooterYear">2026</span>
+            NextGen Digital Solutions.
+            All Rights Reserved.
           </p>
 
-          <div class="footer-tagline">
-            WE BUILD. WE BRAND. WE GROW.
-          </div>
 
-          <!-- SOCIAL LINKS -->
-          <div class="footer-socials">
-
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/nextgendigitalsolutions.sbp?lqvp=MWVvNXVwbXB4M2J5YQ==" target="_blank"
-              rel="noopener noreferrer" aria-label="Instagram">
-              <i class="bi bi-instagram"></i>
-            </a>
-
-            <!-- LinkedIn -->
-            <a href="https://www.linkedin.com/in/chandan-kumar-panda?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-              target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <i class="bi bi-linkedin"></i>
-            </a>
-
-            <!-- Facebook -->
-            <a href="https://www.facebook.com/share/18sdx9C7yx/" target="_blank" rel="noopener noreferrer"
-              aria-label="Facebook">
-              <i class="bi bi-facebook"></i>
-            </a>
-
-            <!-- WhatsApp -->
-            <a href="https://wa.me/918984240820" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-              <i class="bi bi-whatsapp"></i>
-            </a>
-
-            <!-- Telegram -->
-            <a href="https://t.me/nextgendigitalsolutionssbp" target="_blank" rel="noopener noreferrer"
-              aria-label="Telegram">
-              <i class="bi bi-telegram"></i>
-            </a>
-
-          </div>
-
-        </div>
-
-
-        <!-- QUICK LINKS -->
-        <div class="col-lg-2 col-md-6">
-
-          <h4 class="footer-heading">QUICK LINKS</h4>
-
-          <ul class="footer-links">
-
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#services">Our Services</a></li>
-            <li><a href="#portfolio">Our Work</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#contact">Contact</a></li>
-
-          </ul>
-
-        </div>
-
-
-        <!-- SERVICES -->
-        <div class="col-lg-3 col-md-6">
-
-          <h4 class="footer-heading">OUR SERVICES</h4>
-
-          <ul class="footer-links">
-
-            <li><a href="#services">Website Development</a></li>
-            <li><a href="#services">E-Commerce Development</a></li>
-            <li><a href="#services">Digital Marketing</a></li>
-            <li><a href="#services">Social Media Management</a></li>
-            <li><a href="#services">SEO Services in Sambalpur</a></li>
-            <li><a href="#services">Branding & Graphic Design</a></li>
-
-          </ul>
-
-        </div>
-
-
-        <!-- CONTACT -->
-        <div class="col-lg-3 col-md-6">
-
-          <h4 class="footer-heading">GET IN TOUCH</h4>
-
-          <!-- LOCATION -->
-          <a href="https://www.google.com/maps/search/?api=1&query=House+No+1%2C+Lane+No+1%2C+Near+Small+Hanuman+Temple%2C+Mahaveerpara%2C+Dhanupali%2C+Sambalpur%2C+Odisha"
-            target="_blank" rel="noopener noreferrer" class="footer-contact-item">
-
-            <i class="bi bi-geo-alt"></i>
-
-            <span>
-              Sambalpur, Odisha, India
-            </span>
-
-          </a>
-
-          <!-- WHATSAPP -->
-          <a href="https://wa.me/918984240820" target="_blank" rel="noopener noreferrer" class="footer-contact-item">
-
-            <i class="bi bi-whatsapp"></i>
-
-            <span>
-              +91 89842 40820
-            </span>
-
-          </a>
-
-          <!-- EMAIL -->
-          <a href="mailto:chandankumarpanda0820@gmail.com" class="footer-contact-item">
-
-            <i class="bi bi-envelope"></i>
-
-            <span>
-              chandankumarpanda0820@gmail.com
-            </span>
-
-          </a>
-
-          <a href="#contact" class="footer-contact-btn">
-            START A PROJECT
-            <i class="bi bi-arrow-up-right"></i>
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <!-- FOOTER BOTTOM -->
-      <div class="footer-bottom">
-
-        <p>
-          © <span id="footerYear"></span>
-          NextGen Digital Solutions. All Rights Reserved.
-          | Sambalpur, Odisha, India.
-        </p>
-
-        <!-- NextGen Energy Button -->
-        <a href="#home" class="back-to-top" aria-label="Back to top">
-          <span class="ng-energy-icon">
-            <i class="bi bi-lightning-charge-fill"></i>
+          <span class="ng-footer-bottom-message">
+            WE BUILD. WE CREATE. WE POWER.
           </span>
-          <span class="ng-energy-text">GO TOP</span>
-        </a>
+
+
+          <a href="#home" class="ng-footer-back-top">
+
+            BACK TO TOP
+
+            <i class="bi bi-arrow-up"></i>
+
+          </a>
+
+        </div>
 
       </div>
 
@@ -2169,112 +1966,69 @@
 
   </footer>
 
+  <!-- =====================================================
+     END: NEXTGEN DIGITAL SOLUTIONS FOOTER
+===================================================== -->
 
 
-  <!-- =====================================
-     NEXTGEN DIGITAL SOLUTIONS - LIVE CHAT
-===================================== -->
 
-  <div id="ng-chat-widget">
 
-    <!-- Floating Chat Button -->
-    <button id="ng-chat-toggle" type="button" aria-label="Open Live Chat">
-      <i class="bi bi-chat-dots-fill"></i>
-      <span class="ng-chat-pulse"></span>
-    </button>
 
-    <!-- Chat Window -->
-    <div id="ng-chat-box" aria-label="NextGen customer support">
 
-      <!-- Header -->
-      <div class="ng-chat-header">
 
-        <div class="ng-chat-brand">
-          <div class="ng-chat-logo">
-            <i class="bi bi-lightning-charge-fill"></i>
-          </div>
 
-          <div>
-            <h6>NextGen Support</h6>
-            <span>
-              <span class="ng-online-dot"></span>
-              Online Support
-            </span>
-          </div>
-        </div>
 
-        <button id="ng-chat-close" type="button" aria-label="Close Chat">
-          <i class="bi bi-x-lg"></i>
-        </button>
 
-      </div>
 
-      <!-- Chat Messages -->
-      <div class="ng-chat-body" id="ng-chat-body" aria-live="polite">
 
-        <div class="ng-chat-date">Welcome to NextGen</div>
 
-        <div class="ng-bot-message">
-          Hello! 👋 Welcome to
-          <strong>NextGen Digital Solutions.</strong>
 
-          <br><br>
 
-          We help businesses grow with digital solutions.
 
-          <br><br>
 
-          How can we assist you today?
-        </div>
 
-        <div class="ng-option-heading">
-          Select a service:
-        </div>
 
-        <div class="ng-chat-options">
 
-          <button type="button" data-service="Website Development">
-            <i class="bi bi-code-slash"></i>
-            Website Development
-          </button>
 
-          <button type="button" data-service="E-commerce Website">
-            <i class="bi bi-cart3"></i>
-            E-commerce Website
-          </button>
 
-          <button type="button" data-service="SEO & Digital Marketing">
-            <i class="bi bi-graph-up-arrow"></i>
-            SEO & Digital Marketing
-          </button>
 
-          <button type="button" data-service="Social Media Branding">
-            <i class="bi bi-palette"></i>
-            Social Media Branding
-          </button>
 
-          <button type="button" data-service="Other Enquiry">
-            <i class="bi bi-chat-left-text"></i>
-            Other Enquiry
-          </button>
 
-        </div>
 
-      </div>
 
-      <!-- Footer -->
-      <div class="ng-chat-footer">
-        <span>Powered by</span>
-        <strong>NextGen Digital Solutions</strong>
-      </div>
 
-    </div>
+  <!-- =====================================================
+     START: NEXTGEN FLOATING CONTACT
+===================================================== -->
+
+  <div class="ng-floating-contact" aria-label="Quick contact options">
+
+    <!-- WHATSAPP -->
+    <a href="https://wa.me/918984240820" class="ng-float-btn ng-float-whatsapp" target="_blank"
+      rel="noopener noreferrer" aria-label="Chat with NextGen on WhatsApp" title="WhatsApp">
+      <i class="bi bi-whatsapp"></i>
+      <span class="ng-float-tooltip">Chat on WhatsApp</span>
+    </a>
+
+    <!-- INSTAGRAM -->
+    <a href="https://www.instagram.com/nextgendigitalsolutions.sbp/" class="ng-float-btn ng-float-instagram"
+      target="_blank" rel="noopener noreferrer" aria-label="Visit NextGen Instagram" title="Instagram">
+      <i class="bi bi-instagram"></i>
+      <span class="ng-float-tooltip">Follow on Instagram</span>
+    </a>
+
+    <!-- CALL -->
+    <a href="tel:+918984240820" class="ng-float-btn ng-float-call" aria-label="Call NextGen Digital Solutions"
+      title="Call us">
+      <i class="bi bi-telephone-fill"></i>
+      <span class="ng-float-tooltip">Call +91 89842 40820</span>
+    </a>
 
   </div>
 
-
-
-
+  <!-- =====================================================
+     END: NEXTGEN FLOATING CONTACT
+===================================================== -->
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

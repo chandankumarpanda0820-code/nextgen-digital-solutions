@@ -1,134 +1,72 @@
 
-/* =====================================
-   NEXTGEN - ABOUT SECTION JAVASCRIPT
-===================================== */
+/* =====================================================
+   NEXTGEN DIGITAL SOLUTIONS
+   NEW GENERATION NAVBAR SYSTEM
+===================================================== */
+
+
+/* ==================== NAVBAR JS START ==================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ABOUT SECTION REVEAL ANIMATION
-
-  const aboutElements = document.querySelectorAll(
-    ".about-heading, .about-content, .about-visual, .about-stats"
-  );
-
-  const aboutObserver = new IntersectionObserver(
-    (entries, observer) => {
-
-      entries.forEach(entry => {
-
-        if (entry.isIntersecting) {
-
-          entry.target.classList.add("about-visible");
-
-          observer.unobserve(entry.target);
-
-        }
-
-      });
-
-    },
-    {
-      threshold: 0.15
-    }
-  );
-
-  aboutElements.forEach(element => {
-    element.classList.add("about-reveal");
-    aboutObserver.observe(element);
-  });
-
-
-  // STATISTICS HOVER INTERACTION
-
-  const statCards = document.querySelectorAll(".about-stat-item");
-
-  statCards.forEach(card => {
-
-    card.addEventListener("mouseenter", function () {
-      this.classList.add("stat-active");
-    });
-
-    card.addEventListener("mouseleave", function () {
-      this.classList.remove("stat-active");
-    });
-
-  });
-
-
-  // ABOUT CARD POINTER GLOW
-
-  const aboutCard = document.querySelector(".about-main-card");
-
-  if (aboutCard) {
-
-    aboutCard.addEventListener("mousemove", function (event) {
-
-      const rect = this.getBoundingClientRect();
-
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-
-      this.style.setProperty("--mouse-x", `${x}px`);
-      this.style.setProperty("--mouse-y", `${y}px`);
-
-    });
-
-  }
-
-});
-
-
-/* ==========================================
-   NEXTGEN - COMPLETE NAVBAR ACTIVE SECTION
-   All Sections | Desktop + Mobile
-========================================== */
-
-
-/* ==========================================
-   NEXTGEN - SMART NAVBAR ACTIVE TRACKER
-   Accurate section detection
-========================================== */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const sectionIds = [
-    "home",
-    "about",
-    "founder",
-    "services",
-    "portfolio",
-    "pricing",
-    "developer-terminal",
-    "service-scanner",
-    "smart-card-studio",
-    "contact"
-  ];
-
-  const sections = sectionIds
-    .map(id => document.getElementById(id))
-    .filter(Boolean)
-    .sort((a, b) => {
-      const position = a.compareDocumentPosition(b);
-
-      return position & Node.DOCUMENT_POSITION_FOLLOWING
-        ? -1
-        : 1;
-    });
+  const header = document.getElementById("siteHeader");
+  const navbar = document.getElementById("mainNavbar");
+  const toggler = document.querySelector(".ng-menu-toggle");
 
   const navLinks = document.querySelectorAll(
-    '.navbar-nav a.nav-link[href^="#"]'
+    ".ng-nav .nav-link"
   );
 
-  if (!sections.length || !navLinks.length) return;
+  if (!header || !navbar || !toggler) return;
 
-  const navbar = document.querySelector(".navbar");
 
-  function setActiveSection(id) {
+  /* BOOTSTRAP COLLAPSE */
+
+  if (typeof bootstrap === "undefined") {
+    console.error("Bootstrap JavaScript is missing.");
+    return;
+  }
+
+  const mobileMenu =
+    bootstrap.Collapse.getOrCreateInstance(navbar, {
+      toggle: false
+    });
+
+
+  /* BREAKPOINT */
+
+  const mobileQuery = window.matchMedia(
+    "(max-width: 1199px)"
+  );
+
+  const isMobile = () => mobileQuery.matches;
+
+
+  /* COLLECT SECTIONS */
+
+  const sections = Array.from(navLinks)
+    .map(link => {
+
+      const target = link.getAttribute("href");
+
+      if (!target || !target.startsWith("#")) {
+        return null;
+      }
+
+      return document.querySelector(target);
+
+    })
+    .filter(Boolean);
+
+
+  /* ACTIVE NAVIGATION */
+
+  function setActiveLink(id) {
 
     navLinks.forEach(link => {
 
       const active =
-        link.getAttribute("href") === `#${id}`;
+        link.getAttribute("href") === "#" + id;
 
       link.classList.toggle("active", active);
 
@@ -142,2723 +80,893 @@ document.addEventListener("DOMContentLoaded", function () {
 
   }
 
+
+  /* HEADER SHADOW */
+
+  function updateHeader() {
+
+    header.classList.toggle(
+      "scrolled",
+      window.scrollY > 25
+    );
+
+  }
+
+
+  /* UPDATE CURRENT SECTION */
+
   function updateActiveSection() {
 
-    const navbarHeight = navbar
-      ? navbar.getBoundingClientRect().height
-      : 0;
+    if (!sections.length) return;
 
-    const activationLine = navbarHeight + 30;
+    const offset =
+      window.scrollY + header.offsetHeight + 110;
 
     let currentSection = sections[0];
 
     sections.forEach(section => {
 
-      const rect = section.getBoundingClientRect();
-
-      if (rect.top <= activationLine) {
+      if (section.offsetTop <= offset) {
         currentSection = section;
       }
 
     });
 
-    // Bottom of page: activate the final section
-    const atPageBottom =
-      window.innerHeight + window.scrollY >=
-      document.documentElement.scrollHeight - 5;
-
-    if (atPageBottom) {
-      currentSection = sections[sections.length - 1];
+    if (currentSection) {
+      setActiveLink(currentSection.id);
     }
 
-    setActiveSection(currentSection.id);
-
   }
 
-  let scrollScheduled = false;
 
-  function handleScroll() {
+  /* OPTIMIZED SCROLL */
 
-    if (scrollScheduled) return;
+  let scrollFrame = false;
 
-    scrollScheduled = true;
+  window.addEventListener("scroll", function () {
 
-    requestAnimationFrame(() => {
+    if (scrollFrame) return;
+
+    scrollFrame = true;
+
+    window.requestAnimationFrame(() => {
+
+      updateHeader();
       updateActiveSection();
-      scrollScheduled = false;
+
+      scrollFrame = false;
+
     });
 
+  }, { passive: true });
+
+
+  /* CLOSE MOBILE MENU */
+
+  function closeMenu() {
+
+    if (
+      isMobile() &&
+      navbar.classList.contains("show")
+    ) {
+      mobileMenu.hide();
+    }
+
   }
 
-  window.addEventListener("scroll", handleScroll, {
-    passive: true
-  });
 
-  window.addEventListener("resize", handleScroll);
-
-  window.addEventListener("hashchange", handleScroll);
+  /* NAVIGATION CLICK */
 
   navLinks.forEach(link => {
 
-    link.addEventListener("click", function () {
+    link.addEventListener("click", function (event) {
 
-      const id = this.getAttribute("href").slice(1);
+      const target = this.getAttribute("href");
 
-      if (document.getElementById(id)) {
-        setActiveSection(id);
+      if (!target || !target.startsWith("#")) return;
+
+      const section = document.querySelector(target);
+
+      if (!section) {
+        event.preventDefault();
+        return;
       }
+
+      setActiveLink(section.id);
+
+      closeMenu();
 
     });
 
   });
 
+
+  /* OUTSIDE CLICK */
+
+  document.addEventListener("click", function (event) {
+
+    if (!isMobile()) return;
+
+    if (!navbar.classList.contains("show")) return;
+
+    const clickedInsideHeader =
+      header.contains(event.target);
+
+    if (!clickedInsideHeader) {
+      closeMenu();
+    }
+
+  });
+
+
+  /* ESCAPE KEY */
+
+  document.addEventListener("keydown", function (event) {
+
+    if (event.key === "Escape") {
+      closeMenu();
+    }
+
+  });
+
+
+  /* OPEN EVENT */
+
+  navbar.addEventListener(
+    "shown.bs.collapse",
+    function () {
+
+      toggler.setAttribute("aria-expanded", "true");
+
+      toggler.setAttribute(
+        "aria-label",
+        "Close navigation menu"
+      );
+
+    }
+  );
+
+
+  /* CLOSE EVENT */
+
+  navbar.addEventListener(
+    "hidden.bs.collapse",
+    function () {
+
+      toggler.setAttribute("aria-expanded", "false");
+
+      toggler.setAttribute(
+        "aria-label",
+        "Open navigation menu"
+      );
+
+    }
+  );
+
+
+  /* RESPONSIVE RESIZE */
+
+  function handleResize() {
+
+    if (!isMobile() && navbar.classList.contains("show")) {
+      mobileMenu.hide();
+    }
+
+  }
+
+  window.addEventListener("resize", handleResize, {
+    passive: true
+  });
+
+
+  /* INITIAL STATE */
+
+  updateHeader();
   updateActiveSection();
+
+
+  /* PAGE LOAD */
+
+  window.addEventListener("load", function () {
+
+    updateHeader();
+    updateActiveSection();
+
+  });
 
 });
 
 
+/* ==================== NAVBAR JS END ==================== */
 
 
-/* =====================================
-   NEXTGEN - SERVICES JAVASCRIPT
-===================================== */
+
+/* =====================================================
+   NEXTGEN DIGITAL SOLUTIONS
+   PRELOADER - MINIMUM 2 SECONDS
+===================================================== */
+
+/* ==================== PRELOADER JS START ==================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  // 1. SERVICES SCROLL REVEAL
+  const preloader = document.getElementById("ngPreloader");
+  const progressFill = document.getElementById("ngProgressFill");
+  const progressText = document.getElementById("ngLoadingPercent");
+  const loadingText = document.getElementById("ngLoadingText");
 
-  const serviceCards = document.querySelectorAll(".service-card");
+  if (!preloader) return;
 
-  const serviceObserver = new IntersectionObserver(
+  const startTime = Date.now();
+  const MIN_DISPLAY_TIME = 2000;
+
+  let progress = 0;
+  let pageLoaded = document.readyState === "complete";
+  let finished = false;
+
+  const messages = [
+    { limit: 25, text: "INITIALIZING..." },
+    { limit: 50, text: "LOADING RESOURCES..." },
+    { limit: 75, text: "PREPARING EXPERIENCE..." },
+    { limit: 99, text: "ALMOST READY..." }
+  ];
+
+
+  // PROGRESS ANIMATION
+
+  const progressTimer = setInterval(function () {
+
+    if (finished) {
+      clearInterval(progressTimer);
+      return;
+    }
+
+    if (progress < 90) {
+      progress += Math.max(
+        1,
+        Math.ceil((90 - progress) * 0.06)
+      );
+
+      progress = Math.min(progress, 90);
+    }
+
+    updateProgress(progress);
+
+  }, 45);
+
+
+  // UPDATE PROGRESS
+
+  function updateProgress(value) {
+
+    if (progressFill) {
+      progressFill.style.width = value + "%";
+    }
+
+    if (progressText) {
+      progressText.textContent = value + "%";
+    }
+
+    if (loadingText) {
+
+      const current = messages.find(
+        item => value <= item.limit
+      );
+
+      loadingText.textContent =
+        current ? current.text : "ALMOST READY...";
+
+    }
+
+  }
+
+
+  // FINISH WHEN BOTH CONDITIONS ARE MET
+
+  function checkCompletion() {
+
+    if (finished || !pageLoaded) return;
+
+    const elapsed = Date.now() - startTime;
+    const remaining = Math.max(
+      0,
+      MIN_DISPLAY_TIME - elapsed
+    );
+
+    setTimeout(function () {
+
+      if (finished || !pageLoaded) return;
+
+      finished = true;
+
+      clearInterval(progressTimer);
+
+      updateProgress(100);
+
+      if (loadingText) {
+        loadingText.textContent = "WELCOME TO NEXTGEN";
+      }
+
+      setTimeout(function () {
+
+        preloader.classList.add("loaded");
+
+        setTimeout(function () {
+          preloader.remove();
+        }, 700);
+
+      }, 250);
+
+    }, remaining);
+
+  }
+
+
+  // PAGE LOAD COMPLETE
+
+  if (!pageLoaded) {
+
+    window.addEventListener("load", function () {
+
+      pageLoaded = true;
+      checkCompletion();
+
+    }, { once: true });
+
+  } else {
+
+    checkCompletion();
+
+  }
+
+
+  // SAFETY FALLBACK: 10 SECONDS
+
+  setTimeout(function () {
+
+    if (!pageLoaded) {
+      pageLoaded = true;
+      checkCompletion();
+    }
+
+  }, 10000);
+
+});
+
+/* ==================== PRELOADER JS END ==================== */
+
+
+/* =====================================================
+   START: NEXTGEN HOME SECTION ANIMATIONS
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const homeSection = document.querySelector("#home");
+
+  if (!homeSection) return;
+
+  const revealElements = [
+    homeSection.querySelector(".ng-home-image"),
+    homeSection.querySelector(".ng-home-tag"),
+    homeSection.querySelector("h1"),
+    homeSection.querySelector("p"),
+    homeSection.querySelector(".ng-home-actions"),
+    homeSection.querySelector(".ng-home-note")
+  ].filter(Boolean);
+
+  // Initial animation state
+  revealElements.forEach((element, index) => {
+    element.style.opacity = "0";
+    element.style.transform = "translateY(22px)";
+    element.style.transition =
+      "opacity 0.75s ease, transform 0.75s ease";
+    element.style.transitionDelay = `${index * 120}ms`;
+  });
+
+  // Reveal after page load
+  const revealHome = () => {
+    requestAnimationFrame(() => {
+      revealElements.forEach((element) => {
+        element.style.opacity = "1";
+        element.style.transform = "translateY(0)";
+      });
+    });
+  };
+
+  if (document.readyState === "complete") {
+    revealHome();
+  } else {
+    window.addEventListener("load", revealHome, { once: true });
+  }
+});
+
+/* =====================================================
+   END: NEXTGEN HOME SECTION ANIMATIONS
+===================================================== */
+
+
+/* =====================================================
+   START: NEXTGEN EDITORIAL ABOUT ANIMATIONS
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const aboutSection = document.querySelector(
+    ".ng-editorial-about"
+  );
+
+  if (!aboutSection) return;
+
+  const revealElements = aboutSection.querySelectorAll(
+    ".ng-editorial-top, " +
+    ".ng-editorial-heading, " +
+    ".ng-editorial-copy, " +
+    ".ng-editorial-art, " +
+    ".ng-editorial-value-heading, " +
+    ".ng-editorial-card, " +
+    ".ng-editorial-footer"
+  );
+
+  revealElements.forEach((element, index) => {
+    element.classList.add("ng-editorial-reveal");
+
+    // Staggered entrance timing
+    element.style.transitionDelay =
+      `${(index % 4) * 100}ms`;
+  });
+
+  // Respect reduced-motion preferences
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    revealElements.forEach(element => {
+      element.classList.add("ng-ed-visible");
+    });
+    return;
+  }
+
+  const editorialObserver = new IntersectionObserver(
     (entries, observer) => {
 
       entries.forEach(entry => {
 
         if (entry.isIntersecting) {
 
-          const index = [...serviceCards].indexOf(entry.target);
-
-          setTimeout(() => {
-            entry.target.classList.add("service-visible");
-          }, (index % 3) * 120);
-
-          observer.unobserve(entry.target);
-        }
-
-      });
-
-    },
-    {
-      threshold: 0.15
-    }
-  );
-
-  serviceCards.forEach(card => {
-    card.classList.add("service-reveal");
-    serviceObserver.observe(card);
-  });
-
-
-  // 2. INTERACTIVE CARD SPOTLIGHT
-
-  serviceCards.forEach(card => {
-
-    card.addEventListener("pointermove", function (event) {
-
-      const rect = this.getBoundingClientRect();
-
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-
-      this.style.setProperty("--spot-x", `${x}px`);
-      this.style.setProperty("--spot-y", `${y}px`);
-
-    });
-
-  });
-
-
-  // 3. SERVICE ICON INTERACTION
-
-  serviceCards.forEach(card => {
-
-    const icon = card.querySelector(".service-icon");
-
-    if (!icon) return;
-
-    card.addEventListener("mouseenter", () => {
-      icon.classList.add("service-icon-active");
-    });
-
-    card.addEventListener("mouseleave", () => {
-      icon.classList.remove("service-icon-active");
-    });
-
-  });
-
-
-  // 4. EXPLORE SERVICE CLICK
-
-  const serviceLinks = document.querySelectorAll(".service-link");
-
-  serviceLinks.forEach(link => {
-
-    link.addEventListener("click", function () {
-
-      const serviceName = this.closest(".service-card")
-        ?.querySelector("h3")?.textContent;
-
-      console.log("Selected Service:", serviceName);
-
-    });
-
-  });
-
-});
-
-
-
-/* =========================================
-   NEXTGEN — PORTFOLIO ANIMATIONS
-========================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  // 1. REVEAL PROJECT CARDS ON SCROLL
-
-  const projectCards = document.querySelectorAll(".project-card");
-
-  const portfolioObserver = new IntersectionObserver(
-    (entries, observer) => {
-
-      entries.forEach((entry) => {
-
-        if (entry.isIntersecting) {
-
-          entry.target.classList.add("project-visible");
-
-          observer.unobserve(entry.target);
-
-        }
-
-      });
-
-    },
-    {
-      threshold: 0.15
-    }
-  );
-
-  projectCards.forEach((card, index) => {
-
-    card.classList.add("project-reveal");
-
-    card.style.transitionDelay = `${index * 120}ms`;
-
-    portfolioObserver.observe(card);
-
-  });
-
-
-  // 2. PROJECT CARD MOUSE SPOTLIGHT
-
-  projectCards.forEach((card) => {
-
-    card.addEventListener("mousemove", function (event) {
-
-      const rect = card.getBoundingClientRect();
-
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-
-      card.style.setProperty("--mouse-x", `${x}px`);
-      card.style.setProperty("--mouse-y", `${y}px`);
-
-    });
-
-  });
-
-
-  // 3. PROJECT LINK CLICK EFFECT
-
-  const projectLinks = document.querySelectorAll(".project-link");
-
-  projectLinks.forEach((link) => {
-
-    link.addEventListener("click", function () {
-
-      this.classList.add("project-link-clicked");
-
-    });
-
-  });
-
-
-  // 4. PORTFOLIO HEADING REVEAL
-
-  const portfolioHeader = document.querySelector(".portfolio-header");
-
-  if (portfolioHeader) {
-
-    const headerObserver = new IntersectionObserver(
-      (entries) => {
-
-        entries.forEach((entry) => {
-
-          if (entry.isIntersecting) {
-
-            portfolioHeader.classList.add("portfolio-header-visible");
-
-            headerObserver.unobserve(entry.target);
-
-          }
-
-        });
-
-      },
-      {
-        threshold: 0.2
-      }
-    );
-
-    headerObserver.observe(portfolioHeader);
-
-  }
-
-});
-
-
-
-/* =========================================
-   NEXTGEN — PRICING JAVASCRIPT
-========================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  // 1. PRICING CARDS SCROLL REVEAL
-
-  const pricingCards = document.querySelectorAll(".pricing-card");
-
-  const pricingObserver = new IntersectionObserver(
-    (entries, observer) => {
-
-      entries.forEach((entry) => {
-
-        if (entry.isIntersecting) {
-
-          entry.target.classList.add("pricing-visible");
-
-          observer.unobserve(entry.target);
-
-        }
-
-      });
-
-    },
-    {
-      threshold: 0.15
-    }
-  );
-
-  pricingCards.forEach((card, index) => {
-
-    card.classList.add("pricing-reveal");
-
-    card.style.transitionDelay = `${index * 120}ms`;
-
-    pricingObserver.observe(card);
-
-  });
-
-
-  // 2. PRICING CATEGORY ANIMATION
-
-  const pricingHeadings = document.querySelectorAll(
-    ".pricing-category-heading"
-  );
-
-  const headingObserver = new IntersectionObserver(
-    (entries, observer) => {
-
-      entries.forEach((entry) => {
-
-        if (entry.isIntersecting) {
-
-          entry.target.classList.add("pricing-heading-visible");
-
-          observer.unobserve(entry.target);
-
-        }
-
-      });
-
-    },
-    {
-      threshold: 0.2
-    }
-  );
-
-  pricingHeadings.forEach((heading) => {
-
-    heading.classList.add("pricing-heading-reveal");
-
-    headingObserver.observe(heading);
-
-  });
-
-
-  // 3. CARD SPOTLIGHT EFFECT
-
-  pricingCards.forEach((card) => {
-
-    card.addEventListener("mousemove", function (event) {
-
-      const rect = card.getBoundingClientRect();
-
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-
-      card.style.setProperty("--pricing-x", `${x}px`);
-      card.style.setProperty("--pricing-y", `${y}px`);
-
-    });
-
-  });
-
-
-  // 4. WHATSAPP PRICING INQUIRY
-
-  const pricingButtons = document.querySelectorAll(".pricing-btn");
-  const customButton = document.querySelector(".pricing-custom-btn");
-
-  // Replace this with your WhatsApp number.
-  // Include country code, without + or spaces.
-  const whatsappNumber = "8984240820";
-
-  function openWhatsApp(message) {
-
-    if (whatsappNumber === "91YOURNUMBER") {
-
-      alert("Please add your WhatsApp number in script.js first.");
-
-      return;
-
-    }
-
-    const url =
-      "https://wa.me/" +
-      whatsappNumber +
-      "?text=" +
-      encodeURIComponent(message);
-
-    window.open(url, "_blank", "noopener,noreferrer");
-
-  }
-
-  pricingButtons.forEach((button) => {
-
-    button.addEventListener("click", function (event) {
-
-      event.preventDefault();
-
-      const card = this.closest(".pricing-card");
-
-      const plan = card.querySelector("h4").textContent.trim();
-
-      const category = card.closest(".marketing-pricing")
-        ? "Digital Marketing"
-        : "Website Development";
-
-      const message =
-        `Hello NextGen Digital Solutions! I am interested in your ${plan} package (${category}). Please share more details.`;
-
-      openWhatsApp(message);
-
-    });
-
-  });
-
-
-  if (customButton) {
-
-    customButton.addEventListener("click", function (event) {
-
-      event.preventDefault();
-
-      openWhatsApp(
-        "Hello NextGen Digital Solutions! I would like to discuss a custom package for my business."
-      );
-
-    });
-
-  }
-
-});
-
-
-/* =========================================
-   NEXTGEN — WHATSAPP CONTACT FORM
-========================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const contactForm = document.getElementById("whatsappContactForm");
-
-  if (!contactForm) return;
-
-  const whatsappNumber = "918984240820";
-
-  contactForm.addEventListener("submit", function (event) {
-
-    event.preventDefault();
-
-    // GET FORM VALUES
-
-    const name = document.getElementById("contactName").value.trim();
-    const phone = document.getElementById("contactPhone").value.trim();
-    const email = document.getElementById("contactEmail").value.trim();
-    const business = document.getElementById("businessName").value.trim();
-    const service = document.getElementById("contactService").value;
-    const budget = document.getElementById("contactBudget").value;
-    const message = document.getElementById("contactMessage").value.trim();
-
-    // BASIC VALIDATION
-
-    if (!name || !phone || !email || !service || !message) {
-      alert("Please fill in all required fields.");
-      return;
-    }
-
-    if (!/^[0-9]{10}$/.test(phone)) {
-      alert("Please enter a valid 10-digit phone number.");
-      return;
-    }
-
-    // CREATE PROFESSIONAL WHATSAPP MESSAGE
-
-    const whatsappMessage = `
-🚀 *NEW PROJECT INQUIRY*
-
-━━━━━━━━━━━━━━━━━━
-
-👤 *CUSTOMER DETAILS*
-
-Name: ${name}
-Phone: ${phone}
-Email: ${email}
-Business: ${business || "Not Provided"}
-
-━━━━━━━━━━━━━━━━━━
-
-💼 *PROJECT REQUIREMENTS*
-
-Service: ${service}
-Estimated Budget: ${budget || "Not Specified"}
-
-━━━━━━━━━━━━━━━━━━
-
-📝 *PROJECT DETAILS*
-
-${message}
-
-━━━━━━━━━━━━━━━━━━
-
-📩 Inquiry received through:
-NextGen Digital Solutions Website
-
-🌐 We Build. We Brand. We Grow.
-    `.trim();
-
-    // ENCODE MESSAGE
-
-    const encodedMessage = encodeURIComponent(whatsappMessage);
-
-    // OPEN WHATSAPP
-
-    const whatsappURL =
-      `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-    window.open(whatsappURL, "_blank");
-
-  });
-
-});
-
-
-/* =========================================
-   NEXTGEN — AUTOMATIC COPYRIGHT YEAR
-========================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const footerYear = document.getElementById("footerYear");
-
-  if (footerYear) {
-    footerYear.textContent = new Date().getFullYear();
-  }
-
-});
-
-
-
-/* =========================================
-   NEXTGEN — AUTO CLOSE MOBILE NAVBAR
-========================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const navbarMenu = document.getElementById("navbarContent");
-
-  const navLinks = document.querySelectorAll(
-    "#navbarContent .nav-link, #navbarContent .btn"
-  );
-
-  if (!navbarMenu || typeof bootstrap === "undefined") return;
-
-  const bsCollapse = bootstrap.Collapse.getOrCreateInstance(
-    navbarMenu,
-    { toggle: false }
-  );
-
-  navLinks.forEach((link) => {
-
-    link.addEventListener("click", function () {
-
-      // Only close on mobile when menu is expanded
-      if (
-        window.innerWidth < 992 &&
-        navbarMenu.classList.contains("show")
-      ) {
-        bsCollapse.hide();
-      }
-
-    });
-
-  });
-
-});
-
-
-/* =========================================
-   NEXTGEN — LIVE CHAT SYSTEM
-   WhatsApp + Email + Contact Details
-========================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const chatToggle = document.getElementById("ng-chat-toggle");
-  const chatBox = document.getElementById("ng-chat-box");
-  const chatClose = document.getElementById("ng-chat-close");
-  const chatBody = document.getElementById("ng-chat-body");
-
-  if (!chatToggle || !chatBox || !chatClose || !chatBody) return;
-
-  // ORIGINAL CHAT SCREEN
-  const originalChatContent = chatBody.innerHTML;
-
-  // COMPANY CONTACT DETAILS
-  const whatsappNumber = "918984240820";
-  const companyPhone = "8984240820";
-  const companyEmail = "chandankumarpanda0820@gmail.com";
-
-  let selectedService = "";
-
-  // OPEN CHAT
-  chatToggle.addEventListener("click", function () {
-    chatBox.classList.toggle("ng-chat-active");
-  });
-
-  // RESET CHAT
-  function resetChat() {
-    chatBody.innerHTML = originalChatContent;
-    chatBody.scrollTop = 0;
-    selectedService = "";
-  }
-
-  // CLOSE CHAT
-  chatClose.addEventListener("click", function () {
-    chatBox.classList.remove("ng-chat-active");
-    resetChat();
-  });
-
-  // ADD MESSAGE
-  function addMessage(message, type) {
-
-    const div = document.createElement("div");
-
-    div.className = type === "user"
-      ? "ng-user-message"
-      : "ng-bot-message";
-
-    div.textContent = message;
-
-    chatBody.appendChild(div);
-
-    chatBody.scrollTop = chatBody.scrollHeight;
-
-    return div;
-  }
-
-  // CREATE BUTTON
-  function createButton(text, className, callback) {
-
-    const button = document.createElement("button");
-
-    button.type = "button";
-    button.textContent = text;
-    button.className = className;
-
-    button.addEventListener("click", callback);
-
-    return button;
-  }
-
-  // ASK CUSTOMER YES / NO
-  function askContactPreference() {
-
-    addMessage(
-      "Kya aap WhatsApp par hamari NextGen team se baat karna chahte hain?",
-      "bot"
-    );
-
-    const options = document.createElement("div");
-    options.className = "ng-chat-options";
-
-    const yesButton = createButton(
-      "✓ YES, Contact Team",
-      "ng-chat-choice",
-      function () {
-
-        addMessage("YES, I want to contact the team.", "user");
-
-        showContactOptions();
-      }
-    );
-
-    const noButton = createButton(
-      "✕ NO, Show Contact Details",
-      "ng-chat-choice",
-      function () {
-
-        addMessage("NO, Show me your contact details.", "user");
-
-        showContactDetails();
-      }
-    );
-
-    options.appendChild(yesButton);
-    options.appendChild(noButton);
-
-    chatBody.appendChild(options);
-
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }
-
-  // YES: WHATSAPP AND EMAIL OPTIONS
-  function showContactOptions() {
-
-    addMessage(
-      "Great! Please choose how you would like to contact our team.",
-      "bot"
-    );
-
-    const options = document.createElement("div");
-    options.className = "ng-chat-options";
-
-    // WHATSAPP
-    const whatsapp = document.createElement("a");
-
-    const whatsappMessage =
-      "Hello NextGen Digital Solutions! I am interested in " +
-      selectedService +
-      ". Please share more details.";
-
-    whatsapp.href =
-      "https://wa.me/" +
-      whatsappNumber +
-      "?text=" +
-      encodeURIComponent(whatsappMessage);
-
-    whatsapp.target = "_blank";
-    whatsapp.rel = "noopener noreferrer";
-    whatsapp.className = "ng-chat-whatsapp";
-
-    whatsapp.innerHTML =
-      '<i class="bi bi-whatsapp"></i> Contact via WhatsApp';
-
-    // EMAIL
-    const email = document.createElement("a");
-
-    const subject = "Service Enquiry - " + selectedService;
-
-    const emailMessage =
-      "Hello NextGen Digital Solutions,\n\n" +
-      "I am interested in " + selectedService +
-      ". Please share more details.\n\n" +
-      "Thank you.";
-
-    email.href =
-      "mailto:" + companyEmail +
-      "?subject=" + encodeURIComponent(subject) +
-      "&body=" + encodeURIComponent(emailMessage);
-
-    email.className = "ng-chat-whatsapp";
-    email.style.background = "#164c88";
-
-    email.innerHTML =
-      '<i class="bi bi-envelope-fill"></i> Contact via Email';
-
-    options.appendChild(whatsapp);
-    options.appendChild(email);
-
-    chatBody.appendChild(options);
-
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }
-
-  // NO: SHOW COMPANY DETAILS
-  function showContactDetails() {
-
-    addMessage(
-      "No problem! Here are our official contact details. You can contact us whenever you need assistance.",
-      "bot"
-    );
-
-    const details = document.createElement("div");
-
-    details.className = "ng-bot-message";
-
-    const title = document.createElement("strong");
-    title.textContent = "NextGen Digital Solutions";
-
-    const phone = document.createElement("p");
-    phone.style.margin = "10px 0 5px";
-    phone.textContent = "📞 Phone: " + companyPhone;
-
-    const email = document.createElement("p");
-    email.style.margin = "5px 0";
-    email.textContent = "✉ Email: " + companyEmail;
-
-    details.appendChild(title);
-    details.appendChild(phone);
-    details.appendChild(email);
-
-    chatBody.appendChild(details);
-
-    // CALL BUTTON
-    const callButton = document.createElement("a");
-
-    callButton.href = "tel:" + companyPhone;
-    callButton.className = "ng-chat-whatsapp";
-    callButton.innerHTML =
-      '<i class="bi bi-telephone-fill"></i> Call NextGen';
-
-    // EMAIL BUTTON
-    const emailButton = document.createElement("a");
-
-    emailButton.href = "mailto:" + companyEmail;
-    emailButton.className = "ng-chat-whatsapp";
-    emailButton.style.background = "#164c88";
-
-    emailButton.innerHTML =
-      '<i class="bi bi-envelope-fill"></i> Send Email';
-
-    chatBody.appendChild(callButton);
-    chatBody.appendChild(emailButton);
-
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }
-
-  // SERVICE SELECTION
-  chatBody.addEventListener("click", function (event) {
-
-    const button = event.target.closest(
-      ".ng-chat-options button[data-service]"
-    );
-
-    if (!button) return;
-
-    selectedService = button.dataset.service;
-
-    addMessage(selectedService, "user");
-
-    // Prevent repeated selection
-    button.closest(".ng-chat-options").remove();
-
-    addMessage(
-      "Thank you for your interest in " +
-      selectedService + "!",
-      "bot"
-    );
-
-    askContactPreference();
-  });
-
-  // ESCAPE KEY
-  document.addEventListener("keydown", function (event) {
-
-    if (event.key === "Escape") {
-
-      chatBox.classList.remove("ng-chat-active");
-
-      resetChat();
-    }
-
-  });
-
-});
-
-
-/* ===== NEXTGEN PREMIUM PRELOADER ===== */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const preloader = document.getElementById("ng-preloader");
-  if (!preloader) return;
-
-  const startTime = Date.now();
-  let pageLoaded = document.readyState === "complete";
-
-  function hidePreloader() {
-    if (!pageLoaded) return;
-
-    const elapsedTime = Date.now() - startTime;
-    const remainingTime = Math.max(0, 2500 - elapsedTime);
-
-    setTimeout(function () {
-      preloader.classList.add("ng-loader-hide");
-
-      setTimeout(function () {
-        preloader.remove();
-      }, 650);
-
-    }, remainingTime);
-  }
-
-  if (!pageLoaded) {
-    window.addEventListener("load", function () {
-      pageLoaded = true;
-      hidePreloader();
-    }, { once: true });
-  } else {
-    hidePreloader();
-  }
-
-});
-
-/* ===== NEXTGEN SCROLL PROGRESS ===== */
-
-
-/* ==========================================
-   NEXTGEN OPTIMIZED SCROLL PROGRESS
-========================================== */
-
-(function () {
-    "use strict";
-
-    const progressBar = document.getElementById("ng-scroll-progress");
-
-    if (!progressBar) return;
-
-    let progressScheduled = false;
-
-    function updateScrollProgress() {
-
-        const scrollTop = window.scrollY;
-
-        const scrollHeight =
-            document.documentElement.scrollHeight - window.innerHeight;
-
-        const progress = scrollHeight > 0
-            ? Math.min(scrollTop / scrollHeight, 1)
-            : 0;
-
-        progressBar.style.transform = `scaleX(${progress})`;
-
-        progressScheduled = false;
-    }
-
-    function handleProgressScroll() {
-
-        if (progressScheduled) return;
-
-        progressScheduled = true;
-
-        requestAnimationFrame(updateScrollProgress);
-    }
-
-    window.addEventListener("scroll", handleProgressScroll, {
-        passive: true
-    });
-
-    window.addEventListener("resize", handleProgressScroll, {
-        passive: true
-    });
-
-    updateScrollProgress();
-
-})();
-
-
-
-/* =====================================
-   NEXTGEN DEVELOPER TERMINAL
-   INTERACTIVE COMMAND SYSTEM
-   + PREMIUM BOOT ANIMATION
-   + MATRIX DIGITAL RAIN
-===================================== */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const terminalForm = document.getElementById("ngTerminalForm");
-  const terminalInput = document.getElementById("ngTerminalInput");
-  const terminalOutput = document.getElementById("ngTerminalOutput");
-  const terminalWindow = document.querySelector(".ng-terminal-window");
-
-  if (!terminalForm || !terminalInput || !terminalOutput) return;
-
-  const company = {
-    name: "NextGen Digital Solutions",
-    tagline: "We Build. We Brand. We Grow.",
-    founder: "Chandan Kumar Panda",
-    phone: "8984240820",
-    email: "chandankumarpanda0820@gmail.com",
-    website: "https://nextgendigitalsbp.services/",
-    whatsapp: "https://wa.me/918984240820",
-    telegram: "https://t.me/nextgendigitalsolutionssbp",
-    founderInstagram: "https://www.instagram.com/pravatpanda0820/",
-    companyInstagram: "https://www.instagram.com/nextgendigitalsolutions.sbp/"
-  };
-
-  /* =====================================
-     TERMINAL OUTPUT
-  ===================================== */
-
-  function printLine(message, className = "") {
-    const line = document.createElement("p");
-    line.className = className;
-    line.textContent = message;
-    terminalOutput.appendChild(line);
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-  }
-
-  function printHTML(html) {
-    const line = document.createElement("p");
-    line.innerHTML = html;
-    terminalOutput.appendChild(line);
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-  }
-
-  /* =====================================
-     MATRIX DIGITAL RAIN
-  ===================================== */
-
-  function startMatrixRain() {
-
-    if (!terminalWindow) return;
-
-    if (terminalWindow.querySelector(".ng-matrix-canvas")) return;
-
-    const canvas = document.createElement("canvas");
-    canvas.className = "ng-matrix-canvas";
-
-    terminalWindow.prepend(canvas);
-
-    const ctx = canvas.getContext("2d");
-
-    if (!ctx) {
-      canvas.remove();
-      return;
-    }
-
-    const characters =
-      "01アイウエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    const fontSize = 14;
-
-    let drops = [];
-    let columns = 0;
-    let animationId;
-    let resizeObserver;
-
-    function resizeCanvas() {
-
-      const rect = terminalWindow.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-      canvas.width = Math.floor(rect.width * dpr);
-      canvas.height = Math.floor(rect.height * dpr);
-
-      canvas.style.width = rect.width + "px";
-      canvas.style.height = rect.height + "px";
-
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      columns = Math.ceil(rect.width / fontSize);
-
-      drops = Array.from(
-        { length: columns },
-        () => Math.random() * -30
-      );
-    }
-
-    function drawMatrix() {
-
-      const width = canvas.clientWidth;
-      const height = canvas.clientHeight;
-
-      ctx.fillStyle = "rgba(5, 11, 11, 0.12)";
-      ctx.fillRect(0, 0, width, height);
-
-      ctx.font = fontSize + "px monospace";
-
-      for (let i = 0; i < drops.length; i++) {
-
-        const character = characters.charAt(
-          Math.floor(Math.random() * characters.length)
-        );
-
-        const x = i * fontSize;
-        const y = drops[i] * fontSize;
-
-        ctx.fillStyle = "#00ffaa";
-        ctx.fillText(character, x, y);
-
-        if (y > height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-
-        drops[i] += 0.45;
-      }
-
-      animationId = requestAnimationFrame(drawMatrix);
-    }
-
-    resizeCanvas();
-    drawMatrix();
-
-    window.addEventListener("resize", resizeCanvas);
-
-    if ("ResizeObserver" in window) {
-      resizeObserver = new ResizeObserver(resizeCanvas);
-      resizeObserver.observe(terminalWindow);
-    }
-
-  }
-
-  /* =====================================
-     PREMIUM BOOT ANIMATION
-  ===================================== */
-
-  function startTerminalBoot() {
-
-    const bootMessages = [
-      { text: "NEXTGEN DIGITAL SYSTEM INITIALIZING...", type: "" },
-      { text: "Loading terminal environment...", type: "" },
-      { text: "Checking system modules... OK", type: "ng-boot-success" },
-      { text: "Loading company profile... OK", type: "ng-boot-success" },
-      { text: "Connecting digital services... OK", type: "ng-boot-success" },
-      { text: "Security check... PASSED", type: "ng-boot-success" },
-      { text: "Welcome to NextGen Developer Terminal!", type: "ng-boot-success" }
-    ];
-
-    terminalOutput.innerHTML = "";
-    terminalOutput.classList.add("ng-terminal-boot");
-
-    terminalInput.disabled = true;
-
-    let index = 0;
-
-    function showNextMessage() {
-
-      if (index >= bootMessages.length) {
-
-        setTimeout(function () {
-
-          terminalOutput.classList.remove("ng-terminal-boot");
-          terminalOutput.innerHTML = "";
-
-          printLine("Welcome to NextGen Digital Solutions Terminal.");
-          printLine("Type 'help' to explore available commands.");
-          printLine(
-            "System ready. Let's build something amazing!",
-            "ng-terminal-welcome"
+          entry.target.classList.add(
+            "ng-ed-visible"
           );
 
-          terminalInput.disabled = false;
-          terminalInput.focus({ preventScroll: true });
-
-        }, 500);
-
-        return;
-      }
-
-      const message = bootMessages[index];
-
-      const line = document.createElement("p");
-      line.className = "ng-boot-line " + message.type;
-      line.textContent = message.text;
-
-      terminalOutput.appendChild(line);
-      terminalOutput.scrollTop = terminalOutput.scrollHeight;
-
-      index++;
-
-      setTimeout(showNextMessage, 450);
-    }
-
-    showNextMessage();
-  }
-
-  /* =====================================
-     AVAILABLE COMMANDS
-  ===================================== */
-
-  const commands = {
-
-    help: function () {
-      printLine("AVAILABLE COMMANDS", "ng-terminal-welcome");
-      printLine("about      - About NextGen");
-      printLine("services   - Explore our services");
-      printLine("projects   - Explore our projects");
-      printLine("whoami     - Developer identity");
-      printLine("contact    - Contact information");
-      printLine("socials    - Social media links");
-      printLine("website    - Open company website");
-      printLine("date       - Current date");
-      printLine("time       - Current local time");
-      printLine("clear      - Clear terminal");
-      printLine("exit       - Close current session");
-      printLine("help       - Show all commands");
-    },
-
-    about: function () {
-      printLine("COMPANY INFORMATION", "ng-terminal-welcome");
-      printLine(company.name);
-      printLine(company.tagline);
-      printLine("Location: Sambalpur, Odisha, India");
-      printLine("We create digital experiences for growing businesses.");
-    },
-
-    services: function () {
-      printLine("OUR DIGITAL SERVICES", "ng-terminal-welcome");
-      printLine("01. Website Development");
-      printLine("02. E-commerce Development");
-      printLine("03. SEO & Digital Marketing");
-      printLine("04. Social Media Branding");
-      printLine("05. Website Design & Maintenance");
-    },
-
-    projects: function () {
-      printLine("PROJECT SHOWCASE", "ng-terminal-welcome");
-      printLine("Explore our latest digital projects:");
-      printLine("Visit our website to discover our work.");
-    },
-
-    whoami: function () {
-      printLine("IDENTITY DETECTED", "ng-terminal-welcome");
-      printLine("Founder: " + company.founder);
-      printLine("Organization: " + company.name);
-      printLine("Role: Digital Solutions & Development");
-    },
-
-    contact: function () {
-      printLine("CONTACT INFORMATION", "ng-terminal-welcome");
-      printLine("Phone: " + company.phone);
-      printLine("Email: " + company.email);
-      printLine("Website: " + company.website);
-    },
-
-    socials: function () {
-      printLine("CONNECT WITH NEXTGEN", "ng-terminal-welcome");
-
-      printHTML(
-        '<a href="' + company.companyInstagram +
-        '" target="_blank" rel="noopener noreferrer" style="color:#00ffaa;">Instagram - NextGen</a>'
-      );
-
-      printHTML(
-        '<a href="' + company.telegram +
-        '" target="_blank" rel="noopener noreferrer" style="color:#00ffaa;">Telegram Channel</a>'
-      );
-
-      printHTML(
-        '<a href="' + company.whatsapp +
-        '" target="_blank" rel="noopener noreferrer" style="color:#00ffaa;">WhatsApp</a>'
-      );
-
-      printHTML(
-        '<a href="' + company.founderInstagram +
-        '" target="_blank" rel="noopener noreferrer" style="color:#00ffaa;">Founder Instagram</a>'
-      );
-    },
-
-    website: function () {
-      printLine("Opening NextGen website...");
-      window.open(company.website, "_blank", "noopener,noreferrer");
-    },
-
-    date: function () {
-      printLine("Current Date: " + new Date().toLocaleDateString());
-    },
-
-    time: function () {
-      printLine("SYSTEM CLOCK", "ng-terminal-welcome");
-      printLine("Current Time: " + new Date().toLocaleTimeString());
-      printLine(
-        "Timezone: " + Intl.DateTimeFormat().resolvedOptions().timeZone
-      );
-    },
-
-    clear: function () {
-      terminalOutput.innerHTML = "";
-    },
-
-    exit: function () {
-      terminalOutput.innerHTML = "";
-
-      printLine("NEXTGEN DEVELOPER TERMINAL", "ng-terminal-welcome");
-      printLine("Session closed successfully.");
-      printLine("Welcome back!");
-      printLine("Type 'help' to explore available commands.");
-    }
-  };
-
-  /* =====================================
-     COMMAND EXECUTION
-  ===================================== */
-
-  terminalForm.addEventListener("submit", function (event) {
-
-    event.preventDefault();
-
-    if (terminalInput.disabled) return;
-
-    const command = terminalInput.value.trim().toLowerCase();
-
-    if (!command) return;
-
-    printHTML(
-      '<span style="color:#00ffaa">visitor@nextgen:~$</span> ' +
-      command.replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-    );
-
-    if (commands[command]) {
-      commands[command]();
-    } else {
-      printLine(
-        "Command not found: " + command +
-        ". Type 'help' to see available commands."
-      );
-    }
-
-    terminalInput.value = "";
-    terminalInput.focus();
-
-  });
-
-  /* =====================================
-     START TERMINAL
-  ===================================== */
-
-  startMatrixRain();
-  startTerminalBoot();
-
-});
-
-
-/* =========================================
-   NEXTGEN — DIGITAL SERVICE SCANNER
-========================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const form = document.getElementById("ngScannerForm");
-  if (!form) return;
-
-  const businessSelect = document.getElementById("ngBusinessType");
-  const presenceSelect = document.getElementById("ngOnlinePresence");
-
-  const steps = document.querySelectorAll(".ng-ai-step");
-
-  const stepLabel = document.getElementById("ngStepLabel");
-  const stepPercent = document.getElementById("ngStepPercent");
-  const stepBar = document.getElementById("ngStepBar");
-
-  const scanAnimation = document.getElementById("ngScannerAnimation");
-  const scanStatus = document.getElementById("ngScannerStatus");
-  const scanProgress = document.getElementById("ngScannerProgress");
-  const scanPercent = document.getElementById("ngScanPercent");
-
-  const results = document.getElementById("ngScannerResults");
-  const resultDetails = document.getElementById("ngScannerResultDetails");
-
-  const scanButton = document.getElementById("ngScannerButton");
-  const whatsappButton = document.getElementById("ngScannerWhatsApp");
-  const resetButton = document.getElementById("ngScannerReset");
-
-  let scanTimer = null;
-  let currentStep = 1;
-
-  const businessRecommendations = {
-    "Startup": [
-      "Website Development",
-      "Social Media Branding",
-      "SEO & Digital Marketing"
-    ],
-
-    "Small Business": [
-      "Website Development",
-      "SEO & Digital Marketing",
-      "Social Media Branding"
-    ],
-
-    "Retail Shop": [
-      "E-commerce Website",
-      "Social Media Branding",
-      "SEO & Digital Marketing"
-    ],
-
-    "Educational Institute": [
-      "Website Development",
-      "Social Media Branding",
-      "Website Maintenance"
-    ],
-
-    "Personal Brand": [
-      "Website Development",
-      "Social Media Branding",
-      "SEO & Digital Marketing"
-    ],
-
-    "Corporate Business": [
-      "Website Development",
-      "SEO & Digital Marketing",
-      "Website Maintenance"
-    ],
-
-    "Other": [
-      "Website Development",
-      "Social Media Branding"
-    ]
-  };
-
-  const presenceRecommendations = {
-    "No online presence": [
-      "Website Development",
-      "Social Media Branding",
-      "SEO & Digital Marketing"
-    ],
-
-    "Website only": [
-      "SEO & Digital Marketing",
-      "Social Media Branding"
-    ],
-
-    "Social media only": [
-      "Website Development",
-      "SEO & Digital Marketing"
-    ],
-
-    "Website and social media": [
-      "SEO & Digital Marketing",
-      "Website Maintenance"
-    ]
-  };
-
-  // STEP NAVIGATION
-
-  function showStep(stepNumber) {
-    currentStep = stepNumber;
-
-    steps.forEach(step => {
-      step.classList.toggle(
-        "active",
-        Number(step.dataset.step) === stepNumber
-      );
-    });
-
-    const percentage = Math.round((stepNumber / 3) * 100);
-
-    stepLabel.textContent = `STEP ${stepNumber} OF 3`;
-    stepPercent.textContent = `${percentage}%`;
-    stepBar.style.width = `${percentage}%`;
-  }
-
-  // BUSINESS SELECTION
-
-  document.querySelectorAll(".ng-ai-choice").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-      document.querySelectorAll(".ng-ai-choice").forEach(item => {
-        item.classList.remove("selected");
-      });
-
-      button.classList.add("selected");
-      businessSelect.value = button.dataset.business;
-
-    });
-
-  });
-
-  // DIGITAL PRESENCE SELECTION
-
-  document.querySelectorAll(".ng-ai-presence").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-      document.querySelectorAll(".ng-ai-presence").forEach(item => {
-        item.classList.remove("selected");
-      });
-
-      button.classList.add("selected");
-      presenceSelect.value = button.dataset.presence;
-
-    });
-
-  });
-
-  // STEP 1 -> STEP 2
-
-  document.getElementById("ngStepOneNext").addEventListener("click", () => {
-
-    if (!businessSelect.value) {
-      alert("Please select your business category.");
-      return;
-    }
-
-    showStep(2);
-
-  });
-
-  // STEP 2 -> STEP 1
-
-  document.getElementById("ngStepTwoBack").addEventListener("click", () => {
-    showStep(1);
-  });
-
-  // STEP 2 -> STEP 3
-
-  document.getElementById("ngStepTwoNext").addEventListener("click", () => {
-
-    if (!presenceSelect.value) {
-      alert("Please select your digital presence.");
-      return;
-    }
-
-    showStep(3);
-
-  });
-
-  // STEP 3 -> STEP 2
-
-  document.getElementById("ngStepThreeBack").addEventListener("click", () => {
-    showStep(2);
-  });
-
-  // RECOMMENDATION ENGINE
-
-  function getRecommendations(business, presence, selectedServices) {
-
-    const businessList = businessRecommendations[business] || [];
-    const presenceList = presenceRecommendations[presence] || [];
-
-    const combined = [...new Set([
-      ...businessList,
-      ...presenceList
-    ])];
-
-    let suggested = combined.filter(service => {
-      return !selectedServices.includes(service);
-    });
-
-    if (selectedServices.includes("Complete Digital Solution")) {
-      suggested = [];
-    }
-
-    return suggested;
-  }
-
-  // CREATE RESULT CARD
-
-  function createResultCard(title, description, services) {
-
-    const card = document.createElement("div");
-    card.className = "ng-scanner-recommendation";
-
-    const heading = document.createElement("h4");
-    heading.textContent = title;
-
-    const paragraph = document.createElement("p");
-    paragraph.textContent = description;
-
-    const list = document.createElement("ul");
-
-    services.forEach(service => {
-      const item = document.createElement("li");
-      item.textContent = service;
-      list.appendChild(item);
-    });
-
-    card.append(heading, paragraph, list);
-
-    resultDetails.appendChild(card);
-  }
-
-  // DISPLAY RESULTS
-
-  function displayResults(business, presence, selectedServices) {
-
-    const suggestedServices = getRecommendations(
-      business,
-      presence,
-      selectedServices
-    );
-
-    resultDetails.replaceChildren();
-
-    createResultCard(
-      "Your Business Profile",
-      "Details submitted for your digital service scan.",
-      [
-        `Business Type: ${business}`,
-        `Digital Presence: ${presence}`
-      ]
-    );
-
-    createResultCard(
-      "Your Selected Services",
-      "These are the services you requested.",
-      selectedServices
-    );
-
-    createResultCard(
-      "Recommended Services",
-      "Additional services that may help improve your digital presence.",
-      suggestedServices.length
-        ? suggestedServices
-        : ["Your selected services already cover our recommendations."]
-    );
-
-    // WHATSAPP MESSAGE
-
-    const message = [
-      "Hello NextGen Digital Solutions!",
-      "",
-      "I completed the Digital Service Scanner.",
-      "",
-      `Business Type: ${business}`,
-      `Digital Presence: ${presence}`,
-      "",
-      `Selected Services: ${selectedServices.join(", ")}`,
-      "",
-      `Recommended Services: ${suggestedServices.join(", ") || "None"}`,
-      "",
-      "I would like to discuss my business requirements."
-    ].join("\n");
-
-    whatsappButton.href =
-      "https://wa.me/918984240820?text=" +
-      encodeURIComponent(message);
-
-  }
-
-  // START SCANNER
-
-  form.addEventListener("submit", event => {
-
-    event.preventDefault();
-
-    if (currentStep !== 3) return;
-
-    const business = businessSelect.value;
-    const presence = presenceSelect.value;
-
-    const selectedServices = Array.from(
-      form.querySelectorAll('input[name="ngServices"]:checked')
-    ).map(input => input.value);
-
-    if (!business) {
-      alert("Please select your business category.");
-      showStep(1);
-      return;
-    }
-
-    if (!presence) {
-      alert("Please select your digital presence.");
-      showStep(2);
-      return;
-    }
-
-    if (selectedServices.length === 0) {
-      alert("Please select at least one service.");
-      return;
-    }
-
-    // Hide form and show scanner
-
-    form.hidden = true;
-    scanAnimation.hidden = false;
-    results.hidden = true;
-
-    scanButton.disabled = true;
-
-    let progress = 0;
-
-    const messages = [
-      "Initializing business profile...",
-      "Analyzing digital requirements...",
-      "Checking online presence...",
-      "Matching suitable services...",
-      "Preparing your growth report..."
-    ];
-
-    let messageIndex = 0;
-
-    scanStatus.textContent = messages[0];
-    scanProgress.style.width = "0%";
-    scanPercent.textContent = "0%";
-
-    const messageTimer = setInterval(() => {
-
-      messageIndex = Math.min(messageIndex + 1, messages.length - 1);
-      scanStatus.textContent = messages[messageIndex];
-
-    }, 650);
-
-    scanTimer = setInterval(() => {
-
-      progress = Math.min(progress + 2, 100);
-
-      scanProgress.style.width = `${progress}%`;
-      scanPercent.textContent = `${progress}%`;
-
-      if (progress >= 100) {
-
-        clearInterval(scanTimer);
-        clearInterval(messageTimer);
-
-        scanTimer = null;
-
-        scanStatus.textContent = "Analysis completed!";
-
-        setTimeout(() => {
-
-          scanAnimation.hidden = true;
-          results.hidden = false;
-
-          displayResults(
-            business,
-            presence,
-            selectedServices
-          );
-
-          scanButton.disabled = false;
-
-          results.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-
-        }, 400);
-
-      }
-
-    }, 60);
-
-  });
-
-  // RESET SCANNER
-
-  resetButton.addEventListener("click", () => {
-
-    if (scanTimer) {
-      clearInterval(scanTimer);
-      scanTimer = null;
-    }
-
-    form.reset();
-
-    businessSelect.value = "";
-    presenceSelect.value = "";
-
-    document.querySelectorAll(
-      ".ng-ai-choice, .ng-ai-presence"
-    ).forEach(item => {
-      item.classList.remove("selected");
-    });
-
-    scanAnimation.hidden = true;
-    results.hidden = true;
-    form.hidden = false;
-
-    resultDetails.replaceChildren();
-
-    scanProgress.style.width = "0%";
-    scanPercent.textContent = "0%";
-
-    scanButton.disabled = false;
-
-    showStep(1);
-
-    document.getElementById("service-scanner").scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-
-  });
-
-  // INITIAL STATE
-
-  form.hidden = false;
-  scanAnimation.hidden = true;
-  results.hidden = true;
-
-  showStep(1);
-
-});
-
-
-/* =========================================
-   NEXTGEN SMART CARD STUDIO — JAVASCRIPT
-========================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const form = document.getElementById("ngBusinessCardForm");
-  if (!form) return;
-
-  const $ = id => document.getElementById(id);
-
-  const fields = {
-    name: $("ngCardName"),
-    designation: $("ngCardDesignation"),
-    company: $("ngCardCompany"),
-    phone: $("ngCardPhone"),
-    email: $("ngCardEmail"),
-    website: $("ngCardWebsite"),
-    address: $("ngCardAddress"),
-    photo: $("ngCardPhoto"),
-    theme: $("ngCardTheme")
-  };
-
-  const preview = $("ngBusinessCard");
-  const generateBtn = $("ngCardGenerate");
-  const whatsappBtn = $("ngCardWhatsApp");
-  const confirmation = $("ngCardConfirmation");
-  const sentCheckbox = $("ngCardSentConfirm");
-  const unlockBtn = $("ngCardUnlock");
-  const downloadBtn = $("ngCardDownload");
-  const lockMessage = $("ngCardLockMessage");
-  const disclaimer = $("ngCardDisclaimer");
-
-  const previewFields = {
-    name: $("ngPreviewName"),
-    designation: $("ngPreviewDesignation"),
-    company: $("ngPreviewCompany"),
-    phone: $("ngPreviewPhone"),
-    email: $("ngPreviewEmail"),
-    website: $("ngPreviewWebsite"),
-    address: $("ngPreviewAddress")
-  };
-
-  const photoPreview = $("ngPreviewPhoto");
-  const avatarIcon = $("ngPreviewAvatar");
-
-  let generated = false;
-  let unlocked = false;
-  let photoData = "";
-
-  // LIVE PREVIEW
-
-  function updatePreview() {
-
-    previewFields.name.textContent =
-      fields.name.value.trim() || "YOUR NAME";
-
-    previewFields.designation.textContent =
-      fields.designation.value.trim() || "Your Designation";
-
-    previewFields.company.textContent =
-      fields.company.value.trim() || "Your Company";
-
-    previewFields.phone.textContent =
-      fields.phone.value.trim() || "Your Phone Number";
-
-    previewFields.email.textContent =
-      fields.email.value.trim() || "your@email.com";
-
-    previewFields.website.textContent =
-      fields.website.value.trim()
-        ? fields.website.value.replace(/^https?:\/\//, "")
-        : "yourwebsite.com";
-
-    previewFields.address.textContent =
-      fields.address.value.trim() || "Your Business Address";
-
-    preview.classList.remove(
-      "theme-blue",
-      "theme-black",
-      "theme-purple",
-      "theme-gold"
-    );
-
-    preview.classList.add(`theme-${fields.theme.value}`);
-
-  }
-
-  Object.values(fields).forEach(field => {
-
-    if (field && field !== fields.photo) {
-      field.addEventListener("input", updatePreview);
-      field.addEventListener("change", updatePreview);
-    }
-
-  });
-
-  // PROFILE PHOTO
-
-  fields.photo.addEventListener("change", event => {
-
-    const file = event.target.files[0];
-
-    if (!file) return;
-
-    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-      alert("Please upload a JPG, PNG or WebP image.");
-      fields.photo.value = "";
-      return;
-    }
-
-    if (file.size > 3 * 1024 * 1024) {
-      alert("Photo must be smaller than 3 MB.");
-      fields.photo.value = "";
-      return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = e => {
-
-      photoData = e.target.result;
-
-      photoPreview.src = photoData;
-      photoPreview.hidden = false;
-      avatarIcon.hidden = true;
-
-    };
-
-    reader.readAsDataURL(file);
-
-  });
-
-  // GENERATE CARD
-
-  generateBtn.addEventListener("click", () => {
-
-    if (!form.reportValidity()) return;
-
-    if (!/^\+?[0-9\s()-]{7,18}$/.test(fields.phone.value.trim())) {
-      alert("Please enter a valid phone number.");
-      fields.phone.focus();
-      return;
-    }
-
-    if (fields.website.value.trim()) {
-      try {
-        const website = new URL(fields.website.value.trim());
-        if (!["http:", "https:"].includes(website.protocol)) {
-          throw new Error("Invalid URL");
+          observer.unobserve(entry.target);
         }
-      } catch {
-        alert("Please enter a valid website URL starting with https://");
-        fields.website.focus();
-        return;
-      }
-    }
 
-    generated = true;
-    unlocked = false;
-
-    updatePreview();
-
-    lockMessage.hidden = false;
-    confirmation.hidden = true;
-    unlockBtn.hidden = true;
-
-    sentCheckbox.checked = false;
-    downloadBtn.disabled = true;
-
-    whatsappBtn.disabled = false;
-    whatsappBtn.hidden = false;
-
-    disclaimer.textContent =
-      "WhatsApp submission is required before downloading.";
-
-    preview.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-
-  });
-
-  // BUILD WHATSAPP MESSAGE
-
-  function getCustomerMessage() {
-
-    return [
-      "Hello NextGen Digital Solutions!",
-      "",
-      "I have created my Digital Business Card.",
-      "",
-      "MY DETAILS",
-      `Name: ${fields.name.value.trim()}`,
-      `Designation: ${fields.designation.value.trim()}`,
-      `Company: ${fields.company.value.trim() || "Not provided"}`,
-      `Phone: ${fields.phone.value.trim()}`,
-      `Email: ${fields.email.value.trim()}`,
-      `Website: ${fields.website.value.trim() || "Not provided"}`,
-      `Address: ${fields.address.value.trim() || "Not provided"}`,
-      `Theme: ${fields.theme.value}`,
-      `Profile Photo: ${photoData ? "Uploaded on card" : "Not uploaded"}`,
-      "",
-      "Please find my business card request."
-    ].join("\n");
-
-  }
-
-  // WHATSAPP SUBMISSION
-
-  whatsappBtn.addEventListener("click", () => {
-
-    if (!generated) {
-      alert("Please generate your business card first.");
-      return;
-    }
-
-    const whatsappURL =
-      "https://wa.me/918984240820?text=" +
-      encodeURIComponent(getCustomerMessage());
-
-    window.open(whatsappURL, "_blank", "noopener");
-
-    confirmation.hidden = false;
-    lockMessage.hidden = false;
-
-    disclaimer.textContent =
-      "Send your WhatsApp message, return here and confirm submission.";
-
-  });
-
-  // CUSTOMER CONFIRMATION
-
-  sentCheckbox.addEventListener("change", () => {
-
-    unlockBtn.hidden = !sentCheckbox.checked;
-
-  });
-
-  unlockBtn.addEventListener("click", () => {
-
-    if (!generated || !sentCheckbox.checked) {
-      alert("Please confirm that you have sent your WhatsApp message.");
-      return;
-    }
-
-    unlocked = true;
-
-    lockMessage.hidden = true;
-    confirmation.hidden = true;
-    unlockBtn.hidden = true;
-
-    downloadBtn.disabled = false;
-
-    disclaimer.textContent =
-      "Download unlocked. Thank you for choosing NextGen!";
-
-  });
-
-  // QR CODE
-
-  async function createCardQR() {
-
-    if (typeof QRCode === "undefined") {
-      throw new Error("QR Code library could not load.");
-    }
-
-    const qrHolder = document.createElement("div");
-
-    qrHolder.style.position = "absolute";
-    qrHolder.style.left = "-9999px";
-    qrHolder.style.top = "0";
-
-    document.body.appendChild(qrHolder);
-
-    const vcard = [
-      "BEGIN:VCARD",
-      "VERSION:3.0",
-      `FN:${fields.name.value.trim()}`,
-      `ORG:${fields.company.value.trim()}`,
-      `TITLE:${fields.designation.value.trim()}`,
-      `TEL;TYPE=CELL:${fields.phone.value.trim()}`,
-      `EMAIL:${fields.email.value.trim()}`,
-      fields.website.value.trim()
-        ? `URL:${fields.website.value.trim()}`
-        : "",
-      fields.address.value.trim()
-        ? `ADR;TYPE=WORK:;;${fields.address.value.trim()}`
-        : "",
-      "END:VCARD"
-    ].filter(Boolean).join("\n");
-
-    new QRCode(qrHolder, {
-      text: vcard,
-      width: 110,
-      height: 110,
-      correctLevel: QRCode.CorrectLevel.M
-    });
-
-    await new Promise(resolve => setTimeout(resolve, 250));
-
-    const canvas = qrHolder.querySelector("canvas");
-
-    if (!canvas) {
-      qrHolder.remove();
-      throw new Error("QR code generation failed.");
-    }
-
-    const image = new Image();
-    image.src = canvas.toDataURL("image/png");
-
-    await new Promise((resolve, reject) => {
-      image.onload = resolve;
-      image.onerror = reject;
-    });
-
-    qrHolder.remove();
-
-    return image;
-
-  }
-
-  // DOWNLOAD BUSINESS CARD
-
-  downloadBtn.addEventListener("click", async () => {
-
-    if (!generated || !unlocked) {
-      alert("Please submit your WhatsApp details and unlock download first.");
-      return;
-    }
-
-    if (typeof html2canvas === "undefined") {
-      alert("Card download library is unavailable. Please refresh and try again.");
-      return;
-    }
-
-    downloadBtn.disabled = true;
-    downloadBtn.innerHTML =
-      '<i class="bi bi-hourglass-split"></i> Preparing Card...';
-
-    let originalQR = null;
-    let qrImage = null;
-
-    try {
-
-      // Add QR to card temporarily
-
-      originalQR = preview.querySelector(".ng-generated-qr");
-
-      if (originalQR) originalQR.remove();
-
-      qrImage = await createCardQR();
-
-      const qrWrapper = document.createElement("div");
-      qrWrapper.className = "ng-generated-qr";
-      qrWrapper.style.position = "absolute";
-      qrWrapper.style.width = "64px";
-      qrWrapper.style.height = "64px";
-      qrWrapper.style.right = "25px";
-      qrWrapper.style.top = "65px";
-      qrWrapper.style.padding = "4px";
-      qrWrapper.style.borderRadius = "5px";
-      qrWrapper.style.background = "#fff";
-      qrWrapper.style.zIndex = "5";
-
-      qrImage.style.width = "100%";
-      qrImage.style.height = "100%";
-
-      qrWrapper.appendChild(qrImage);
-      preview.appendChild(qrWrapper);
-
-      // Export PNG
-
-      const canvas = await html2canvas(preview, {
-        scale: 3,
-        backgroundColor: null,
-        useCORS: true,
-        logging: false
       });
 
-      const link = document.createElement("a");
-
-      link.download =
-        `${fields.name.value.trim().replace(/[^a-z0-9]/gi, "-")}-business-card.png`;
-
-      link.href = canvas.toDataURL("image/png");
-
-      link.click();
-
-      qrWrapper.remove();
-
-      // Download VCF contact
-
-      const vcard = [
-        "BEGIN:VCARD",
-        "VERSION:3.0",
-        `FN:${fields.name.value.trim()}`,
-        `ORG:${fields.company.value.trim()}`,
-        `TITLE:${fields.designation.value.trim()}`,
-        `TEL;TYPE=CELL:${fields.phone.value.trim()}`,
-        `EMAIL:${fields.email.value.trim()}`,
-        fields.website.value.trim()
-          ? `URL:${fields.website.value.trim()}`
-          : "",
-        fields.address.value.trim()
-          ? `ADR;TYPE=WORK:;;${fields.address.value.trim()}`
-          : "",
-        "END:VCARD"
-      ].filter(Boolean).join("\r\n");
-
-      const contactBlob = new Blob(
-        [vcard],
-        { type: "text/vcard;charset=utf-8" }
-      );
-
-      const contactURL = URL.createObjectURL(contactBlob);
-
-      const contactLink = document.createElement("a");
-      contactLink.href = contactURL;
-      contactLink.download =
-        `${fields.name.value.trim().replace(/[^a-z0-9]/gi, "-")}.vcf`;
-
-      document.body.appendChild(contactLink);
-      contactLink.click();
-      contactLink.remove();
-
-      URL.revokeObjectURL(contactURL);
-
-      disclaimer.textContent =
-        "Your PNG card and contact file have been downloaded!";
-
-    } catch (error) {
-
-      console.error("Card download error:", error);
-      alert("Unable to download the card. Please try again.");
-
-    } finally {
-
-      const temporaryQR = preview.querySelector(".ng-generated-qr");
-      if (temporaryQR) temporaryQR.remove();
-
-      downloadBtn.disabled = !unlocked;
-      downloadBtn.innerHTML =
-        '<i class="bi bi-download"></i> Download Business Card';
-
+    },
+    {
+      threshold: 0.12,
+      rootMargin: "0px 0px -30px 0px"
     }
+  );
 
+  revealElements.forEach(element => {
+    editorialObserver.observe(element);
   });
-
-  // INITIAL STATE
-
-  updatePreview();
-
-  downloadBtn.disabled = true;
-  confirmation.hidden = true;
-  unlockBtn.hidden = true;
 
 });
 
-
-/* ==========================================
-   NEXTGEN PREMIUM OFFER POPUP
-   Show on Every Page Load
-   Delay: 3 Seconds
-========================================== */
-
-(function () {
-  "use strict";
-
-  function initNextGenOfferPopup() {
-
-    const popup = document.getElementById("ngOfferPopup");
-    const closeBtn = document.getElementById("ngOfferClose");
-    const offerCTA = document.getElementById("ngOfferCTA");
-
-    // Check popup HTML elements
-    if (!popup || !closeBtn || !offerCTA) {
-      return;
-    }
-
-    let previousBodyOverflow = "";
-
-    // OPEN POPUP
-    function openPopup() {
-
-      if (popup.classList.contains("ng-offer-show")) {
-        return;
-      }
-
-      previousBodyOverflow = document.body.style.overflow;
-
-      popup.classList.add("ng-offer-show");
-
-      document.body.style.overflow = "hidden";
-    }
-
-    // CLOSE POPUP
-    function closePopup() {
-
-      popup.classList.remove("ng-offer-show");
-
-      document.body.style.overflow = previousBodyOverflow;
-    }
-
-    // SHOW POPUP AFTER 3 SECONDS
-    window.setTimeout(function () {
-      openPopup();
-    }, 2000);
-
-    // CLOSE BUTTON
-    closeBtn.addEventListener("click", function () {
-      closePopup();
-    });
-
-    // CLOSE WHEN CLICKING OUTSIDE MODAL
-    popup.addEventListener("click", function (event) {
-
-      if (event.target === popup) {
-        closePopup();
-      }
-
-    });
-
-    // CLOSE USING ESCAPE KEY
-    document.addEventListener("keydown", function (event) {
-
-      if (
-        event.key === "Escape" &&
-        popup.classList.contains("ng-offer-show")
-      ) {
-        closePopup();
-      }
-
-    });
-
-    // CLOSE WHEN CLAIM OFFER BUTTON IS CLICKED
-    offerCTA.addEventListener("click", function () {
-      closePopup();
-    });
-
-  }
-
-  // INITIALIZE AFTER HTML LOAD
-  if (document.readyState === "loading") {
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      initNextGenOfferPopup
-    );
-
-  } else {
-
-    initNextGenOfferPopup();
-
-  }
-
-})();
+/* =====================================================
+   END: NEXTGEN EDITORIAL ABOUT ANIMATIONS
+===================================================== */
 
 
-
-/* =========================================
-   NEXTGEN SMART WEBSITE SEARCH
-   FIXED FULLSCREEN VERSION
-========================================= */
+/* =====================================================
+   START: NEXTGEN SIGNATURE FOUNDER ANIMATION
+===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  const openButton = document.getElementById("ngSearchOpen");
-  const overlay = document.getElementById("ngSearchDialog");
-  const closeButton = document.getElementById("ngSearchClose");
-  const input = document.getElementById("ngSearchInput");
-  const resultsBox = document.getElementById("ngSearchResults");
-  const status = document.getElementById("ngSearchStatus");
+  const founder = document.querySelector("#founder");
 
-  if (!openButton || !overlay || !closeButton || !input || !resultsBox || !status) {
+  if (!founder) return;
+
+  const elements = [
+    founder.querySelector(".ng-sf-topbar"),
+    founder.querySelector(".ng-sf-heading"),
+    founder.querySelector(".ng-sf-portrait"),
+    founder.querySelector(".ng-sf-information"),
+    founder.querySelector(".ng-sf-footer")
+  ].filter(Boolean);
+
+  const showAll = () => {
+    elements.forEach(element => {
+      element.classList.add("ng-sf-visible");
+    });
+  };
+
+  if (
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    !("IntersectionObserver" in window)
+  ) {
+    showAll();
     return;
   }
 
-  /* =====================================
-     IMPORTANT FIX:
-     MOVE SEARCH OVERLAY DIRECTLY INTO BODY
-  ===================================== */
+  elements.forEach((element, index) => {
+    element.classList.add("ng-sf-reveal");
+    element.style.transitionDelay = `${Math.min(index * 80, 240)}ms`;
+  });
 
-  if (overlay.parentElement !== document.body) {
-    document.body.appendChild(overlay);
-  }
+  const observer = new IntersectionObserver(
+    (entries, observerInstance) => {
 
-  // ACCESSIBILITY
-  openButton.setAttribute("aria-expanded", "false");
+      entries.forEach(entry => {
 
-  // INDEX WEBSITE SECTIONS
-  const searchableSections = Array.from(
-    document.querySelectorAll("section[id]")
-  )
-  .filter(section => !section.closest("#ngSearchDialog"))
-  .map(section => {
+        if (!entry.isIntersecting) return;
 
-    const heading = section.querySelector("h1, h2, h3, h4");
+        entry.target.classList.add("ng-sf-visible");
 
-    const title = (
-      heading ? heading.textContent : section.id
-    ).replace(/\s+/g, " ").trim();
+        observerInstance.unobserve(entry.target);
 
-    const text = (
-      section.innerText || section.textContent || ""
-    ).replace(/\s+/g, " ").trim();
-
-    return {
-      id: section.id,
-      title: title || section.id,
-      text: text,
-      normalized: (title + " " + text).toLowerCase()
-    };
-
-  })
-  .filter(item => item.text.length > 0);
-
-  let activeIndex = -1;
-  let currentResults = [];
-
-  // EMPTY STATE
-  function showEmpty(icon, title, description) {
-
-    const wrapper = document.createElement("div");
-    wrapper.className = "ng-search-empty";
-
-    const iconElement = document.createElement("i");
-    iconElement.className = "bi " + icon;
-
-    const heading = document.createElement("strong");
-    heading.textContent = title;
-
-    const detail = document.createElement("span");
-    detail.textContent = description;
-
-    wrapper.append(iconElement, heading, detail);
-    resultsBox.replaceChildren(wrapper);
-  }
-
-  // SEARCH EXCERPT
-  function getExcerpt(text, query) {
-
-    const position = text.toLowerCase().indexOf(query.toLowerCase());
-
-    if (position < 0) {
-      return text.slice(0, 150);
-    }
-
-    const start = Math.max(0, position - 60);
-    const end = Math.min(text.length, position + query.length + 90);
-
-    return text.slice(start, end);
-  }
-
-  // SEARCH ENGINE
-  function renderResults(query) {
-
-    const term = query.trim().toLowerCase();
-
-    activeIndex = -1;
-    resultsBox.replaceChildren();
-
-    if (!term) {
-
-      currentResults = [];
-
-      status.textContent = "Start typing to search this website";
-
-      showEmpty(
-        "bi-stars",
-        "Your next discovery starts here.",
-        "Try website, pricing, SEO or contact."
-      );
-
-      return;
-    }
-
-    const terms = term.split(/\s+/).filter(Boolean);
-
-    currentResults = searchableSections
-      .map(item => {
-
-        const titleMatch = item.title.toLowerCase().includes(term);
-
-        const matches = terms.filter(word =>
-          item.normalized.includes(word)
-        ).length;
-
-        const exactPhrase = item.normalized.includes(term);
-
-        return {
-          ...item,
-          score:
-            (exactPhrase ? 8 : 0) +
-            (titleMatch ? 6 : 0) +
-            matches
-        };
-
-      })
-      .filter(item => item.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 8);
-
-    status.textContent = currentResults.length
-      ? currentResults.length + " results found"
-      : "No matching sections found";
-
-    if (!currentResults.length) {
-
-      showEmpty(
-        "bi-search",
-        "No results found",
-        "Try another keyword like services, portfolio or contact."
-      );
-
-      return;
-    }
-
-    const fragment = document.createDocumentFragment();
-
-    currentResults.forEach((item, index) => {
-
-      const button = document.createElement("button");
-
-      button.type = "button";
-      button.className = "ng-search-result";
-      button.dataset.index = index;
-      button.setAttribute("role", "option");
-      button.setAttribute("aria-selected", "false");
-
-      const iconWrap = document.createElement("span");
-      iconWrap.className = "ng-search-result-icon";
-
-      const icon = document.createElement("i");
-      icon.className = "bi bi-arrow-up-right-circle";
-
-      iconWrap.appendChild(icon);
-
-      const copy = document.createElement("span");
-      copy.className = "ng-search-result-copy";
-
-      const title = document.createElement("span");
-      title.className = "ng-search-result-title";
-      title.textContent = item.title;
-
-      const excerpt = document.createElement("span");
-      excerpt.className = "ng-search-result-excerpt";
-      excerpt.textContent = getExcerpt(item.text, term);
-
-      copy.append(title, excerpt);
-
-      const arrow = document.createElement("span");
-      arrow.className = "ng-search-result-arrow";
-      arrow.innerHTML = '<i class="bi bi-arrow-up-right"></i>';
-
-      button.append(iconWrap, copy, arrow);
-
-      button.addEventListener("click", function () {
-        navigateTo(item.id);
       });
 
-      fragment.appendChild(button);
-
-    });
-
-    resultsBox.appendChild(fragment);
-  }
-
-  // KEYBOARD RESULT NAVIGATION
-  function setActiveResult(index) {
-
-    const buttons = Array.from(
-      resultsBox.querySelectorAll(".ng-search-result")
-    );
-
-    if (!buttons.length) return;
-
-    activeIndex = (index + buttons.length) % buttons.length;
-
-    buttons.forEach((button, i) => {
-
-      const active = i === activeIndex;
-
-      button.classList.toggle("is-active", active);
-      button.setAttribute("aria-selected", active ? "true" : "false");
-
-    });
-
-    buttons[activeIndex].scrollIntoView({
-      block: "nearest"
-    });
-  }
-
-  // OPEN SEARCH
-  function openSearch() {
-
-    overlay.hidden = false;
-
-    document.body.classList.add("ng-search-open");
-
-    openButton.setAttribute("aria-expanded", "true");
-
-    input.value = "";
-
-    renderResults("");
-
-    setTimeout(() => input.focus(), 100);
-  }
-
-  // CLOSE SEARCH
-  function closeSearch() {
-
-    overlay.hidden = true;
-
-    document.body.classList.remove("ng-search-open");
-
-    openButton.setAttribute("aria-expanded", "false");
-
-    openButton.focus();
-  }
-
-  // NAVIGATE TO SECTION
-  function navigateTo(id) {
-
-    const target = document.getElementById(id);
-
-    if (!target) return;
-
-    overlay.hidden = true;
-
-    document.body.classList.remove("ng-search-open");
-
-    openButton.setAttribute("aria-expanded", "false");
-
-    if (window.bootstrap) {
-
-      const menu = document.getElementById("navbarContent");
-
-      if (menu && menu.classList.contains("show")) {
-
-        window.bootstrap.Collapse
-          .getOrCreateInstance(menu, { toggle: false })
-          .hide();
-
-      }
+    },
+    {
+      threshold: 0.12,
+      rootMargin: "0px 0px -25px 0px"
     }
+  );
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    target.scrollIntoView({
-      behavior: reduceMotion ? "auto" : "smooth",
-      block: "start"
-    });
-
-    if (history.replaceState) {
-      history.replaceState(null, "", "#" + encodeURIComponent(id));
-    }
-
-  }
-
-  // BUTTON EVENTS
-  openButton.addEventListener("click", openSearch);
-
-  closeButton.addEventListener("click", closeSearch);
-
-  // CLICK OUTSIDE TO CLOSE
-  overlay.addEventListener("click", function (event) {
-
-    if (event.target === overlay) {
-      closeSearch();
-    }
-
+  elements.forEach(element => {
+    observer.observe(element);
   });
-
-  // LIVE SEARCH
-  input.addEventListener("input", function () {
-    renderResults(input.value);
-  });
-
-  // SEARCH KEYBOARD CONTROLS
-  input.addEventListener("keydown", function (event) {
-
-    if (event.key === "ArrowDown") {
-
-      event.preventDefault();
-      setActiveResult(activeIndex + 1);
-
-    } else if (event.key === "ArrowUp") {
-
-      event.preventDefault();
-      setActiveResult(activeIndex - 1);
-
-    } else if (event.key === "Enter") {
-
-      event.preventDefault();
-
-      if (activeIndex >= 0 && currentResults[activeIndex]) {
-        navigateTo(currentResults[activeIndex].id);
-      } else if (currentResults[0]) {
-        navigateTo(currentResults[0].id);
-      }
-
-    } else if (event.key === "Escape") {
-
-      closeSearch();
-
-    }
-
-  });
-
-  // CTRL + K SHORTCUT
-  document.addEventListener("keydown", function (event) {
-
-    if (
-      (event.ctrlKey || event.metaKey) &&
-      event.key.toLowerCase() === "k"
-    ) {
-
-      event.preventDefault();
-
-      if (overlay.hidden) {
-        openSearch();
-      } else {
-        input.focus();
-      }
-
-    } else if (event.key === "Escape" && !overlay.hidden) {
-
-      closeSearch();
-
-    }
-
-  });
-
-  status.textContent =
-    searchableSections.length + " website sections ready to search";
 
 });
+
+/* =====================================================
+   END: NEXTGEN SIGNATURE FOUNDER ANIMATION
+===================================================== */
+
+
+/* =====================================================
+   START: NEXTGEN SERVICES REVEAL
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const section = document.querySelector("#services");
+
+  if (!section) return;
+
+  const elements = section.querySelectorAll(
+    ".ng-services-header, " +
+    ".ng-service-card, " +
+    ".ng-services-bottom"
+  );
+
+  const revealAll = () => {
+    elements.forEach(element => {
+      element.classList.add("ng-service-visible");
+    });
+  };
+
+  if (
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    !("IntersectionObserver" in window)
+  ) {
+    revealAll();
+    return;
+  }
+
+  elements.forEach(element => {
+    element.classList.add("ng-service-reveal");
+  });
+
+  const observer = new IntersectionObserver(
+    (entries, observerInstance) => {
+
+      entries.forEach(entry => {
+
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add("ng-service-visible");
+
+        observerInstance.unobserve(entry.target);
+
+      });
+
+    },
+    {
+      threshold: 0.1,
+      rootMargin: "0px 0px -20px 0px"
+    }
+  );
+
+  elements.forEach(element => {
+    observer.observe(element);
+  });
+
+});
+
+/* =====================================================
+   END: NEXTGEN SERVICES REVEAL
+===================================================== */
+
+
+/* =====================================================
+   START: NEXTGEN PROJECTS REVEAL
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const section = document.querySelector("#projects");
+
+  if (!section) return;
+
+  const elements = section.querySelectorAll(
+    ".ng-projects-top, " +
+    ".ng-projects-heading, " +
+    ".ng-project-card, " +
+    ".ng-projects-footer"
+  );
+
+  const revealAll = () => {
+    elements.forEach(element => {
+      element.classList.add("ng-project-visible");
+    });
+  };
+
+  if (
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    !("IntersectionObserver" in window)
+  ) {
+    revealAll();
+    return;
+  }
+
+  elements.forEach(element => {
+    element.classList.add("ng-project-reveal");
+  });
+
+  const observer = new IntersectionObserver(
+    (entries, observerInstance) => {
+
+      entries.forEach(entry => {
+
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add("ng-project-visible");
+
+        observerInstance.unobserve(entry.target);
+
+      });
+
+    },
+    {
+      threshold: 0.10,
+      rootMargin: "0px 0px -20px 0px"
+    }
+  );
+
+  elements.forEach(element => {
+    observer.observe(element);
+  });
+
+});
+
+/* =====================================================
+   END: NEXTGEN PROJECTS REVEAL
+===================================================== */
+
+
+/* =====================================================
+   START: NEXTGEN CATALOGUE JAVASCRIPT
+===================================================== */
+
+(() => {
+  const catalogue = document.querySelector(".ng-catalogue");
+
+  if (!catalogue) return;
+
+  const revealElements = catalogue.querySelectorAll(
+    ".ng-cat-header, .ng-cat-info, .ng-cat-preview"
+  );
+
+  revealElements.forEach((element) => {
+    element.classList.add("ng-cat-reveal");
+  });
+
+  // Accessibility: show content immediately if reduced motion is preferred.
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    revealElements.forEach((element) => {
+      element.classList.add("ng-cat-visible");
+    });
+    return;
+  }
+
+  // Lightweight scroll reveal using IntersectionObserver.
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries, currentObserver) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("ng-cat-visible");
+            currentObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px 40px 0px"
+      }
+    );
+
+    revealElements.forEach((element) => {
+      observer.observe(element);
+    });
+  } else {
+    revealElements.forEach((element) => {
+      element.classList.add("ng-cat-visible");
+    });
+  }
+})();
+
+/* =====================================================
+   END: NEXTGEN CATALOGUE JAVASCRIPT
+===================================================== */
+
+
+/* =====================================================
+   START: NEXTGEN GET IN TOUCH JAVASCRIPT
+===================================================== */
+
+(() => {
+  const section = document.querySelector(".ng-contact");
+
+  if (!section) return;
+
+  const elements = section.querySelectorAll(
+    ".ng-contact-header, .ng-contact-info, .ng-contact-card, .ng-contact-bottom"
+  );
+
+  elements.forEach((element) => {
+    element.classList.add("ng-contact-reveal");
+  });
+
+  const showAll = () => {
+    elements.forEach((element) => {
+      element.classList.add("ng-contact-visible");
+    });
+  };
+
+  if (
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    !("IntersectionObserver" in window)
+  ) {
+    showAll();
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries, currentObserver) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("ng-contact-visible");
+          currentObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.12,
+      rootMargin: "0px 0px 40px 0px"
+    }
+  );
+
+  elements.forEach((element) => {
+    observer.observe(element);
+  });
+})();
+
+/* =====================================================
+   END: NEXTGEN GET IN TOUCH JAVASCRIPT
+===================================================== */
+
+
+/* =====================================================
+   START: NEXTGEN FOOTER JAVASCRIPT
+===================================================== */
+
+(() => {
+
+  // Automatically update copyright year
+  const yearElement = document.getElementById("ngFooterYear");
+
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+
+  // Smooth back-to-top interaction
+  const backTop = document.querySelector(
+    ".ng-footer-back-top"
+  );
+
+  if (backTop) {
+    backTop.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const home = document.getElementById("home");
+
+      if (home) {
+        home.scrollIntoView({
+          behavior: window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches ? "auto" : "smooth",
+          block: "start"
+        });
+      } else {
+        window.scrollTo({
+          top: 0,
+          behavior: window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches ? "auto" : "smooth"
+        });
+      }
+    });
+  }
+
+})();
+
+/* =====================================================
+   END: NEXTGEN FOOTER JAVASCRIPT
+===================================================== */
+
+
+/* =====================================================
+   START: NEXTGEN SCROLL PROGRESS JAVASCRIPT
+===================================================== */
+
+(() => {
+  const progress = document.getElementById("ngScrollProgress");
+  const fill = document.getElementById("ngScrollProgressFill");
+
+  if (!progress || !fill) return;
+
+  let ticking = false;
+
+  const updateProgress = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+    const scrollHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    const percentage = scrollHeight > 0
+      ? Math.min(100, Math.max(0, (scrollTop / scrollHeight) * 100))
+      : 0;
+
+    fill.style.transform = `scaleX(${percentage / 100})`;
+
+    progress.setAttribute(
+      "aria-valuenow",
+      Math.round(percentage)
+    );
+
+    ticking = false;
+  };
+
+  const requestUpdate = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateProgress);
+      ticking = true;
+    }
+  };
+
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate, { passive: true });
+
+  updateProgress();
+})();
+
+/* =====================================================
+   END: NEXTGEN SCROLL PROGRESS JAVASCRIPT
+===================================================== */
