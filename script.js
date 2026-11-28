@@ -2484,6 +2484,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* =========================================
    NEXTGEN SMART WEBSITE SEARCH
+   FIXED FULLSCREEN VERSION
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -2495,7 +2496,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const resultsBox = document.getElementById("ngSearchResults");
   const status = document.getElementById("ngSearchStatus");
 
-  if (!openButton || !overlay || !closeButton || !input || !resultsBox || !status) return;
+  if (!openButton || !overlay || !closeButton || !input || !resultsBox || !status) {
+    return;
+  }
+
+  /* =====================================
+     IMPORTANT FIX:
+     MOVE SEARCH OVERLAY DIRECTLY INTO BODY
+  ===================================== */
+
+  if (overlay.parentElement !== document.body) {
+    document.body.appendChild(overlay);
+  }
+
+  // ACCESSIBILITY
+  openButton.setAttribute("aria-expanded", "false");
 
   // INDEX WEBSITE SECTIONS
   const searchableSections = Array.from(
@@ -2707,11 +2722,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.body.classList.add("ng-search-open");
 
+    openButton.setAttribute("aria-expanded", "true");
+
     input.value = "";
 
     renderResults("");
 
-    setTimeout(() => input.focus(), 30);
+    setTimeout(() => input.focus(), 100);
   }
 
   // CLOSE SEARCH
@@ -2720,6 +2737,8 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay.hidden = true;
 
     document.body.classList.remove("ng-search-open");
+
+    openButton.setAttribute("aria-expanded", "false");
 
     openButton.focus();
   }
@@ -2734,6 +2753,8 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay.hidden = true;
 
     document.body.classList.remove("ng-search-open");
+
+    openButton.setAttribute("aria-expanded", "false");
 
     if (window.bootstrap) {
 
@@ -2768,6 +2789,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   closeButton.addEventListener("click", closeSearch);
 
+  // CLICK OUTSIDE TO CLOSE
   overlay.addEventListener("click", function (event) {
 
     if (event.target === overlay) {
