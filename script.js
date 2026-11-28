@@ -486,78 +486,85 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* =====================================================
-   START: NEXTGEN EDITORIAL ABOUT ANIMATIONS
+   START: NEXTGEN EXPERIMENTAL ABOUT ANIMATIONS
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
   const aboutSection = document.querySelector(
-    ".ng-editorial-about"
+    ".ng-universe-about"
   );
 
   if (!aboutSection) return;
 
   const revealElements = aboutSection.querySelectorAll(
-    ".ng-editorial-top, " +
-    ".ng-editorial-heading, " +
-    ".ng-editorial-copy, " +
-    ".ng-editorial-art, " +
-    ".ng-editorial-value-heading, " +
-    ".ng-editorial-card, " +
-    ".ng-editorial-footer"
+    ".ngu-topbar, " +
+    ".ngu-hero-small, " +
+    ".ngu-giant-title, " +
+    ".ngu-hero-bottom, " +
+    ".ngu-artwork-label, " +
+    ".ngu-artwork-image, " +
+    ".ngu-artwork-caption, " +
+    ".ngu-story-index, " +
+    ".ngu-story-content, " +
+    ".ngu-purpose-header, " +
+    ".ngu-purpose-item, " +
+    ".ngu-ending"
   );
-
-  revealElements.forEach((element, index) => {
-    element.classList.add("ng-editorial-reveal");
-
-    // Staggered entrance timing
-    element.style.transitionDelay =
-      `${(index % 4) * 100}ms`;
-  });
 
   // Respect reduced-motion preferences
   const reduceMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  if (reduceMotion || !("IntersectionObserver" in window)) {
-    revealElements.forEach(element => {
-      element.classList.add("ng-ed-visible");
-    });
+  if (
+    reduceMotion ||
+    !("IntersectionObserver" in window)
+  ) {
     return;
   }
 
-  const editorialObserver = new IntersectionObserver(
+  // Add animation styles only when observer is available
+  aboutSection.classList.add("ngu-js");
+
+  revealElements.forEach((element, index) => {
+
+    element.classList.add("ngu-reveal");
+
+    element.style.transitionDelay =
+      `${(index % 3) * 90}ms`;
+
+  });
+
+  // Reveal elements when visible
+  const aboutObserver = new IntersectionObserver(
     (entries, observer) => {
 
       entries.forEach(entry => {
 
-        if (entry.isIntersecting) {
+        if (!entry.isIntersecting) return;
 
-          entry.target.classList.add(
-            "ng-ed-visible"
-          );
+        entry.target.classList.add("ngu-visible");
 
-          observer.unobserve(entry.target);
-        }
+        observer.unobserve(entry.target);
 
       });
 
     },
     {
       threshold: 0.12,
-      rootMargin: "0px 0px -30px 0px"
+      rootMargin: "0px 0px -35px 0px"
     }
   );
 
   revealElements.forEach(element => {
-    editorialObserver.observe(element);
+    aboutObserver.observe(element);
   });
 
 });
 
 /* =====================================================
-   END: NEXTGEN EDITORIAL ABOUT ANIMATIONS
+   END: NEXTGEN EXPERIMENTAL ABOUT ANIMATIONS
 ===================================================== */
 
 
@@ -1396,3 +1403,257 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 })();
+
+
+
+/* ==========================================
+   START: NEXTGEN WHY CHOOSE US JAVASCRIPT
+========================================== */
+
+(() => {
+  "use strict";
+
+  const section = document.querySelector("#why-us");
+
+  if (!section) return;
+
+  const cards = section.querySelectorAll(".ng-why-card");
+
+  // Stop if browser does not support IntersectionObserver.
+  if (!("IntersectionObserver" in window)) {
+    cards.forEach(card => {
+      card.style.opacity = "1";
+      card.style.transform = "none";
+    });
+    return;
+  }
+
+  // Respect user's reduced-motion preference.
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (reduceMotion) return;
+
+  // Add reveal animation class to cards.
+  cards.forEach(card => {
+    card.style.opacity = "0";
+    card.style.transform = "translateY(18px)";
+    card.style.transition =
+      "opacity .55s ease, transform .55s ease";
+  });
+
+  // Reveal cards when they enter the viewport.
+  const observer = new IntersectionObserver(
+    (entries, currentObserver) => {
+
+      entries.forEach(entry => {
+
+        if (!entry.isIntersecting) return;
+
+        const card = entry.target;
+        const index = Array.from(cards).indexOf(card);
+
+        card.style.transitionDelay = `${index * 70}ms`;
+        card.style.opacity = "1";
+        card.style.transform = "translateY(0)";
+
+        currentObserver.unobserve(card);
+
+      });
+
+    },
+    {
+      threshold: 0.12,
+      rootMargin: "0px 0px -35px 0px"
+    }
+  );
+
+  cards.forEach(card => observer.observe(card));
+
+})();
+
+/* ==========================================
+   END: NEXTGEN WHY CHOOSE US JAVASCRIPT
+========================================== */
+
+
+
+/* ==================================================
+   START: NEXTGEN EDITORIAL WORK PROCESS JAVASCRIPT
+================================================== */
+
+(() => {
+  "use strict";
+
+  const section = document.querySelector("#process");
+
+  if (!section) return;
+
+  const stages = Array.from(
+    section.querySelectorAll("[data-process-stage]")
+  );
+
+  const progressFill = section.querySelector(
+    ".ng-ep-track-fill"
+  );
+
+  if (!stages.length || !progressFill) return;
+
+  // Respect reduced-motion preferences.
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  let activeIndex = 0;
+  let ticking = false;
+
+  // Update the active stage and timeline progress.
+  function updateTimeline() {
+
+    const sectionRect = section.getBoundingClientRect();
+
+    const sectionHeight = section.offsetHeight;
+    const viewportHeight = window.innerHeight;
+
+    const totalScrollable = Math.max(
+      1,
+      sectionHeight - viewportHeight
+    );
+
+    const progress = Math.min(
+      1,
+      Math.max(0, -sectionRect.top / totalScrollable)
+    );
+
+    progressFill.style.height = `${progress * 100}%`;
+
+    // Find the stage nearest to the viewport focus point.
+    const focusPoint = viewportHeight * 0.48;
+
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+
+    stages.forEach((stage, index) => {
+
+      const rect = stage.getBoundingClientRect();
+
+      const stageCenter = rect.top + rect.height * 0.35;
+      const distance = Math.abs(stageCenter - focusPoint);
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+
+    });
+
+    if (closestIndex !== activeIndex) {
+      activeIndex = closestIndex;
+
+      stages.forEach((stage, index) => {
+        stage.classList.toggle(
+          "is-active",
+          index === activeIndex
+        );
+      });
+    }
+
+    ticking = false;
+  }
+
+  // Schedule updates using requestAnimationFrame.
+  function requestTimelineUpdate() {
+
+    if (ticking) return;
+
+    ticking = true;
+
+    window.requestAnimationFrame(updateTimeline);
+  }
+
+  // Avoid unnecessary animation transitions for reduced motion.
+  if (reduceMotion) {
+    progressFill.style.transition = "none";
+  }
+
+  // Passive listeners keep scrolling responsive.
+  window.addEventListener(
+    "scroll",
+    requestTimelineUpdate,
+    { passive: true }
+  );
+
+  window.addEventListener(
+    "resize",
+    requestTimelineUpdate,
+    { passive: true }
+  );
+
+  // Initial state.
+  updateTimeline();
+
+})();
+
+/* ==================================================
+   END: NEXTGEN EDITORIAL WORK PROCESS JAVASCRIPT
+================================================== */
+
+
+
+/* ==================================================
+   START: NEXTGEN EDITORIAL FAQ JAVASCRIPT
+================================================== */
+
+(() => {
+  "use strict";
+
+  const section = document.querySelector("#faq");
+
+  if (!section) return;
+
+  const entries = section.querySelectorAll(".ng-faq-entry");
+
+  function closeEntry(entry) {
+    const button = entry.querySelector(".ng-faq-question");
+    const answer = entry.querySelector(".ng-faq-answer");
+
+    entry.classList.remove("is-open");
+    button.setAttribute("aria-expanded", "false");
+    answer.hidden = true;
+  }
+
+  function openEntry(entry) {
+    const button = entry.querySelector(".ng-faq-question");
+    const answer = entry.querySelector(".ng-faq-answer");
+
+    entry.classList.add("is-open");
+    button.setAttribute("aria-expanded", "true");
+    answer.hidden = false;
+  }
+
+  entries.forEach(entry => {
+
+    const button = entry.querySelector(".ng-faq-question");
+
+    button.addEventListener("click", () => {
+
+      const alreadyOpen = entry.classList.contains("is-open");
+
+      // Close all other FAQ entries.
+      entries.forEach(closeEntry);
+
+      // Open the selected entry if it was previously closed.
+      if (!alreadyOpen) {
+        openEntry(entry);
+      }
+
+    });
+
+  });
+
+})();
+
+/* ==================================================
+   END: NEXTGEN EDITORIAL FAQ JAVASCRIPT
+================================================== */
