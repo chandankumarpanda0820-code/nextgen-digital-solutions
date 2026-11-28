@@ -970,3 +970,429 @@ document.addEventListener("DOMContentLoaded", function () {
 /* =====================================================
    END: NEXTGEN SCROLL PROGRESS JAVASCRIPT
 ===================================================== */
+
+
+/* =========================================
+   NEXTGEN — FULL WEBSITE SEARCH ENGINE
+========================================= */
+
+(() => {
+  "use strict";
+
+  const wrapper = document.getElementById("ngSearchWrapper");
+  const trigger = document.getElementById("ngSearchTrigger");
+  const panel = document.getElementById("ngSearchPanel");
+  const input = document.getElementById("ngSearchInput");
+  const closeBtn = document.getElementById("ngSearchClose");
+  const resultsBox = document.getElementById("ngSearchResults");
+
+  if (!wrapper || !trigger || !panel || !input || !closeBtn || !resultsBox) {
+    return;
+  }
+
+  const projectData = [
+    {
+      title: "Nexora Institute",
+      description: "Educational institute website project.",
+      url: "https://chandankumarpanda0820-code.github.io/nexora-institute/",
+      type: "Project"
+    },
+    {
+      title: "Portfolio Chandan",
+      description: "Personal portfolio website.",
+      url: "https://chandankumarpanda0820-code.github.io/Portfolio-chandan/",
+      type: "Project"
+    },
+    {
+      title: "Chandan's Digital World",
+      description: "Personal digital portfolio and creative website.",
+      url: "https://chandankumarpanda0820-code.github.io/chandans-digital-world/",
+      type: "Project"
+    },
+    {
+      title: "Luxora Estates",
+      description: "Luxury real estate website.",
+      url: "https://chandankumarpanda0820-code.github.io/luxora-estates/",
+      type: "Project"
+    },
+    {
+      title: "LifeDrop",
+      description: "Blood support network website.",
+      url: "https://chandankumarpanda0820-code.github.io/LifeDrop/",
+      type: "Project"
+    }
+  ];
+
+  const serviceData = [
+    {
+      title: "Website Development",
+      description: "Professional and responsive website development.",
+      url: "#services",
+      type: "Service"
+    },
+    {
+      title: "E-Commerce Development",
+      description: "Online stores and e-commerce solutions.",
+      url: "#services",
+      type: "Service"
+    },
+    {
+      title: "Digital Marketing",
+      description: "Digital marketing solutions for businesses.",
+      url: "#services",
+      type: "Service"
+    },
+    {
+      title: "Social Media Management",
+      description: "Social media growth and management.",
+      url: "#services",
+      type: "Service"
+    },
+    {
+      title: "SEO Services",
+      description: "Search engine optimization and online visibility.",
+      url: "#services",
+      type: "Service"
+    },
+    {
+      title: "Branding & Graphic Design",
+      description: "Logo design, graphics and creative branding.",
+      url: "#services",
+      type: "Service"
+    }
+  ];
+
+  const sectionData = [
+    {
+      title: "Home",
+      description: "Welcome to NextGen Digital Solutions.",
+      url: "#home",
+      type: "Section"
+    },
+    {
+      title: "About Us",
+      description: "Learn about NextGen Digital Solutions.",
+      url: "#about",
+      type: "Section"
+    },
+    {
+      title: "Founder",
+      description: "Meet Chandan Kumar Panda.",
+      url: "#founder",
+      type: "Section"
+    },
+    {
+      title: "Services",
+      description: "Explore our digital services.",
+      url: "#services",
+      type: "Section"
+    },
+    {
+      title: "Projects",
+      description: "Explore our website projects.",
+      url: "#projects",
+      type: "Section"
+    },
+    {
+      title: "Catalogue",
+      description: "View our digital service catalogue.",
+      url: "#catalogue",
+      type: "Section"
+    },
+    {
+      title: "Contact",
+      description: "Contact NextGen Digital Solutions.",
+      url: "#contact",
+      type: "Section"
+    },
+    {
+      title: "Footer",
+      description: "Quick links and company information.",
+      url: "#footer",
+      type: "Section"
+    }
+  ];
+
+  const icons = {
+    Project: "bi-globe",
+    Service: "bi-briefcase",
+    Section: "bi-layout-text-window"
+  };
+
+  let searchIndex = [];
+  let selectedIndex = -1;
+
+  function buildSearchIndex() {
+    const existingIds = new Set();
+
+    const pageElements = document.querySelectorAll(
+      "main section, body > section, footer, " +
+      "[id='home'], [id='about'], [id='founder'], " +
+      "[id='services'], [id='projects'], [id='catalogue'], " +
+      "[id='contact'], [id='footer']"
+    );
+
+    pageElements.forEach(section => {
+      const id = section.id;
+
+      if (!id || existingIds.has(id)) return;
+
+      existingIds.add(id);
+
+      const heading = section.querySelector(
+        "h1, h2, h3, h4"
+      );
+
+      const title = heading
+        ? heading.innerText.trim()
+        : id.replace(/[-_]/g, " ");
+
+      const description = section.innerText
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, 180);
+
+      if (title || description) {
+        searchIndex.push({
+          title,
+          description,
+          url: "#" + id,
+          type: "Section"
+        });
+      }
+    });
+
+    // Search all visible text inside website sections.
+    const contentElements = document.querySelectorAll(
+      "main section p, main section h1, main section h2, " +
+      "main section h3, main section h4, " +
+      "section p, section h1, section h2, section h3, " +
+      "footer p, footer h2, footer h3"
+    );
+
+    contentElements.forEach(element => {
+      const text = element.innerText.trim();
+      const section = element.closest("section, footer");
+
+      if (!text || !section) return;
+
+      const sectionId = section.id;
+
+      if (!sectionId || text.length < 3) return;
+
+      searchIndex.push({
+        title: text.slice(0, 85),
+        description: "Website content",
+        url: "#" + sectionId,
+        type: "Content"
+      });
+    });
+
+    searchIndex.push(
+      ...sectionData,
+      ...serviceData,
+      ...projectData
+    );
+  }
+
+  function openSearch() {
+    panel.hidden = false;
+    trigger.setAttribute("aria-expanded", "true");
+    input.focus();
+  }
+
+  function closeSearch() {
+    panel.hidden = true;
+    trigger.setAttribute("aria-expanded", "false");
+    trigger.focus();
+  }
+
+  function normalize(value) {
+    return value.toLowerCase().trim();
+  }
+
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[char]);
+  }
+
+  function searchWebsite(query) {
+    const term = normalize(query);
+
+    if (!term) {
+      resultsBox.innerHTML =
+        '<p class="ng-search-hint">' +
+        'Start typing to search the entire website.' +
+        '</p>';
+      selectedIndex = -1;
+      return;
+    }
+
+    const words = term.split(/\s+/);
+
+    const matches = searchIndex
+      .map(item => {
+        const title = normalize(item.title);
+        const description = normalize(item.description);
+        const combined = title + " " + description;
+
+        const matchedWords = words.filter(word =>
+          combined.includes(word)
+        );
+
+        if (!matchedWords.length) return null;
+
+        const score = matchedWords.reduce((total, word) => {
+          if (title === word) return total + 12;
+          if (title.startsWith(word)) return total + 8;
+          if (title.includes(word)) return total + 5;
+          return total + 2;
+        }, 0);
+
+        return { ...item, score };
+      })
+      .filter(Boolean)
+      .sort((a, b) => b.score - a.score)
+      .filter((item, index, array) =>
+        array.findIndex(other =>
+          other.url === item.url &&
+          other.title === item.title
+        ) === index
+      )
+      .slice(0, 12);
+
+    selectedIndex = -1;
+
+    if (!matches.length) {
+      resultsBox.innerHTML =
+        '<p class="ng-search-empty">' +
+        '<i class="bi bi-search"></i><br>' +
+        'No results found. Try another keyword.' +
+        '</p>';
+      return;
+    }
+
+    resultsBox.innerHTML = matches.map((item, index) => {
+      const safeTitle = escapeHTML(item.title);
+      const safeDescription = escapeHTML(item.description);
+      const safeUrl = escapeHTML(item.url);
+      const icon = icons[item.type] || "bi-file-text";
+
+      return `
+        <a
+          href="${safeUrl}"
+          class="ng-search-result"
+          data-search-index="${index}"
+        >
+          <span class="ng-search-result-icon">
+            <i class="bi ${icon}"></i>
+          </span>
+
+          <span class="ng-search-result-content">
+            <span class="ng-search-result-title">${safeTitle}</span>
+            <span class="ng-search-result-description">
+              ${safeDescription}
+            </span>
+          </span>
+
+          <span class="ng-search-result-type">
+            ${escapeHTML(item.type)}
+          </span>
+        </a>
+      `;
+    }).join("");
+  }
+
+  trigger.addEventListener("click", openSearch);
+  closeBtn.addEventListener("click", closeSearch);
+
+  input.addEventListener("input", () => {
+    searchWebsite(input.value);
+  });
+
+  document.addEventListener("keydown", event => {
+    if (
+      (event.ctrlKey || event.metaKey) &&
+      event.key.toLowerCase() === "k"
+    ) {
+      event.preventDefault();
+
+      if (panel.hidden) openSearch();
+      else input.focus();
+    }
+
+    if (event.key === "Escape" && !panel.hidden) {
+      closeSearch();
+    }
+
+    if (!panel.hidden && event.key === "ArrowDown") {
+      event.preventDefault();
+      const items = resultsBox.querySelectorAll(".ng-search-result");
+
+      if (!items.length) return;
+
+      selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+
+      items[selectedIndex].focus();
+    }
+
+    if (!panel.hidden && event.key === "ArrowUp") {
+      event.preventDefault();
+      const items = resultsBox.querySelectorAll(".ng-search-result");
+
+      if (!items.length) return;
+
+      selectedIndex = Math.max(selectedIndex - 1, 0);
+
+      items[selectedIndex].focus();
+    }
+  });
+
+  document.addEventListener("click", event => {
+    if (!wrapper.contains(event.target) && !panel.hidden) {
+      panel.hidden = true;
+      trigger.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  // Build index after page content has loaded.
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", buildSearchIndex, {
+      once: true
+    });
+  } else {
+    buildSearchIndex();
+  }
+
+  // Close panel after selecting a result.
+  resultsBox.addEventListener("click", event => {
+    const result = event.target.closest(".ng-search-result");
+
+    if (!result) return;
+
+    panel.hidden = true;
+    trigger.setAttribute("aria-expanded", "false");
+    input.value = "";
+
+    const target = document.querySelector(
+      result.getAttribute("href")
+    );
+
+    if (target) {
+      setTimeout(() => {
+        target.scrollIntoView({
+          behavior: window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches ? "auto" : "smooth",
+          block: "start"
+        });
+      }, 50);
+    }
+  });
+
+})();
